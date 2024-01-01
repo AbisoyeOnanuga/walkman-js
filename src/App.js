@@ -1,16 +1,17 @@
 // App.js
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Walkman from './components/Walkman';
 import HomeScreen from './components/HomeScreen';
 import VisualizerScreen from './components/VisualizerScreen';
 import PetScreen from './components/PetScreen';
 import RadioScreen from './components/RadioScreen';
-import SettingsScreen from './components/SettingsScreen';
 import PlaylistsScreen from './components/PlaylistsScreen';
 import WeatherScreen from './components/WeatherScreen';
-import PersistentPlayer from './components/PersistentPlayer';
-import Header from './components/Header';
+import SettingsMainScreen from './components/SettingsMainScreen';
+import SettingsAboutScreen from './components/SettingsAboutScreen';
+import SettingsThemeScreen from './components/SettingsThemeScreen';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
+import { RADIO_STATIONS } from './data/radioStations';
 import './App.css';
 
 const App = () => {
@@ -22,20 +23,25 @@ const App = () => {
 };
 
 const AppContent = () => {
-  const [screenContent, setScreenContent] = useState('Welcome to Walkman-js'); // Correctly defining useState
+  const [screenContent, setScreenContent] = useState('Welcome to Walkman-js');
   const [selectedIcon, setSelectedIcon] = useState(1);
   const [currentScreen, setCurrentScreen] = useState('home');
+  const [currentSettingsScreen, setCurrentSettingsScreen] = useState('main');
   const [currentAudio, setCurrentAudio] = useState(null); 
   const [playing, setPlaying] = useState(null);
   const [activePlayer, setActivePlayer] = useState(null);
+  const [currentStation, setCurrentStation] = useState(null);
+  const [youtubePlayer, setYoutubePlayer] = useState(null);
+  const [currentPlaylist, setCurrentPlaylist] = useState(null);
   const [audioPlayer] = useState(() => {
     const audio = new Audio();
     audio.crossOrigin = "anonymous";
     return audio;
   });
-  const [currentStation, setCurrentStation] = useState(null);
-  const [youtubePlayer, setYoutubePlayer] = useState(null);
-  const [currentPlaylist, setCurrentPlaylist] = useState(null);
+
+  const mainScreenRef = useRef(null);
+  const aboutScreenRef = useRef(null);
+  const themeScreenRef = useRef(null);
 
   const { theme } = useTheme();
 
@@ -59,36 +65,6 @@ const AppContent = () => {
       audioPlayer.src = '';
     };
   }, [audioPlayer]);
-
-  const handleButtonPress = (button) => {
-    let newIndex = selectedIcon;
-    if (currentScreen === 'home') {
-      switch (button) {
-        case 'up':
-          newIndex = (selectedIcon - 3 + 6) % 6;
-          break;
-        case 'down':
-          newIndex = (selectedIcon + 3) % 6;
-          break;
-        case 'left':
-          newIndex = (selectedIcon - 1 + 6) % 6;
-          break;
-        case 'right':
-          newIndex = (selectedIcon + 1) % 6;
-          break;
-        case 'enter':
-          const screens = ['pet', 'visualizer', 'radio', 'settings', 'playlists', 'weather'];
-          setCurrentScreen(screens[selectedIcon]);
-          return;
-        default:
-          return;
-      }
-    } else if (button === 'back' || button === 'Escape' || button === 'Backspace') {
-      setCurrentScreen('home');
-    }
-    setSelectedIcon(newIndex);
-    setScreenContent(`Selected: ${icons[newIndex]}`);
-  };
 
   const handleRadioPlay = (station) => {
     if (currentStation?.name === station.name && !audioPlayer.paused) {
@@ -127,11 +103,102 @@ const AppContent = () => {
     }
   };
 
+  const handleSettingsNavigate = (screen) => {
+    setCurrentSettingsScreen(screen);
+  };
+
+  const handleButtonPress = (button) => {
+    let newIndex = selectedIcon;
+    
+    // Handle back button first
+    if (button === 'back' || button === 'Escape' || button === 'Backspace') {
+      if (currentScreen === 'settings') {
+        if (currentSettingsScreen !== 'main') {
+          setCurrentSettingsScreen('main');
+        } else {
+          setCurrentScreen('home');
+        }
+      } else {
+        setCurrentScreen('home');
+      }
+      return;
+    }
+
+    switch (currentScreen) {
+      case 'home':
+        switch (button) {
+          case 'up':
+            newIndex = (selectedIcon - 3 + icons.length) % icons.length;
+            break;
+          case 'down':
+            newIndex = (selectedIcon + 3) % icons.length;
+            break;
+          case 'left':
+            newIndex = (selectedIcon - 1 + icons.length) % icons.length;
+            break;
+          case 'right':
+            newIndex = (selectedIcon + 1) % icons.length;
+            break;
+          case 'enter':
+            const screenMap = {
+              'Pet': 'pet',
+              'Visualizer': 'visualizer',
+              'FM Radio': 'radio',
+              'Settings': 'settings',
+              'Playlists': 'playlists',
+              'Weather': 'weather'
+            };
+            setCurrentScreen(screenMap[icons[selectedIcon]]);
+            return;
+        }
+        break;
+      case 'radio':
+        const currentStationIndex = RADIO_STATIONS.findIndex(station => station.name === currentStation?.name);
+        let newStationIndex = currentStationIndex === -1 ? 0 : currentStationIndex;
+
+        switch (button) {
+          case 'up':
+            newStationIndex = (newStationIndex - 1 + RADIO_STATIONS.length) % RADIO_STATIONS.length;
+            setCurrentStation(RADIO_STATIONS[newStationIndex]);
+            break;
+          case 'down':
+            newStationIndex = (newStationIndex + 1) % RADIO_STATIONS.length;
+            setCurrentStation(RADIO_STATIONS[newStationIndex]);
+            break;
+          case 'enter':
+          case 'space':
+          case ' ':
+            if (currentStation) {
+              handleRadioPlay(currentStation);
+            }
+            break;
+        }
+        return;
+      case 'settings':
+        // Pass navigation to the appropriate settings screen
+        switch (currentSettingsScreen) {
+          case 'main':
+            mainScreenRef.current?.handleNavigation(button);
+            break;
+          case 'about':
+            aboutScreenRef.current?.handleNavigation(button);
+            break;
+          case 'theme':
+            themeScreenRef.current?.handleNavigation(button);
+            break;
+        }
+        return;
+    }
+    
+    setSelectedIcon(newIndex);
+    setScreenContent(`Selected: ${icons[newIndex]}`);
+  };
+
   const renderCurrentScreen = () => {
     switch (currentScreen) {
       case 'pet':
         return <PetScreen playing={playing} />;
-      case 'music':
+      case 'visualizer':
         return <VisualizerScreen playing={playing} />;
       case 'playlists':
         return <PlaylistsScreen 
@@ -148,9 +215,35 @@ const AppContent = () => {
           onStationPlay={handleRadioPlay}
         />;
       case 'settings':
-        return <SettingsScreen onButtonPress={handleButtonPress} playing={playing} />;
-      case 'visualizer':
-        return <VisualizerScreen playing={playing} audioPlayer={audioPlayer} />;
+        switch (currentSettingsScreen) {
+          case 'main':
+            return <SettingsMainScreen 
+              ref={mainScreenRef}
+              onButtonPress={handleButtonPress}
+              onNavigate={handleSettingsNavigate}
+              playing={playing}
+            />;
+          case 'about':
+            return <SettingsAboutScreen 
+              ref={aboutScreenRef}
+              onButtonPress={handleButtonPress}
+              onNavigate={handleSettingsNavigate}
+              playing={playing}
+            />;
+          case 'theme':
+            return <SettingsThemeScreen 
+              ref={themeScreenRef}
+              onButtonPress={handleButtonPress}
+              playing={playing}
+            />;
+          default:
+            return <SettingsMainScreen 
+              ref={mainScreenRef}
+              onButtonPress={handleButtonPress}
+              onNavigate={handleSettingsNavigate}
+              playing={playing}
+            />;
+        }
       case 'weather':
         return <WeatherScreen playing={playing} />;
       default:
