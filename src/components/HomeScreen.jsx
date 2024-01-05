@@ -1,12 +1,12 @@
 import React from 'react';
 import Header from './Header';
 import { useTheme } from '../context/ThemeContext';
-import icon1 from '../assets/photos.png';
-import icon2 from '../assets/music.png';
+import icon1 from '../assets/pet.png';
+import icon2 from '../assets/visualizer.png';
 import icon3 from '../assets/radio.png';
 import icon4 from '../assets/settings.png';
 import icon5 from '../assets/playlists.png';
-import icon6 from '../assets/playback.png';
+import icon6 from '../assets/weather.png';
 import icon7 from '../assets/play-status.svg';
 import icon9 from '../assets/song-status.svg';
 import icon10 from '../assets/battery.svg';
@@ -19,7 +19,7 @@ const HomeScreen = ({ selectedIcon, onButtonPress, playing }) => {
     { src: icon3, label: 'Radio' }, 
     { src: icon4, label: 'Settings' }, 
     { src: icon5, label: 'Playlists' },
-    { src: icon6, label: 'Playback' },
+    { src: icon6, label: 'Weather' },
   ];
 
   return (
