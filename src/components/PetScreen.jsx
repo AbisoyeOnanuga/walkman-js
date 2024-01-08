@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 import Header from './Header';
 import './PetScreen.css';
 
@@ -165,17 +165,23 @@ const PetScreen = ({ playing }) => {
     const currentState = animation || petState;
     let displayArt;
 
-    if (currentAnimation) {
-      displayArt = ANIMATIONS[currentAnimation][animationFrame];
-    } else {
+    // Add checks for undefined values
+    if (currentAnimation && ANIMATIONS[currentAnimation]) {
+      displayArt = ANIMATIONS[currentAnimation][animationFrame % ANIMATIONS[currentAnimation].length];
+    } else if (PET_PIXELS[currentState]) {
       displayArt = PET_PIXELS[currentState];
+    } else {
+      // Fallback to idle state if no valid state/animation is found
+      displayArt = PET_PIXELS.idle;
     }
     
     return (
       <pre className={`pet-pixel-art ${currentState}`}>
-        {displayArt.map((line, index) => (
+        {Array.isArray(displayArt) ? displayArt.map((line, index) => (
           <div key={index} className="pixel-line">{line}</div>
-        ))}
+        )) : (
+          <div className="pixel-line">{'(・_・)'}</div> // Fallback display
+        )}
       </pre>
     );
   };
