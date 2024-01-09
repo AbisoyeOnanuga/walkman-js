@@ -3,9 +3,13 @@ import axios from 'axios';
 import Header from './Header';
 import './WeatherScreen.css';
 
-const RAPID_API_KEY = 'f2bbb5b1a3msh7d83c14ad42bc40p1625f7jsn1b8d7d32e5a8';
+const RAPID_API_KEY = process.env.REACT_APP_RAPID_API_KEY;
 const DEFAULT_CITY = 'sydney'; // Fallback city
 const DEFAULT_COUNTRY = 'AU';  // Fallback country
+
+if (!RAPID_API_KEY) {
+  console.error('RapidAPI key is missing. Please check your .env file.');
+}
 
 const WeatherScreen = ({ playing }) => {
   // Initialize city from localStorage or use default
@@ -21,6 +25,11 @@ const WeatherScreen = ({ playing }) => {
   const [showInput, setShowInput] = useState(false);
 
   const fetchWeather = async (cityName) => {
+    if (!RAPID_API_KEY) {
+      setError('API key is missing. Please check configuration.');
+      return;
+    }
+
     const options = {
       method: 'GET',
       url: `https://open-weather13.p.rapidapi.com/city/${cityName}/AU`,
@@ -65,7 +74,18 @@ const WeatherScreen = ({ playing }) => {
       setError(null);
       setShowInput(false); // Hide input after successful fetch
     } catch (err) {
-      setError('City not found');
+      console.error('Weather API Error:', err);
+      if (err.response) {
+        if (err.response.status === 401) {
+          setError('API authentication failed. Please check API key.');
+        } else if (err.response.status === 429) {
+          setError('Too many requests. Please try again later.');
+        } else {
+          setError(`Error: ${err.response.status} - ${err.response.data.message || 'City not found'}`);
+        }
+      } else {
+        setError('Failed to fetch weather data. Please try again.');
+      }
     } finally {
       setLoading(false);
     }
