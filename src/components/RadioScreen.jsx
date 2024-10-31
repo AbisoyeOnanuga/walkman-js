@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
 const RadioScreen = ({ setPlaying, playing }) => {
+  useEffect(() => {
+    if (playing === 'radio') {
+      // Logic to resume playing content if previously playing
+    }
+  }, [playing]);
   const [stations, setStations] = useState([]);
 
   useEffect(() => {

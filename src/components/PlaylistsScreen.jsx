@@ -1,6 +1,12 @@
 import React from 'react';
 
 const PlaylistsScreen = ({ setPlaying, playing }) => {
+  useEffect(() => {
+    if (playing === 'playlists') {
+      // Logic to resume playing content if previously playing
+    }
+  }, [playing]);
+  
   return (
     <div className="playlists-screen">
       <div className="header">

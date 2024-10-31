@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from 'react';
 
-const MusicScreen = ({ setPlaying }) => {
+const MusicScreen = ({ setPlaying, playing }) => {
   const [videos, setVideos] = useState([]);
   const apiKey = process.env.REACT_APP_YOUTUBE_API_KEY;
 
+  useEffect(() => {
+    if (playing === 'music') {
+      // Logic to resume playing content if previously playing
+    }
+  }, [playing]);
+  
   useEffect(() => {
     fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=10&key=${apiKey}`)
       .then(response => response.json())
