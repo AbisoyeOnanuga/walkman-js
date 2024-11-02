@@ -9,7 +9,7 @@ const Search = ({ onSearch }) => {
   };
 
   const handleSearch = async () => {
-    const apiKey = 'AIzaSyB0_YkmQgAehK63HgH39wurN1poOdYmzEU';  // Replace with your YouTube Data API key
+    const apiKey = process.env.REACT_APP_YOUTUBE_API_KEY;  // Replace with your YouTube Data API key
     const searchUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&type=video&key=${apiKey}`;
 
     try {
