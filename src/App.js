@@ -1,32 +1,49 @@
 import React, { useState } from 'react';
-import Icon from './assets/icon.svg';
-
-import Player from './components/Player';
-import Playlist from './components/Playlist';
-import Search from './components/Search';
-
+import Walkman from './components/Walkman';
 import './App.css';
 
 const App = () => {
-    const [tracks, setTracks] = useState([]);
-    const [currentTrack, setCurrentTrack] = useState(null);
+  const [screenContent, setScreenContent] = useState('Welcome to Walkman-js');
 
-    const handleSearch = (tracks) => {
-      setTracks(tracks);
-      if (tracks.length > 0) {
-        setCurrentTrack(tracks[0]);
-      }
-    };  
+  const handleButtonPress = (button) => {
+    switch (button) {
+      case 'up':
+        setScreenContent('Up button pressed');
+        break;
+      case 'down':
+        setScreenContent('Down button pressed');
+        break;
+      case 'left':
+        setScreenContent('Left button pressed');
+        break;
+      case 'right':
+        setScreenContent('Right button pressed');
+        break;
+      case 'enter':
+        setScreenContent('Enter button pressed');
+        break;
+      case 'back':
+        setScreenContent('Back button pressed');
+        break;
+      case 'option':
+        setScreenContent('Option button pressed');
+        break;
+      case 'home':
+        setScreenContent('Home button pressed');
+        break;
+      case 'power':
+        setScreenContent('Power button pressed');
+        break;
+      default:
+        setScreenContent('Welcome to Walkman-js');
+    }
+  };
 
-    return (
+  return (
     <div className="app">
-      <img src={Icon} alt="App Icon" />
-      <h1>Walkman-js</h1>
-      <Search onSearch={handleSearch} />
-      {currentTrack && <Player videoId={currentTrack.videoId} />}
-      <Playlist tracks={tracks} />
+      <Walkman screenContent={screenContent} onButtonPress={handleButtonPress} />
     </div>
   );
-}
+};
 
 export default App;
