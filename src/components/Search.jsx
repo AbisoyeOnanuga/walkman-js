@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import api from './youtubeMusic';
 
 const Search = ({ onSearch }) => {
   const [query, setQuery] = useState('');
@@ -7,8 +8,9 @@ const Search = ({ onSearch }) => {
     setQuery(e.target.value);
   };
 
-  const handleSearch = () => {
-    onSearch(query);
+  const handleSearch = async () => {
+    const results = await api.search(query)
+    onSearch(results);
   };
 
   return (
