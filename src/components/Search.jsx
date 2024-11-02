@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import api from './youtubeMusic';
+import axios from 'axios';
 
 const Search = ({ onSearch }) => {
   const [query, setQuery] = useState('');
@@ -9,8 +9,19 @@ const Search = ({ onSearch }) => {
   };
 
   const handleSearch = async () => {
-    const results = await api.search(query)
-    onSearch(results);
+    const apiKey = 'AIzaSyB0_YkmQgAehK63HgH39wurN1poOdYmzEU';  // Replace with your YouTube Data API key
+    const searchUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&type=video&key=${apiKey}`;
+
+    try {
+      const response = await axios.get(searchUrl);
+      const tracks = response.data.items.map(item => ({
+        title: item.snippet.title,
+        videoId: item.id.videoId
+      }));
+      onSearch(tracks);
+    } catch (error) {
+      console.error('Network Error:', error);
+    }
   };
 
   return (
