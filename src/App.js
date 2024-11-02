@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import Icon from './assets/icon.svg';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+import Player from './components/Player';
+import Playlist from './components/Playlist';
+import Search from './components/Search';
+
+const App = () => {
+    const [tracks, setTracks] = useState([]);
+    const [currentTrack, setCurrentTrack] = useState(null);
+
+    const handleSearch = (query) => {
+      // Implement search functionality using YouTube API
+      // For now, let's use dummy data
+      const dummyTracks = [
+        { title: 'Track 1', videoId: 'dQw4w9WgXcQ' },
+        { title: 'Track 2', videoId: '3JZ_D3ELwOQ' }
+      ];
+      setTracks(dummyTracks);
+    };
+    return (
+    <div className="app">
+      <img src={Icon} alt="App Icon" />
+      <h1>Walkman-js</h1>
+      <Search onSearch={handleSearch} />
+      <Player videoId={currentTrack && currentTrack.videoId} />
+      <Playlist tracks={tracks} />
     </div>
   );
 }
