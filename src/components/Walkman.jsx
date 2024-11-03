@@ -65,9 +65,26 @@ const Walkman = ({ screenContent, onButtonPress }) => {
 
   return (
     <div className="walkman">
-      <div className="bezel">
-        <div className="screen">{screenContent}</div>
+      <div className="bezel">        
         <div className="sony-logo">SONY</div>
+          <div class="home-screen">
+            <div class="header">
+              <div class="status-icons">
+                <div class="play-pause"></div>
+                <div class="song-status"></div>
+              </div>
+              <div class="battery-icon"></div>
+            </div>
+            <div class="grid">
+              <div class="icon photos">Photos</div>
+              <div class="icon music">Music</div>
+              <div class="icon fm-radio">FM Radio</div>
+              <div class="icon settings">Settings</div>
+              <div class="icon playlists">Playlists</div>
+              <div class="icon playback">Playback</div>
+            </div>
+          <div class="highlighted-text">Photos</div>
+        </div>
       </div>
       <div class="volume-buttons"></div>
       <div class="key-volume-button"></div>

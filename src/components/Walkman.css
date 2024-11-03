@@ -244,3 +244,75 @@
   top: 65px;
   right: -6px;
 }
+
+.home-screen {
+  width: 117px;
+  height: 134px;
+  background-image: url('../assets/sony-walkman-nw-e394-background.jpg'); /* Background image */
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5px;
+}
+
+.status-icons {
+  display: flex;
+}
+
+.play-pause,
+.song-status {
+  width: 14px;
+  height: 14px;
+  background-color: #fff; /* Placeholder for icons */
+  margin-right: 4px;
+}
+
+.battery-icon {
+  width: 20px;
+  height: 14px;
+  background-color: #fff; /* Placeholder for battery icon */
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 5px;
+  padding: 10px 0;
+}
+
+.icon {
+  width: 33px;
+  height: 33px;
+  border: 2px solid #7e7e7e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.photos { background-color: rgb(152, 152, 152); } /* Placeholder for Photos icon */
+.music { background-color: rgb(152, 152, 152); } /* Placeholder for Music icon */
+.fm-radio { background-color: rgb(152, 152, 152); } /* Placeholder for FM Radio icon */
+.settings { background-color: rgb(152, 152, 152); } /* Placeholder for Settings icon */
+.playlists { background-color: rgb(152, 152, 152); } /* Placeholder for Playlists icon */
+.playback { background-color: rgb(152, 152, 152); } /* Placeholder for Playback icon */
+
+.highlighted-text {
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  font-size: 14px;
+  padding: 5px 0;
+}
