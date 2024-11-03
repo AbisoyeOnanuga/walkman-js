@@ -69,6 +69,9 @@ const Walkman = ({ screenContent, onButtonPress }) => {
         <div className="screen">{screenContent}</div>
         <div className="sony-logo">SONY</div>
       </div>
+      <div class="volume-buttons"></div>
+      <div class="key-volume-button"></div>
+      <div class="power-button"></div>
       <div className="buttons">
         <div
           className="button-back"
@@ -89,7 +92,10 @@ const Walkman = ({ screenContent, onButtonPress }) => {
         <div className="button-home">HOME</div>
         <div className="button-power">POWER</div>
         <div className="navigation">
-          <button className="button-center" onClick={() => onButtonPress('enter')}><img src={PlayIcon} alt="Play/Pause" /></button>
+          <button className="button-center" onClick={() => onButtonPress('enter')}>
+            <img src={PlayIcon} alt="Play/Pause" />
+            <div class="key-button"></div>
+          </button>
           <button className="button-up" onClick={() => onButtonPress('up')}><img src={UpIcon} alt="Up" /></button>
           <button className="button-down" onClick={() => onButtonPress('down')}><img src={DownIcon} alt="Down" /></button>
           <button className="button-left" onClick={() => onButtonPress('left')}><img src={LeftIcon} alt="Left" /></button>
