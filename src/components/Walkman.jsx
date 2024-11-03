@@ -9,7 +9,7 @@ import WalkmanIcon from '../assets/walkman-logo.svg';
 
 import './Walkman.css';
 
-const Walkman = ({ screenContent, onButtonPress }) => {
+const Walkman = ({ screenContent, onButtonPress, selectedIcon }) => {
   const [pressTimer, setPressTimer] = useState(null);
 
   useEffect(() => {
@@ -67,23 +67,23 @@ const Walkman = ({ screenContent, onButtonPress }) => {
     <div className="walkman">
       <div className="bezel">        
         <div className="sony-logo">SONY</div>
-          <div class="home-screen">
-            <div class="header">
-              <div class="status-icons">
-                <div class="play-pause"></div>
-                <div class="song-status"></div>
+        <div className="home-screen">
+            <div className="header">
+              <div className="status-icons">
+                <div className="play-pause"></div>
+                <div className="song-status"></div>
               </div>
-              <div class="battery-icon"></div>
+              <div className="battery-icon"></div>
             </div>
-            <div class="grid">
-              <div class="icon photos">Photos</div>
-              <div class="icon music">Music</div>
-              <div class="icon fm-radio">FM Radio</div>
-              <div class="icon settings">Settings</div>
-              <div class="icon playlists">Playlists</div>
-              <div class="icon playback">Playback</div>
+            <div className="grid">
+              <div className={`icon photos ${selectedIcon === 0 ? 'glow' : ''}`}>Photos</div>
+              <div className={`icon music ${selectedIcon === 1 ? 'glow' : ''}`}>Music</div>
+              <div className={`icon fm-radio ${selectedIcon === 2 ? 'glow' : ''}`}>FM Radio</div>
+              <div className={`icon settings ${selectedIcon === 3 ? 'glow' : ''}`}>Settings</div>
+              <div className={`icon playlists ${selectedIcon === 4 ? 'glow' : ''}`}>Playlists</div>
+              <div className={`icon playback ${selectedIcon === 5 ? 'glow' : ''}`}>Playback</div>
             </div>
-          <div class="highlighted-text">Photos</div>
+          <div class="highlighted-text">{screenContent}</div>
         </div>
       </div>
       <div class="volume-buttons"></div>
@@ -95,6 +95,7 @@ const Walkman = ({ screenContent, onButtonPress }) => {
           onMouseDown={() => handleMouseDown('back')}
           onMouseUp={handleMouseUp}
           onClick={() => onButtonPress('back')}
+          tabIndex="0"
         >
           BACK
         </div>
@@ -103,6 +104,7 @@ const Walkman = ({ screenContent, onButtonPress }) => {
           onMouseDown={() => handleMouseDown('option')}
           onMouseUp={handleMouseUp}
           onClick={() => onButtonPress('option')}
+          tabIndex="0"
         >
           OPTION
         </div>

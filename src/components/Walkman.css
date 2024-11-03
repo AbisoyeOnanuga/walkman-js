@@ -29,7 +29,7 @@
 }
 
 .screen {
-  width: 117px;
+  width: 120px;
   height: 134px;
   border-radius: 3px;
   border: 1px solid #0c0c0c;
@@ -246,15 +246,16 @@
 }
 
 .home-screen {
-  width: 117px;
+  width: 120px;
   height: 134px;
   background-image: url('../assets/sony-walkman-nw-e394-background.jpg'); /* Background image */
   background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 10px;
 }
 
 .header {
@@ -262,25 +263,27 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 5px;
+  background-color: #120323;
 }
 
 .status-icons {
   display: flex;
+  padding: 3px 3px;
 }
 
 .play-pause,
 .song-status {
-  width: 14px;
-  height: 14px;
+  width: 8px;
+  height: 8px;
   background-color: #fff; /* Placeholder for icons */
   margin-right: 4px;
 }
 
 .battery-icon {
-  width: 20px;
-  height: 14px;
+  width: 15px;
+  height: 8px;
   background-color: #fff; /* Placeholder for battery icon */
+  margin-right: 3px;
 }
 
 .grid {
@@ -291,15 +294,20 @@
 }
 
 .icon {
-  width: 33px;
-  height: 33px;
+  width: 25px;
+  height: 25px;
   border: 2px solid #7e7e7e;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #fff;
-  font-size: 12px;
+  font-size: 8px;
   cursor: pointer;
+}
+
+.icon.glow {
+  box-shadow: 0 0 10px 2px rgb(255, 225, 0);
+  border-radius: 5px;
 }
 
 .photos { background-color: rgb(152, 152, 152); } /* Placeholder for Photos icon */
@@ -313,6 +321,6 @@
   width: 100%;
   text-align: center;
   color: #fff;
-  font-size: 14px;
+  font-size: 10px;
   padding: 5px 0;
 }

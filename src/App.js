@@ -4,44 +4,51 @@ import './App.css';
 
 const App = () => {
   const [screenContent, setScreenContent] = useState('Welcome to Walkman-js');
+  const [selectedIcon, setSelectedIcon] = useState(1); // Index of the selected icon, starting with Music
 
+  const icons = ['Photos', 'Music', 'FM Radio', 'Settings', 'Playlists', 'Playback'];
+  
   const handleButtonPress = (button) => {
+    let newIndex = selectedIcon;
     switch (button) {
       case 'up':
-        setScreenContent('Up button pressed');
+        newIndex = (selectedIcon - 3 + 6) % 6; // Moving up in a 2x3 grid
         break;
       case 'down':
-        setScreenContent('Down button pressed');
+        newIndex = (selectedIcon + 3) % 6; // Moving down in a 2x3 grid
         break;
       case 'left':
-        setScreenContent('Left button pressed');
+        newIndex = (selectedIcon - 1 + 6) % 6; // Moving left in a row
         break;
       case 'right':
-        setScreenContent('Right button pressed');
+        newIndex = (selectedIcon + 1) % 6; // Moving right in a row
         break;
       case 'enter':
-        setScreenContent('Enter button pressed');
-        break;
+        setScreenContent(`Enter ${icons[selectedIcon]}`);
+        return;
       case 'back':
         setScreenContent('Back button pressed');
-        break;
+        return;
       case 'option':
         setScreenContent('Option button pressed');
-        break;
+        return;
       case 'home':
         setScreenContent('Home button pressed');
-        break;
+        return;
       case 'power':
         setScreenContent('Power button pressed');
-        break;
+        return;
       default:
         setScreenContent('Welcome to Walkman-js');
+        return;
     }
+    setSelectedIcon(newIndex);
+    setScreenContent(`Selected: ${icons[newIndex]}`);
   };
 
   return (
     <div className="app">
-      <Walkman screenContent={screenContent} onButtonPress={handleButtonPress} />
+      <Walkman screenContent={screenContent} onButtonPress={handleButtonPress} selectedIcon={selectedIcon} />
     </div>
   );
 };
