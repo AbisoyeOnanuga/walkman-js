@@ -1,7 +1,8 @@
 .walkman {
-    background: linear-gradient(15deg, #ff8c00 , #ffd700);
-  }
-  .button-center, .navigation, .button-back, .button-option, .volume-buttons, .power-button, .key-button, .key-volume-button {
-    background: linear-gradient(15deg, #ff8c00 , #ffd700);
-  }
+  background: linear-gradient(15deg, #ff8c00 , #ffd700);
+}
+
+.button-center, .navigation, .button-back, .button-option, .volume-buttons, .power-button, .key-button, .key-volume-button {
+  background: linear-gradient(15deg, #ff8c00 , #ffd700);
+}
   
