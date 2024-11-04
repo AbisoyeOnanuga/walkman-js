@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { MediaProvider } from './MediaContext';
 import Walkman from './components/Walkman';
 import HomeScreen from './components/HomeScreen';
 import MusicScreen from './components/MusicScreen';
@@ -18,32 +17,32 @@ import './themes/Green.css';
 
 const App = () => {
   const [screenContent, setScreenContent] = useState('Welcome to Walkman-js');
-  const [selectedIcon, setSelectedIcon] = useState(1); // Index of the selected icon, starting with Music
-  const [currentScreen, setCurrentScreen] = useState('home'); // Current screen, default is home
+  const [selectedIcon, setSelectedIcon] = useState(1);
+  const [currentScreen, setCurrentScreen] = useState('home');
   const [theme, setTheme] = useState('black');
-  const [playing, setPlaying] = useState(null); // Track currently playing media
+  const [playing, setPlaying] = useState(null);
 
   const icons = ['Photos', 'Music', 'FM Radio', 'Settings', 'Playlists', 'Playback'];
-  
+
   const handleButtonPress = (button) => {
     let newIndex = selectedIcon;
     if (currentScreen === 'home') {
       switch (button) {
         case 'up':
-          newIndex = (selectedIcon - 3 + 6) % 6; // Moving up in a 2x3 grid
+          newIndex = (selectedIcon - 3 + 6) % 6;
           break;
         case 'down':
-          newIndex = (selectedIcon + 3) % 6; // Moving down in a 2x3 grid
+          newIndex = (selectedIcon + 3) % 6;
           break;
         case 'left':
-          newIndex = (selectedIcon - 1 + 6) % 6; // Moving left in a row
+          newIndex = (selectedIcon - 1 + 6) % 6;
           break;
         case 'right':
-          newIndex = (selectedIcon + 1) % 6; // Moving right in a row
+          newIndex = (selectedIcon + 1) % 6;
           break;
         case 'enter':
           const screens = ['photos', 'music', 'radio', 'settings', 'playlists', 'playback'];
-          setCurrentScreen(screens[selectedIcon]); // Switch to the selected screen
+          setCurrentScreen(screens[selectedIcon]);
           return;
         default:
           return;
@@ -75,11 +74,14 @@ const App = () => {
   };
 
   return (
-    <MediaProvider>
-      <div className={`app ${theme}`}>
-        <Walkman screenContent={screenContent} onButtonPress={handleButtonPress} selectedIcon={selectedIcon} currentScreen={currentScreen} />
-      </div>
-    </MediaProvider>
+    <div className={`app ${theme}`}>
+      <Walkman
+        screenContent={screenContent}
+        onButtonPress={handleButtonPress}
+        selectedIcon={selectedIcon}
+        currentScreen={currentScreen}
+      />
+    </div>
   );
 };
 
