@@ -1,0 +1,124 @@
+/* themes/Black.css */
+.walkman {
+    position: relative;
+    width: 162px;
+    height: 357px;
+    border-radius: 8px;
+    border: 1px solid #000;
+    background-color: #494949;
+    background: linear-gradient(15deg, #1a1a1a, #4d4d4d);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+  
+  .screen {
+    width: 120px;
+    height: 134px;
+    border-radius: 3px;
+    border: 1px solid #0c0c0c;
+    background-color: #494949;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 14px;
+  }
+  
+  .button-center {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #363636;
+    color: #fff;
+    border: 1px solid #000;
+    background: linear-gradient(15deg, #1a1a1a, #363636);
+    box-shadow: inset 1px -2px 1px -1px #00000094, inset -2px 3px 2px -3px #ffffffad, 0 0 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    cursor: pointer;
+    position: absolute;
+    top: 40px;
+  }
+  
+  .navigation {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background-color: #363636;
+    border: 1px solid #000;
+    background: linear-gradient(15deg, #1a1a1a, #363636);
+    box-shadow: inset 1px -2px 1px 0px #00000094, inset -2px 2px 2px -2px #ffffffad, 0 0 0 0;
+    top: 10px;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    z-index: 1;
+  }
+  
+  .button-back {
+    left: -40px;
+    background: linear-gradient(15deg, #1a1a1a, #363636);
+    box-shadow: inset 1px -2px 1px -1px #00000094, inset -2px 3px 2px -3px #ffffff92, 0 0 0 0;
+  }
+  
+  .button-option {
+    right: -40px;
+    background: linear-gradient(15deg, #1a1a1a, #363636);
+    box-shadow: inset 1px -2px 1px -1px #00000094, inset 0px 1px 2px -1px #ffffffad, 0 0 0 0;
+  }
+  
+  .volume-buttons {
+    position: absolute;
+    width: 2px;
+    height: 85px;
+    background-color: #494949;
+    border: 1px solid #0e0e0e;
+    background: linear-gradient(15deg, #1a1a1a, #494949);
+    top: 55px;
+    right: -4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .power-button {
+    position: absolute;
+    width: 2px;
+    height: 10px;
+    background-color: #494949;
+    border: 1px solid #0e0e0e;
+    background: linear-gradient(15deg, #0e0e0e, #1a1a1a);
+    top: 220px;
+    right: -4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .key-button {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #1a1a1a, #494949);
+    top: 33px;
+    left: 23px;
+  }
+  
+  .key-volume-button {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: #494949;
+    background: linear-gradient(60deg, #494949, #1a1a1a);
+    top: 65px;
+    right: -6px;
+  }
+  
