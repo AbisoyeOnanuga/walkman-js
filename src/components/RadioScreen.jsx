@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const RadioScreen = () => {
+const RadioScreen = ({ setPlaying }) => {
   const [stations, setStations] = useState([]);
 
   useEffect(() => {
@@ -15,7 +15,7 @@ const RadioScreen = () => {
       {stations.map(station => (
         <div key={station.stationuuid} className="station">
           <p>{station.name}</p>
-          <audio controls>
+          <audio controls onPlay={() => setPlaying('radio')}>
             <source src={station.url} type="audio/mpeg" />
           </audio>
         </div>
