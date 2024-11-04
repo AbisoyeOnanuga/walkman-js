@@ -39,6 +39,35 @@
   justify-content: center;
   color: #fff;
   font-size: 14px;
+  overflow: hidden;
+}
+
+.music-screen,
+.photos-screen,
+.radio-screen,
+.settings-screen,
+.playlists-screen,
+.playback-screen {
+  width: 120px;
+  height: 134px;
+  background-image: url('../assets/sony-walkman-nw-e394-background.jpg'); /* Background image */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  font-size: 10px;
+  overflow-y: auto;
+}
+
+.photos-screen input[type="file"] {
+  width: 100%;
+  font-size: 10px;
+}
+
+.radio-screen .station {
+  font-size: 10px;
 }
 
 .sony-logo {
@@ -104,7 +133,6 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: #363636;
   color: #fff;
   border: 1px solid #000;
 }

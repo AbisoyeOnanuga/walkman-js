@@ -1,15 +1,22 @@
 import React, { useEffect, useState } from 'react';
 
-import PlayIcon from '../assets/play-pause.svg'
+import PlayIcon from '../assets/play-pause.svg';
 import UpIcon from '../assets/tune-up.svg';
 import DownIcon from '../assets/tune-down.svg';
 import LeftIcon from '../assets/left.svg';
 import RightIcon from '../assets/right.svg';
 import WalkmanIcon from '../assets/walkman-logo.svg';
+import HomeScreen from './HomeScreen';
+import MusicScreen from './MusicScreen';
+import PhotosScreen from './PhotosScreen';
+import RadioScreen from './RadioScreen';
+import SettingsScreen from './SettingsScreen';
+import PlaylistsScreen from './PlaylistsScreen';
+import PlaybackScreen from './PlaybackScreen';
 
 import './Walkman.css';
 
-const Walkman = ({ screenContent, onButtonPress, selectedIcon }) => {
+const Walkman = ({ screenContent, onButtonPress, selectedIcon, currentScreen }) => {
   const [pressTimer, setPressTimer] = useState(null);
 
   useEffect(() => {
@@ -63,32 +70,34 @@ const Walkman = ({ screenContent, onButtonPress, selectedIcon }) => {
     setPressTimer(null);
   };
 
+  const renderCurrentScreen = () => {
+    switch (currentScreen) {
+      case 'photos':
+        return <PhotosScreen />;
+      case 'music':
+        return <MusicScreen />;
+      case 'radio':
+        return <RadioScreen />;
+      case 'settings':
+        return <SettingsScreen />;
+      case 'playlists':
+        return <PlaylistsScreen />;
+      case 'playback':
+        return <PlaybackScreen />;
+      default:
+        return <HomeScreen selectedIcon={selectedIcon} onButtonPress={onButtonPress} />;
+    }
+  };
+
   return (
     <div className="walkman">
-      <div className="bezel">        
+      <div className="bezel">
         <div className="sony-logo">SONY</div>
-        <div className="home-screen">
-            <div className="header">
-              <div className="status-icons">
-                <div className="play-pause"></div>
-                <div className="song-status"></div>
-              </div>
-              <div className="battery-icon"></div>
-            </div>
-            <div className="grid">
-              <div className={`icon photos ${selectedIcon === 0 ? 'glow' : ''}`}>Photos</div>
-              <div className={`icon music ${selectedIcon === 1 ? 'glow' : ''}`}>Music</div>
-              <div className={`icon fm-radio ${selectedIcon === 2 ? 'glow' : ''}`}>FM Radio</div>
-              <div className={`icon settings ${selectedIcon === 3 ? 'glow' : ''}`}>Settings</div>
-              <div className={`icon playlists ${selectedIcon === 4 ? 'glow' : ''}`}>Playlists</div>
-              <div className={`icon playback ${selectedIcon === 5 ? 'glow' : ''}`}>Playback</div>
-            </div>
-          <div class="highlighted-text">{screenContent}</div>
-        </div>
+        {renderCurrentScreen()}
       </div>
-      <div class="volume-buttons"></div>
-      <div class="key-volume-button"></div>
-      <div class="power-button"></div>
+      <div className="volume-buttons"></div>
+      <div className="key-volume-button"></div>
+      <div className="power-button"></div>
       <div className="buttons">
         <div
           className="button-back"
@@ -113,7 +122,7 @@ const Walkman = ({ screenContent, onButtonPress, selectedIcon }) => {
         <div className="navigation">
           <button className="button-center" onClick={() => onButtonPress('enter')}>
             <img src={PlayIcon} alt="Play/Pause" />
-            <div class="key-button"></div>
+            <div className="key-button"></div>
           </button>
           <button className="button-up" onClick={() => onButtonPress('up')}><img src={UpIcon} alt="Up" /></button>
           <button className="button-down" onClick={() => onButtonPress('down')}><img src={DownIcon} alt="Down" /></button>
