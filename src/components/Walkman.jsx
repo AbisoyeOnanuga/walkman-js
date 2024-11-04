@@ -18,6 +18,7 @@ import './Walkman.css';
 
 const Walkman = ({ onButtonPress, selectedIcon, currentScreen }) => {
   const [pressTimer, setPressTimer] = useState(null);
+  const [theme, setTheme] = useState('black');
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -79,7 +80,7 @@ const Walkman = ({ onButtonPress, selectedIcon, currentScreen }) => {
       case 'radio':
         return <RadioScreen />;
       case 'settings':
-        return <SettingsScreen />;
+        return <SettingsScreen setTheme={setTheme} />;
       case 'playlists':
         return <PlaylistsScreen />;
       case 'playback':

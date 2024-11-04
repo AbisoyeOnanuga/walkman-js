@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Walkman from './components/Walkman';
 import HomeScreen from './components/HomeScreen';
 import MusicScreen from './components/MusicScreen';
@@ -23,6 +23,10 @@ const App = () => {
   const [playing, setPlaying] = useState(null);
 
   const icons = ['Photos', 'Music', 'FM Radio', 'Settings', 'Playlists', 'Playback'];
+
+  useEffect(() => {
+    console.log('Current theme:', theme); // Log the current theme whenever it changes
+  }, [theme]);
 
   const handleButtonPress = (button) => {
     let newIndex = selectedIcon;
