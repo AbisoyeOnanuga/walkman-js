@@ -16,7 +16,7 @@ import PlaybackScreen from './PlaybackScreen';
 
 import './Walkman.css';
 
-const Walkman = ({ screenContent, onButtonPress, selectedIcon, currentScreen }) => {
+const Walkman = ({ onButtonPress, selectedIcon, currentScreen }) => {
   const [pressTimer, setPressTimer] = useState(null);
 
   useEffect(() => {

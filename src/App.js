@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { MediaProvider } from './MediaContext';
 import Walkman from './components/Walkman';
 import HomeScreen from './components/HomeScreen';
 import MusicScreen from './components/MusicScreen';
@@ -8,6 +9,12 @@ import SettingsScreen from './components/SettingsScreen';
 import PlaylistsScreen from './components/PlaylistsScreen';
 import PlaybackScreen from './components/PlaybackScreen';
 import './App.css';
+import './themes/Black.css';
+import './themes/Pink.css';
+import './themes/Blue.css';
+import './themes/Red.css';
+import './themes/Yellow.css';
+import './themes/Green.css';
 
 const App = () => {
   const [screenContent, setScreenContent] = useState('Welcome to Walkman-js');
@@ -17,7 +24,7 @@ const App = () => {
   const [playing, setPlaying] = useState(null); // Track currently playing media
 
   const icons = ['Photos', 'Music', 'FM Radio', 'Settings', 'Playlists', 'Playback'];
-
+  
   const handleButtonPress = (button) => {
     let newIndex = selectedIcon;
     if (currentScreen === 'home') {
@@ -41,6 +48,8 @@ const App = () => {
         default:
           return;
       }
+    } else if (button === 'back' || button === 'Escape' || button === 'Backspace') {
+      setCurrentScreen('home');
     }
     setSelectedIcon(newIndex);
     setScreenContent(`Selected: ${icons[newIndex]}`);
@@ -55,7 +64,7 @@ const App = () => {
       case 'radio':
         return <RadioScreen />;
       case 'settings':
-        return <SettingsScreen />;
+        return <SettingsScreen setTheme={setTheme} />;
       case 'playlists':
         return <PlaylistsScreen />;
       case 'playback':
@@ -66,9 +75,11 @@ const App = () => {
   };
 
   return (
-    <div className={`app ${theme}`}>
-      <Walkman screenContent={screenContent} onButtonPress={handleButtonPress} selectedIcon={selectedIcon} currentScreen={currentScreen} />
-    </div>
+    <MediaProvider>
+      <div className={`app ${theme}`}>
+        <Walkman screenContent={screenContent} onButtonPress={handleButtonPress} selectedIcon={selectedIcon} currentScreen={currentScreen} />
+      </div>
+    </MediaProvider>
   );
 };
 

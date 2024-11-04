@@ -1,6 +1,6 @@
 import React from 'react';
 
-const PlaylistsScreen = () => {
+const PlaylistsScreen = ({ setPlaying, playing }) => {
   return (
     <div className="playlists-screen">
       <iframe
@@ -10,6 +10,7 @@ const PlaylistsScreen = () => {
         frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         referrerpolicy="strict-origin-when-cross-origin" allowfullscreen
+        onLoad={() => setPlaying('playlists')}
       ></iframe>
     </div>
   );
