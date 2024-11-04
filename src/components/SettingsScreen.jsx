@@ -10,8 +10,7 @@ const SettingsScreen = ({ setTheme }) => {
       <h2>Choose Theme</h2>
       {themes.map(theme => (
         <button key={theme} onClick={() => {
-          console.log("Button click: setTheme is", typeof 
-          setTheme); // Debugging log
+          console.log('Changing theme to:', theme);
           setTheme(theme)
           }}>{theme}</button>
       ))}
