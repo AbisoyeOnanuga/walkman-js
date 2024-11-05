@@ -43,18 +43,20 @@ const SettingsScreen = ({ setTheme }) => {
         </div>
         <div className="battery-icon"></div>
       </div>
-      <h2>Settings</h2>
-      <ul className="theme-list" ref={themeListRef} tabIndex={0}>
-        {themes.map((theme, index) => (
-          <li
-            key={theme}
-            className={index === selectedThemeIndex ? 'selected' : ''}
-            onClick={() => setTheme(theme)}
-          >
-            {theme.charAt(0).toUpperCase() + theme.slice(1)}
-          </li>
-        ))}
-      </ul>
+      <div className="screen-content">
+        <h2>Settings</h2>
+        <ul className="theme-list" ref={themeListRef} tabIndex={0}>
+          {themes.map((theme, index) => (
+            <li
+              key={theme}
+              className={index === selectedThemeIndex ? 'selected' : ''}
+              onClick={() => setTheme(theme)}
+            >
+              {theme.charAt(0).toUpperCase() + theme.slice(1)}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };

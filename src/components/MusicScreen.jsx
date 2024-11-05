@@ -20,24 +20,26 @@ const MusicScreen = ({ setPlaying }) => {
         </div>
         <div className="battery-icon"></div>
       </div>
-      {videos.length === 0 ? (
-        <p>No videos available.</p>
-        ) : (
-        videos.map(video => (
-          <div key={video.id.videoId} className="video">
-            <iframe
-              src={`https://www.youtube.com/embed/${video.id.videoId}`}
-              title={video.snippet.title}
-              frameBorder="0"
-              style={{ width: '100%', height: '100%' }}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              onLoad={() => setPlaying && setPlaying('music')}
-            ></iframe>
-            <p>{video.snippet.title}</p>
-          </div>
-        ))
-      )}
+      <div className="screen-content">
+        {videos.length === 0 ? (
+          <p>No videos available.</p>
+          ) : (
+          videos.map(video => (
+            <div key={video.id.videoId} className="video">
+              <iframe
+                src={`https://www.youtube.com/embed/${video.id.videoId}`}
+                title={video.snippet.title}
+                frameBorder="0"
+                style={{ width: '100%', height: '100%' }}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                onLoad={() => setPlaying && setPlaying('music')}
+              ></iframe>
+              <p>{video.snippet.title}</p>
+            </div>
+          ))
+        )}
+      </div>
     </div>
   );
 };

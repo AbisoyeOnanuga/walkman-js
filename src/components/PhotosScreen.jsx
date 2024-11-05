@@ -10,9 +10,11 @@ const PhotosScreen = () => {
         </div>
         <div className="battery-icon"></div>
       </div>
-      <h2>Upload and Browse Photos</h2>
-      <input type="file" accept="image/*" />
-      {/* Use a photo hosting service to upload and display photos */}
+      <div className="screen-content">
+        <h2>Upload and Browse Photos</h2>
+        <input type="file" accept="image/*" />
+        {/* Use a photo hosting service to upload and display photos */}
+      </div>
     </div>
   );
 };

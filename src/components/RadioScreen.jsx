@@ -19,14 +19,16 @@ const RadioScreen = ({ setPlaying, playing }) => {
         </div>
         <div className="battery-icon"></div>
       </div>
-      {stations.map(station => (
-        <div key={station.stationuuid} className="station">
-          <p>{station.name}</p>
-          <audio controls onPlay={() => setPlaying && setPlaying('radio')} style={{ width: '100%', height: '30%' }}>
-            <source src={station.url} type="audio/mpeg" />
-          </audio>
-        </div>
-      ))}
+      <div className="screen-content">
+        {stations.map(station => (
+          <div key={station.stationuuid} className="station">
+            <p>{station.name}</p>
+            <audio controls onPlay={() => setPlaying && setPlaying('radio')} style={{ width: '100%', height: '30%' }}>
+              <source src={station.url} type="audio/mpeg" />
+            </audio>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
