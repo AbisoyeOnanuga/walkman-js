@@ -8,12 +8,6 @@ import SettingsScreen from './components/SettingsScreen';
 import PlaylistsScreen from './components/PlaylistsScreen';
 import PlaybackScreen from './components/PlaybackScreen';
 import './App.css';
-import './themes/Black.css';
-import './themes/Pink.css';
-import './themes/Blue.css';
-import './themes/Red.css';
-import './themes/Yellow.css';
-import './themes/Green.css';
 
 const App = () => {
   const [screenContent, setScreenContent] = useState('Welcome to Walkman-js');
@@ -25,7 +19,10 @@ const App = () => {
   const icons = ['Photos', 'Music', 'FM Radio', 'Settings', 'Playlists', 'Playback'];
 
   useEffect(() => {
-    console.log('Current theme:', theme); // Log the current theme whenever it changes
+    console.log('Current theme:', theme);
+    import(`./themes/${theme}.css`).then(() => {
+      document.body.className = theme;
+    });
   }, [theme]);
 
   const handleButtonPress = (button) => {
@@ -71,7 +68,7 @@ const App = () => {
       case 'playlists':
         return <PlaylistsScreen />;
       case 'playback':
-        return playing === 'music' ? <MusicScreen setPlaying={setPlaying} /> : <RadioScreen setPlaying={setPlaying} />;
+        return <PlaybackScreen />;
       default:
         return <HomeScreen selectedIcon={selectedIcon} onButtonPress={handleButtonPress} />;
     }
@@ -80,10 +77,11 @@ const App = () => {
   return (
     <div className={`app ${theme}`}>
       <Walkman
-        screenContent={screenContent}
+        screenContent={renderCurrentScreen}
         onButtonPress={handleButtonPress}
         selectedIcon={selectedIcon}
         currentScreen={currentScreen}
+        setTheme={setTheme} // Pass the setTheme function
       />
     </div>
   );
