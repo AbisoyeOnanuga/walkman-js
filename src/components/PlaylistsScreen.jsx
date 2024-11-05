@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const PlaylistsScreen = ({ setPlaying, playing }) => {
   useEffect(() => {
@@ -6,7 +6,7 @@ const PlaylistsScreen = ({ setPlaying, playing }) => {
       // Logic to resume playing content if previously playing
     }
   }, [playing]);
-  
+
   return (
     <div className="playlists-screen">
       <div className="header">

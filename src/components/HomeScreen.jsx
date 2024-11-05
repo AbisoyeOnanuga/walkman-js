@@ -1,6 +1,6 @@
 import React from 'react';
 
-const HomeScreen = ({ selectedIcon, onButtonPress }) => {
+const HomeScreen = ({ selectedIcon, onButtonPress, setPlaying, playing }) => {
   const icons = ['Photos', 'Music', 'FM-Radio', 'Settings', 'Playlists', 'Playback'];
 
   return (
