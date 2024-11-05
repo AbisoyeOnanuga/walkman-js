@@ -1,7 +1,7 @@
 import React from 'react';
 
 const HomeScreen = ({ selectedIcon, onButtonPress }) => {
-  const icons = ['Photos', 'Music', 'FM Radio', 'Settings', 'Playlists', 'Playback'];
+  const icons = ['Photos', 'Music', 'FM-Radio', 'Settings', 'Playlists', 'Playback'];
 
   return (
     <div className="home-screen">

@@ -13,9 +13,16 @@ const MusicScreen = ({ setPlaying }) => {
 
   return (
     <div className="music-screen">
+      <div className="header">
+        <div className="status-icons">
+          <div className="play-pause"></div>
+          <div className="song-status"></div>
+        </div>
+        <div className="battery-icon"></div>
+      </div>
       {videos.length === 0 ? (
         <p>No videos available.</p>
-      ) : (
+        ) : (
         videos.map(video => (
           <div key={video.id.videoId} className="video">
             <iframe

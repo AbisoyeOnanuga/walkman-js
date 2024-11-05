@@ -12,6 +12,13 @@ const RadioScreen = ({ setPlaying, playing }) => {
 
   return (
     <div className="radio-screen">
+      <div className="header">
+        <div className="status-icons">
+          <div className="play-pause"></div>
+          <div className="song-status"></div>
+        </div>
+        <div className="battery-icon"></div>
+      </div>
       {stations.map(station => (
         <div key={station.stationuuid} className="station">
           <p>{station.name}</p>
