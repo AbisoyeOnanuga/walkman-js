@@ -13,7 +13,7 @@ const RadioScreen = ({ setCurrentAudio }) => {
 
   const handlePlay = (station) => {
     if (typeof setCurrentAudio === 'function') {
-      setCurrentAudio({ url: station.url, name: station.name });
+      setCurrentAudio(station);
     } else {
       console.error('setCurrentAudio is not a function');
     }
