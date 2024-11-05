@@ -50,7 +50,7 @@
 .playback-screen {
   width: 120px;
   height: 134px;
-  background-image: url('../assets/sony-walkman-nw-e394-background.jpg'); /* Background image */
+  background-color: #0d0d0d;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
@@ -292,6 +292,7 @@
   justify-content: space-between;
   align-items: center;
   background-color: #120323;
+  z-index: 1000;
 }
 
 .status-icons {
@@ -325,6 +326,7 @@
   width: 25px;
   height: 25px;
   border: 2px solid #7e7e7e;
+  border-radius: 2px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -334,7 +336,7 @@
 }
 
 .icon.glow {
-  box-shadow: 0 0 10px 2px rgb(255, 225, 0);
+  box-shadow: 0 0 5px 1px rgb(255, 200, 0);
   border-radius: 5px;
 }
 
@@ -351,4 +353,58 @@
   color: #fff;
   font-size: 10px;
   padding: 5px 0;
+}
+
+/* Walkman.css */
+.theme-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  overflow-y: auto;
+}
+
+.theme-list::-webkit-scrollbar {
+  width: 3px; /* Chrome, Safari */
+}
+
+.theme-list::-webkit-scrollbar {
+  width: 3px; /* Chrome, Safari */
+}
+
+.theme-list::-webkit-scrollbar-track {
+  background: #333;
+}
+
+.theme-list::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 2px;
+}
+
+.theme-list li {
+  padding: 10px;
+  cursor: pointer;
+  width: auto;
+  position: relative;
+}
+
+.theme-list li::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: radial-gradient(circle, transparent, #333);
+}
+
+.theme-list li.selected {
+  background: linear-gradient(to top, transparent, rgba(255, 255, 255, 0.3) 50%, transparent);
+}
+
+.settings-screen {
+  display: flex;
+  flex-direction: column;
+  background-color: #0d0d0d;
+  width: 120px;
 }
