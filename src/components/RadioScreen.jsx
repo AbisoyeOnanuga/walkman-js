@@ -1,11 +1,7 @@
+// RadioScreen.jsx
 import React, { useState, useEffect } from 'react';
 
-const RadioScreen = ({ setPlaying, playing }) => {
-  useEffect(() => {
-    if (playing === 'radio') {
-      // Logic to resume playing content if previously playing
-    }
-  }, [playing]);
+const RadioScreen = ({ setCurrentAudio }) => {
   const [stations, setStations] = useState([]);
 
   useEffect(() => {
@@ -14,6 +10,14 @@ const RadioScreen = ({ setPlaying, playing }) => {
       .then(data => setStations(data))
       .catch(error => console.error('Error fetching radio stations:', error));
   }, []);
+
+  const handlePlay = (station) => {
+    if (typeof setCurrentAudio === 'function') {
+      setCurrentAudio({ url: station.url, name: station.name });
+    } else {
+      console.error('setCurrentAudio is not a function');
+    }
+  };
 
   return (
     <div className="radio-screen">
@@ -24,15 +28,13 @@ const RadioScreen = ({ setPlaying, playing }) => {
         </div>
         <div className="battery-icon"></div>
       </div>
-      <div className="screen-content"> {stations.map(station => ( 
-        <div key={station.stationuuid} className="station">
-          <p>{station.name}</p>
-          <div className="audio-player">
-            <audio controls onPlay={() => setPlaying && setPlaying('radio')} style={{ width: '100%', height: '30%' }}>
-              <source src={station.url} type="audio/mpeg" />
-            </audio>
-          </div> 
-        </div> ))}
+      <div className="screen-content">
+        {stations.map(station => (
+          <div key={station.stationuuid} className="station">
+            <p>{station.name}</p>
+            <button onClick={() => handlePlay(station)}>Play</button>
+          </div>
+        ))}
       </div>
     </div>
   );
