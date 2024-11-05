@@ -81,7 +81,6 @@ const App = () => {
         onButtonPress={handleButtonPress}
         selectedIcon={selectedIcon}
         currentScreen={currentScreen}
-        setTheme={setTheme} // Pass the setTheme function
       />
     </div>
   );

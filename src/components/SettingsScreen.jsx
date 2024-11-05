@@ -1,33 +1,37 @@
 // components/SettingsScreen.jsx
 import React, { useState, useEffect, useRef } from 'react';
 
-const SettingsScreen = ({ setTheme }) => {
+const SettingsScreen = ({ onButtonPress, setTheme }) => {
   const themes = ['black', 'pink', 'blue', 'red', 'yellow', 'green'];
   const [selectedThemeIndex, setSelectedThemeIndex] = useState(0);
   const themeListRef = useRef(null);
+  const selectedThemeRef = useRef(null);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
-      switch (event.key) {
-        case 'ArrowUp':
-          setSelectedThemeIndex((prevIndex) => (prevIndex - 1 + themes.length) % themes.length);
-          break;
-        case 'ArrowDown':
-          setSelectedThemeIndex((prevIndex) => (prevIndex + 1) % themes.length);
-          break;
-        case 'Enter':
-        case ' ':
-          setTheme(themes[selectedThemeIndex]);
-          break;
-        default:
-          break;
+      let newIndex = selectedThemeIndex;
+      if (event.key === 'ArrowUp') {
+        newIndex = (selectedThemeIndex - 1 + themes.length) % themes.length;
+      } else if (event.key === 'ArrowDown') {
+        newIndex = (selectedThemeIndex + 1) % themes.length;
+      } else if (event.key === 'Enter' || event.key === ' ') {
+        setTheme(themes[selectedThemeIndex]);
+      } else if (event.key === 'Backspace' || event.key === 'Escape') {
+        setTheme('home');
       }
+      setSelectedThemeIndex(newIndex);
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [selectedThemeIndex, themes, setTheme]);
-  
+
+  useEffect(() => {
+    if (selectedThemeRef.current) {
+      selectedThemeRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }, [selectedThemeIndex]);
+
   useEffect(() => {
     if (themeListRef.current) {
       themeListRef.current.focus();
@@ -47,13 +51,14 @@ const SettingsScreen = ({ setTheme }) => {
         <h2>Settings</h2>
         <ul className="theme-list" ref={themeListRef} tabIndex={0}>
           {themes.map((theme, index) => (
-            <li
-              key={theme}
-              className={index === selectedThemeIndex ? 'selected' : ''}
-              onClick={() => setTheme(theme)}
-            >
-              {theme.charAt(0).toUpperCase() + theme.slice(1)}
-            </li>
+          <li
+            key={theme}
+            ref={index === selectedThemeIndex ? selectedThemeRef : null}
+            className={index === selectedThemeIndex ? 'selected' : ''}
+            onClick={() => setTheme(theme)}
+          >
+            {theme.charAt(0).toUpperCase() + theme.slice(1)}
+          </li>
           ))}
         </ul>
       </div>
