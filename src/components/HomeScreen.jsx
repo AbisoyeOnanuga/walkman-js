@@ -1,6 +1,6 @@
 import React from 'react';
 
-const HomeScreen = ({ selectedIcon, onButtonPress, setPlaying, playing }) => {
+const HomeScreen = ({ selectedIcon, onButtonPress }) => {
   const icons = ['Photos', 'Music', 'FM-Radio', 'Settings', 'Playlists', 'Playback'];
 
   return (
@@ -15,7 +15,9 @@ const HomeScreen = ({ selectedIcon, onButtonPress, setPlaying, playing }) => {
       <div className="screen-content">
         <div className="grid">
           {icons.map((icon, index) => (
-            <div key={index} className={`icon ${icon.toLowerCase()} ${selectedIcon === index ? 'glow' : ''}`}>
+            <div key={index} className={`icon ${icon.toLowerCase()} ${selectedIcon === index ? 'glow' : ''}`}             
+            onClick={() => onButtonPress(icon.screen, index)}
+            >
               {icon}
             </div>
           ))}
