@@ -1,7 +1,13 @@
 import React from 'react';
+import icon1 from '../assets/song.svg';
+import icon2 from '../assets/playlist.svg';
+
 
 const HomeScreen = ({ selectedIcon, onButtonPress }) => {
-  const icons = ['Photos', 'Music', 'FM-Radio', 'Settings', 'Playlists', 'Playback'];
+  const icons = [
+    { src: icon1, label: 'Icon 1' },
+    { src: icon2, label: 'Icon 2' }, // add other icons here
+   ];
 
   return (
     <div className="home-screen">

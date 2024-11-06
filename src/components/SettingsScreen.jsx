@@ -1,7 +1,7 @@
 // components/SettingsScreen.jsx
 import React, { useState, useEffect, useRef } from 'react';
 
-const SettingsScreen = ({ onButtonPress, setTheme }) => {
+const SettingsScreen = ({ setTheme }) => {
   const themes = ['black', 'pink', 'blue', 'red', 'yellow', 'green'];
   const [selectedThemeIndex, setSelectedThemeIndex] = useState(0);
   const themeListRef = useRef(null);

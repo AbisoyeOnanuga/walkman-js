@@ -7,14 +7,14 @@ import RadioScreen from './components/RadioScreen';
 import SettingsScreen from './components/SettingsScreen';
 import PlaylistsScreen from './components/PlaylistsScreen';
 import PlaybackScreen from './components/PlaybackScreen';
-import GlobalAudioPlayer from './components/GlobalAudioPlayer';
+import GlobalAudioPlayer from './components/GlobalAudioPlayer'; // Import the new component
 import './App.css';
 
 const App = () => {
   const [screenContent, setScreenContent] = useState('Welcome to Walkman-js');
   const [selectedIcon, setSelectedIcon] = useState(1);
   const [currentScreen, setCurrentScreen] = useState('home');
-  const [theme, setTheme] = useState('black');
+  const [theme, setTheme] = useState('Black');
   const [currentAudio, setCurrentAudio] = useState(null); // State to manage current playing audio
   
   const icons = ['Photos', 'Music', 'FM Radio', 'Settings', 'Playlists', 'Playback'];
@@ -61,13 +61,13 @@ const App = () => {
       case 'photos':
         return <PhotosScreen />;
       case 'music':
-        return <MusicScreen setCurrentAudio={setCurrentAudio} />;
+        return <MusicScreen />;
       case 'radio':
-        return <RadioScreen setCurrentAudio={setCurrentAudio} />;
+        return <RadioScreen />;
       case 'settings':
         return <SettingsScreen setTheme={setTheme} />;
       case 'playlists':
-        return <PlaylistsScreen setCurrentAudio={setCurrentAudio} />;
+        return <PlaylistsScreen />;
       case 'playback':
         return <PlaybackScreen />;
       default:
@@ -83,7 +83,7 @@ const App = () => {
         selectedIcon={selectedIcon}
         currentScreen={currentScreen}
       />
-      <GlobalAudioPlayer currentAudio={currentAudio} />
+      <GlobalAudioPlayer currentAudio={currentAudio} setCurrentAudio={setCurrentAudio} />
     </div>
   );
 };
