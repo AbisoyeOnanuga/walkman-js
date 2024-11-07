@@ -320,7 +320,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #120323;
+  background: linear-gradient(90deg, #050505, #494949);
   position: fixed;
   z-index: 1000;
 }
@@ -343,23 +343,19 @@
   border-radius: 4px;
 }
 
-.status-icons {
+.status-icon {
+  top: -2px;
   display: flex;
-  padding: 3px 3px;
+  background-color: transparent; /* Placeholder for icons */
 }
 
-.play-pause,
-.song-status {
-  width: 8px;
-  height: 8px;
-  background-color: #fff; /* Placeholder for icons */
-  margin-right: 4px;
+img.song-status {
+  margin-left: 4px;
 }
 
 .battery-icon {
-  width: 15px;
-  height: 8px;
-  background-color: #fff; /* Placeholder for battery icon */
+  top: -2px;
+  background-color: transparent; /* Placeholder for battery icon */
   margin-right: 3px;
 }
 
