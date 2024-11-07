@@ -1,7 +1,7 @@
 .walkman {
   position: relative; /* Ensure child elements are positioned correctly */
-  width: 162px;
-  height: 357px;
+  width: 200px;
+  height: 460px;
   border-radius: 8px;
   border: 1px solid #000;
   position: relative;
@@ -14,8 +14,8 @@
 }
 
 .bezel {
-  width: 145px;
-  height: 182px;
+  width: 185px;
+  height: 252px;
   border-radius: 12px;
   border: 1px solid #5a5a5a;
   background-color: #030303;
@@ -30,7 +30,7 @@
 
 .screen {
   width: 120px;
-  height: 134px;
+  height: 234px;
   border-radius: 3px;
   border: 1px solid #0c0c0c;
   background-color: #494949;
@@ -48,8 +48,8 @@
 .settings-screen,
 .playlists-screen,
 .playback-screen {
-  width: 120px;
-  height: 134px;
+  width: 150px;
+  height: 194px;
   background-color: #0d0d0d;
   background-size: cover;
   background-repeat: no-repeat;
@@ -57,17 +57,17 @@
   display: flex;
   flex-direction: column;
   color: #fff;
-  font-size: 10px;
+  font-size: 12px;
   overflow-y: auto;
 }
 
 .photos-screen input[type="file"] {
   width: 100%;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .radio-screen .station {
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .sony-logo {
@@ -86,8 +86,8 @@
 }
 
 .button-center {
-  width: 50px;
-  height: 50px;
+  width: 67px;
+  height: 67px;
   border-radius: 50%;
   background-color: #363636;
   color: #fff;
@@ -106,9 +106,7 @@
 .button-up,
 .button-down,
 .button-left,
-.button-right,
-.button-back,
-.button-option {
+.button-right {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -117,9 +115,9 @@
   position: absolute;
   width: 30px;
   height: 30px;
-  border-radius: 50%;
-  background-color: #363636;
+  background-color: transparent;
   border: none;
+  transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 .button-back,
@@ -130,11 +128,48 @@
   font-size: 16px;
   cursor: pointer;
   position: absolute;
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   color: #fff;
   border: 1px solid #000;
+  font-size: 10px;
+  top: 10px;
+  z-index: 2;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.button-back:active {
+  background: linear-gradient(15deg, #1a1a1a, #292929);
+}
+
+.button-option:active {
+  background: linear-gradient(15deg, #1a1a1a, #292929);
+}
+
+.button-center:active {
+ background: linear-gradient(15deg, #1a1a1a, #292929);
+ }
+
+.button-up:active {
+  background: linear-gradient(0deg, #2e2e2e, #1a1a1a); 
+  width: 120px;
+}
+.button-down:active {
+  background: linear-gradient(180deg, #2020208b, #090909);
+    width: 120px;
+}
+.button-left:active {
+  background: linear-gradient(270deg, #26262644, #1a1a1a);
+  height: 120px;
+  top: 15px;
+  width: 30px;
+}
+.button-right:active {
+  background: linear-gradient(90deg, #26262644, #1a1a1a);
+  height: 120px;
+  top: 15px;
+  width: 30px;
 }
 
 .button-up {
@@ -146,18 +181,18 @@
 }
 
 .button-left {
-  top: 50px;
+  top: 60px;
   left: 0px;
 }
 
 .button-right {
-  top: 50px;
+  top: 60px;
   right: 0px;
 }
 
 .navigation {
-  width: 130px;
-  height: 130px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
   background-color: #363636;
   border: 1px solid #000;
@@ -168,25 +203,18 @@
   justify-content: center;
   position: absolute;
   z-index: 1;
-}
-
-.button-back,
-.button-option {
-  width: 45px;
-  height: 45px;
-  font-size: 10px;
-  top: 10px;
-  z-index: 2;
+  overflow: hidden;
 }
 
 .button-back {
-  left: -40px;
+  left: -50px;
   background: linear-gradient(15deg, #1a1a1a, #363636);
   box-shadow: inset 1px -2px 1px -1px #00000094, inset -2px 3px 2px -3px #ffffff92, 0 0 0 0; /* Updated box shadow */
+  transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 .button-option {
-  right: -40px;
+  right: -50px;
   background: linear-gradient(15deg, #1a1a1a, #363636);
   box-shadow: inset 1px -2px 1px -1px #00000094, inset 0px 1px 2px -1px #ffffffad, 0 0 0 0; /* Updated box shadow */
 }
@@ -208,12 +236,12 @@
 
 .button-home {
   top: -10px;
-  left: -33px;
+  left: -47px;
 }
 
 .button-power {
   top: -10px;
-  right: -33px;
+  right: -47px;
 }
 
 .key-button::after {
@@ -255,11 +283,12 @@
 /* Key button indicator for center button */
 .key-button {
   position: absolute;
-  width: 4px;
-  height: 4px;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
-  background: linear-gradient(45deg, #1a1a1a, #494949);  top: 33px; /* Adjust position to be centered below the play-pause icon */
-  left: 23px; /* Adjust position to be centered below the play-pause icon */
+  background: linear-gradient(45deg, #292929, #585858);
+  top: 45px; /* Adjust position to be centered below the play-pause icon */
+  left: 30px; /* Adjust position to be centered below the play-pause icon */
 }
 
 .key-volume-button {
@@ -274,9 +303,9 @@
 }
 
 .home-screen {
-  width: 120px;
-  height: 134px;
-  background-image: url('../assets/sony-walkman-nw-e394-background.jpg'); /* Background image */
+  width: 150px;
+  height: 194px;
+  background-image: url('../assets/sony-walkman-nw-e394-background-1.jpg'); /* Background image */
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
@@ -287,7 +316,7 @@
 }
 
 .header {
-  width: 120px;
+  width: 150px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -336,21 +365,18 @@
 
 .grid {
   display: grid;
+  margin-top: 10px;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 5px;
   padding: 30px 10px 10px 10px;
 }
 
-.icon {
-  width: 25px;
-  height: 25px;
-  border: 2px solid #7e7e7e;
-  border-radius: 2px;
+img.icon {
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
-  font-size: 8px;
   cursor: pointer;
 }
 
@@ -359,19 +385,22 @@
   border-radius: 5px;
 }
 
-.photos { background-color: rgb(152, 152, 152); } /* Placeholder for Photos icon */
-.music { background-color: rgb(152, 152, 152); } /* Placeholder for Music icon */
-.fm-radio { background-color: rgb(152, 152, 152); } /* Placeholder for FM Radio icon */
-.settings { background-color: rgb(152, 152, 152); } /* Placeholder for Settings icon */
-.playlists { background-color: rgb(152, 152, 152); } /* Placeholder for Playlists icon */
-.playback { background-color: rgb(152, 152, 152); } /* Placeholder for Playback icon */
+/*
+.photos,
+.music,
+.fm-radio,
+.settings,
+.playlists,
+.playback { 
+  background-color: rgb(152, 152, 152);
+}  icons */
 
 .highlighted-text {
   width: 100%;
   text-align: center;
   color: #fff;
-  font-size: 10px;
-  padding: 5px 0;
+  font-size: 14px;
+  padding: 12px 0;
 }
 
 .theme-list {
@@ -424,7 +453,6 @@
   display: flex;
   flex-direction: column;
   background-color: #0d0d0d;
-  width: 120px;
 }
 
 .audio-player { 
