@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
 import PlayIcon from '../assets/play-pause.svg';
-import UpIcon from '../assets/tune-up.svg';
-import DownIcon from '../assets/tune-down.svg';
-import LeftIcon from '../assets/left.svg';
-import RightIcon from '../assets/right.svg';
+import UpIcon from '../assets/up.png';
+import DownIcon from '../assets/down.png';
+import LeftIcon from '../assets/left.png';
+import RightIcon from '../assets/right.png';
 import WalkmanIcon from '../assets/walkman-logo.svg';
 import HomeScreen from './HomeScreen';
 import MusicScreen from './MusicScreen';
@@ -19,7 +19,7 @@ import './Walkman.css';
 const Walkman = ({ onButtonPress, selectedIcon, currentScreen }) => {
   const [pressTimer, setPressTimer] = useState(null);
   const [playing, setPlaying] = useState(false);
-  
+
   useEffect(() => {
     const handleKeyDown = (event) => {
       switch (event.key) {
