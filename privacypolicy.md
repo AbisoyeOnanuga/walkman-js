@@ -2,7 +2,7 @@
 
 **Last updated: 07/11/2024**
 
-This privacy policy outlines how **[Your App Name]** collects, uses, and protects user data.
+This privacy policy outlines how **Walkman-JS** collects, uses, and protects user data.
 
 ## Information Collection
 
