@@ -1,7 +1,6 @@
 # Privacy Policy
 
-**Last updated: 07/11/2024**
-
+**Last updated: 08/11/2024**
 This privacy policy outlines how **Walkman-JS** collects, uses, and protects user data.
 
 ## Information Collection
@@ -39,4 +38,4 @@ For more information, please refer to the privacy policies of these services.
 
 ## Contact Us
 
-If you have any questions or concerns about our privacy policy, please contact the developer at **github.io/website**.
+If you have any questions or concerns about our privacy policy, please contact the developer at **coming soon ...**.
