@@ -357,6 +357,7 @@
 }
 
 .status-icon {
+  position: relative;
   top: -2px;
   display: flex;
   background-color: transparent; /* Placeholder for icons */
