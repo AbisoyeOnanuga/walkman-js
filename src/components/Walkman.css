@@ -367,6 +367,7 @@ img.song-status {
 }
 
 .battery-icon {
+  position: relative;
   top: -2px;
   background-color: transparent; /* Placeholder for battery icon */
   margin-right: 3px;
