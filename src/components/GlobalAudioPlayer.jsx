@@ -1,15 +1,8 @@
 // GlobalAudioPlayer.js
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 
 const GlobalAudioPlayer = ({ currentAudio }) => {
     const audioRef = useRef(null);
-
-    useEffect(() => {
-        if (currentAudio) {
-            audioRef.current.src = currentAudio.url;
-            audioRef.current.play();
-        }
-    }, [currentAudio]);
 
     return (
         <audio ref={audioRef} controls style={{ display: 'none' }}>
