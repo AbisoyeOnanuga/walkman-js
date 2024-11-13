@@ -6,7 +6,6 @@ import icon4 from '../assets/settings.png';
 import icon5 from '../assets/playlists.png';
 import icon6 from '../assets/playback.png';
 import icon7 from '../assets/play-status.svg';
-import icon8 from '../assets/pause-status.svg';
 import icon9 from '../assets/song-status.svg';
 import icon10 from '../assets/battery.svg';
 
