@@ -1,7 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-clientid = Process.env.REACT_APP_IMGUR_CLIENT_ID
+const CLIENT_ID = process.env.REACT_APP_IMGUR_CLIENT_ID
+
+const throttle = (func, limit) => {
+  let inThrottle;
+  return function() {
+    const args = arguments;
+    const context = this;
+    if (!inThrottle) {
+      func.apply(context, args);
+      inThrottle = true;
+      setTimeout(() => inThrottle = false, limit);
+    }
+  }
+};
 
 const PhotosScreen = () => {
   const [photos, setPhotos] = useState([]); 
@@ -9,12 +22,14 @@ const PhotosScreen = () => {
 
   useEffect(() => {
     const fetchPhotos = async () => {
+      console.log('Fetching photos...');
       try {
-        const response = await axios.get('https://api.imgur.com/3/gallery/t/landscape/day/0?showViral=true', {
+        const response = await axios.get('https://api.imgur.com/3/gallery/t/landscape/day/1.json', {
           headers: {
-            'Authorization': `Bearer ${clientid}`,
+            'Authorization' : `Client-ID ${CLIENT_ID}`,
           },
         });
+        console.log('Rate limits:', response.headers['x-ratelimit-clientremaining'], response.headers['x-ratelimit-userremaining']);
         setPhotos(response.data.data);
       } catch (err) {
         console.error('Error fetching photos:', err);
@@ -22,7 +37,9 @@ const PhotosScreen = () => {
       }
     };
 
-    fetchPhotos();
+    const throttledFetchedPhotos = throttle(fetchPhotos, 3000); // 3 seconds throttle
+    throttledFetchedPhotos();
+    // setTimeout(fetchPhotos, 3000); // Delay the next request by 3 seconds
   }, []);
 
   return (
@@ -37,7 +54,7 @@ const PhotosScreen = () => {
       <div className="screen-content">
         <h2>Landscape Photos</h2>
         {error ? (
-          <p className="error-message">Failed to load photos: {error.message}</p>
+          <p className="error-message">Failed to load photos: {error.message}. Retrying in 3 seconds...</p>
         ) : (
           <div className="photo-gallery">
             {photos.map(photo => (
