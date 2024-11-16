@@ -1,40 +1,63 @@
 // utils/themes.js
-const Silver = {
-  body: {
-    background: "linear-gradient(180deg, #e3e3e3 0%, #d6d6d6 100%)",
-  },
-  clickwheel: {
-    background: "#FFFFFF",
-    outline: "#b9b9b9",
-    button: "#AFAFAF",
-    centerButton: {
-      background: "#ffffff",
-      boxShadow: "rgb(191, 191, 191)",
-      outline: "#b9b9b9",
-    },
-  },
-};
-
 const Black = {
-  body: {
-    background: "linear-gradient(180deg, #7d7c7d 0%, #1e1e1e 100%)",
-  },
-  clickwheel: {
-    background: "#2a2a2a",
-    outline: "#1a1a1a",
-    button: "#FFFFFF",
-    centerButton: {
-      background: "#7d7c7d",
-      boxShadow: "rgb(50, 50, 50)",
-      outline: "#1a1a1a",
+    body: {
+      background: "linear-gradient(15deg, #1a1a1a, #4d4d4d)",
     },
-  },
-};
-
-const themes = {
-  silver: Silver,
-  black: Black,
-  // Add other themes here
-};
-
-export default themes;
+    buttonCenter: {
+      background: "linear-gradient(15deg, #1a1a1a, #363636)",
+    },
+    navigation: {
+      background: "linear-gradient(15deg, #1a1a1a, #363636)",
+    },
+    buttonBack: {
+      background: "linear-gradient(15deg, #1a1a1a, #363636)",
+    },
+    buttonOption: {
+      background: "linear-gradient(15deg, #1a1a1a, #363636)",
+    },
+    volumeButtons: {
+      background: "linear-gradient(15deg, #1a1a1a, #363636)",
+    },
+    powerButton: {
+      background: "linear-gradient(15deg, #1a1a1a, #363636)",
+    },
+    keyButton: {
+      background: "linear-gradient(15deg, #292929, #585858)",
+    },
+  };
+  
+  const Blue = {
+    body: {
+      background: "linear-gradient(15deg, #4682b4, #1e90ff)",
+    },
+    buttonCenter: {
+      background: "linear-gradient(15deg, #4682b4, #1e90ff)",
+    },
+    navigation: {
+      background: "linear-gradient(15deg, #4682b4, #1e90ff)",
+    },
+    buttonBack: {
+      background: "linear-gradient(15deg, #4682b4, #1e90ff)",
+    },
+    buttonOption: {
+      background: "linear-gradient(15deg, #4682b4, #1e90ff)",
+    },
+    volumeButtons: {
+      background: "linear-gradient(15deg, #4682b4, #1e90ff)",
+    },
+    powerButton: {
+      background: "linear-gradient(15deg, #4682b4, #1e90ff)",
+    },
+    keyButton: {
+      background: "linear-gradient(15deg, #4682b4, #1e90ff)",
+    },
+  };
+  
+  const themes = {
+    Black,
+    Blue,
+    // Add other themes here
+  };
+  
+  export default themes;
+  
