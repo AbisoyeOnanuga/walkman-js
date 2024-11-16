@@ -1,11 +1,9 @@
 // components/SettingsScreen.jsx
 import React, { useState, useEffect, useRef } from 'react';
-import { useTheme } from '../themes/themeManager';
 
 const SettingsScreen = ({ setTheme }) => {
   const themes = ['black', 'pink', 'blue', 'red', 'yellow', 'green'];
   const [selectedThemeIndex, setSelectedThemeIndex] = useState(0);
-  const { changeTheme } = useTheme();
   const themeListRef = useRef(null);
   const selectedThemeRef = useRef(null);
 
