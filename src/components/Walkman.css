@@ -85,6 +85,19 @@
   position: relative;
 }
 
+.button { 
+  padding: 10px 20px; 
+  margin: 5px; 
+  border: none; 
+  background-color: #eee; 
+  cursor: pointer; 
+  transition: background-color 0.3s ease; 
+} 
+.button:active, 
+.button.active { 
+  background-color: #ccc; /* Change color when active */
+}
+
 .button-center {
   width: 67px;
   height: 67px;
