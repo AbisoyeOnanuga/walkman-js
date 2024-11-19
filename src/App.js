@@ -8,6 +8,7 @@ import SettingsScreen from './components/SettingsScreen';
 import PlaylistsScreen from './components/PlaylistsScreen';
 import PlaybackScreen from './components/PlaybackScreen';
 import GlobalAudioPlayer from './components/GlobalAudioPlayer'; // Import the new component
+import { applyTheme } from './utils/themeManager'; // Import applyTheme function
 import './App.css';
 
 const App = () => {
@@ -20,10 +21,8 @@ const App = () => {
   const icons = ['Photos', 'Music', 'FM Radio', 'Settings', 'Playlists', 'Playback'];
 
   useEffect(() => {
-    console.log('Current theme:', theme);
-    import(`./themes/${theme}.css`).then(() => {
-      document.body.className = theme;
-    });
+     console.log('Current theme:', theme);
+     applyTheme(theme); // Apply the theme using the theme manager 
   }, [theme]);
 
   const handleButtonPress = (button) => {
@@ -76,7 +75,7 @@ const App = () => {
   };
 
   return (
-    <div className={`app ${theme}`}>
+    <div className="app">
       <Walkman
         screenContent={renderCurrentScreen}
         onButtonPress={handleButtonPress}
