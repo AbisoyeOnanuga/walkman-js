@@ -24,9 +24,9 @@ const Black = {
     keyButton: {
       background: "linear-gradient(15deg, #292929, #585858)",
     },
-  };
+};
   
-  const Blue = {
+const Blue = {
     body: {
       background: "linear-gradient(15deg, #4682b4, #1e90ff)",
     },
@@ -51,13 +51,71 @@ const Black = {
     keyButton: {
       background: "linear-gradient(15deg, #4682b4, #1e90ff)",
     },
-  };
+};
   
-  const themes = {
+const Pink = {
+    body: {
+      background: "linear-gradient(15deg, #ff1493, #ff69b4)",
+    },
+    buttonCenter: {
+      background: "linear-gradient(15deg, #ff1493, #ff69b4)",
+    },
+    navigation: {
+      background: "linear-gradient(15deg, #ff1493, #ff69b4)",
+    },
+    buttonBack: {
+      background: "linear-gradient(15deg, #ff1493, #ff69b4)",
+    },
+    buttonOption: {
+      background: "linear-gradient(15deg, #ff1493, #ff69b4)",
+    },
+    volumeButtons: {
+      background: "linear-gradient(15deg, #ff1493, #ff69b4)",
+    },
+    powerButton: {
+      background: "linear-gradient(15deg, #ff1493, #ff69b4)",
+    },
+    keyButton: {
+      background: "linear-gradient(15deg, #ff1493, #ff69b4)",
+    },
+};
+
+const Red = {
+    body: {
+      background: "linear-gradient(15deg, )",
+    },
+    buttonCenter: {
+      background: "linear-gradient(15deg, )",
+    },
+    navigation: {
+      background: "linear-gradient(15deg, )",
+    },
+    buttonBack: {
+      background: "linear-gradient(15deg, )",
+    },
+    buttonOption: {
+      background: "linear-gradient(15deg, )",
+    },
+    volumeButtons: {
+      background: "linear-gradient(15deg, )",
+    },
+    powerButton: {
+      background: "linear-gradient(15deg, )",
+    },
+    keyButton: {
+      background: "linear-gradient()",
+    },
+};
+
+const themes = {
     Black,
     Blue,
+    Pink,
+    Red,
+    Yellow,
+    Green,
     // Add other themes here
-  };
+};
   
-  export default themes;
+export default themes;
   
