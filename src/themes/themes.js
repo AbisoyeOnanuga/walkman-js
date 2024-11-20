@@ -82,28 +82,28 @@ const Pink = {
 
 const Red = {
     body: {
-      background: "linear-gradient(15deg, )",
+      background: "linear-gradient(15deg, #ff4500, #ff6347)",
     },
     buttonCenter: {
-      background: "linear-gradient(15deg, )",
+      background: "linear-gradient(15deg, #ff4500, #ff6347)",
     },
     navigation: {
-      background: "linear-gradient(15deg, )",
+      background: "linear-gradient(15deg, #ff4500, #ff6347)",
     },
     buttonBack: {
-      background: "linear-gradient(15deg, )",
+      background: "linear-gradient(15deg, #ff4500, #ff6347)",
     },
     buttonOption: {
-      background: "linear-gradient(15deg, )",
+      background: "linear-gradient(15deg, #ff4500, #ff6347)",
     },
     volumeButtons: {
-      background: "linear-gradient(15deg, )",
+      background: "linear-gradient(15deg, #ff4500, #ff6347)",
     },
     powerButton: {
-      background: "linear-gradient(15deg, )",
+      background: "linear-gradient(15deg, #ff4500, #ff6347)",
     },
     keyButton: {
-      background: "linear-gradient()",
+      background: "linear-gradient(15deg, #ff4500, #ff6347)",
     },
 };
 
