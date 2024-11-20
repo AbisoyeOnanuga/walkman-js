@@ -107,6 +107,33 @@ const Red = {
     },
 };
 
+const Yellow = {
+    body: {
+      background: "linear-gradient(15deg, #ff8c00 , #ffd700)",
+    },
+    buttonCenter: {
+      background: "linear-gradient(15deg, #ff8c00 , #ffd700)",
+    },
+    navigation: {
+      background: "linear-gradient(15deg, #ff8c00 , #ffd700)",
+    },
+    buttonBack: {
+      background: "linear-gradient(15deg, #ff8c00 , #ffd700)",
+    },
+    buttonOption: {
+      background: "linear-gradient(15deg, #ff8c00 , #ffd700)",
+    },
+    volumeButtons: {
+      background: "linear-gradient(15deg, #ff8c00 , #ffd700)",
+    },
+    powerButton: {
+      background: "linear-gradient(15deg, #ff8c00 , #ffd700)",
+    },
+    keyButton: {
+      background: "linear-gradient(15deg, #ff8c00 , #ffd700)",
+    },
+};
+
 const themes = {
     Black,
     Blue,
