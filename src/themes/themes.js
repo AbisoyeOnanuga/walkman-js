@@ -134,6 +134,33 @@ const Yellow = {
     },
 };
 
+const Green = {
+    body: {
+      background: "linear-gradient(15deg, #228b22, #32cd32)",
+    },
+    buttonCenter: {
+      background: "linear-gradient(15deg, #228b22, #32cd32)",
+    },
+    navigation: {
+      background: "linear-gradient(15deg, #228b22, #32cd32)",
+    },
+    buttonBack: {
+      background: "linear-gradient(15deg, #228b22, #32cd32)",
+    },
+    buttonOption: {
+      background: "linear-gradient(15deg, #228b22, #32cd32)",
+    },
+    volumeButtons: {
+      background: "linear-gradient(15deg, #228b22, #32cd32)",
+    },
+    powerButton: {
+      background: "linear-gradient(15deg, #228b22, #32cd32)",
+    },
+    keyButton: {
+      background: "linear-gradient(15deg, #228b22, #32cd32)",
+    },
+};
+
 const themes = {
     Black,
     Blue,
