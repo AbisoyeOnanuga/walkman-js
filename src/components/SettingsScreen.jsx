@@ -1,9 +1,9 @@
 // components/SettingsScreen.jsx
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 
 const SettingsScreen = ({ setTheme }) => {
   console.log("setTheme function: ", setTheme); // Debugging log
-  const themes = ['black', 'pink', 'blue', 'red', 'yellow', 'green'];
+  const themes = useMemo(() => ['Black', 'Pink', 'Blue', 'Red', 'Yellow', 'Green'], []);
   const [selectedThemeIndex, setSelectedThemeIndex] = useState(0);
   const themeListRef = useRef(null);
   const selectedThemeRef = useRef(null);
