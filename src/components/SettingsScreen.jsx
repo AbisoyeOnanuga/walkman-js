@@ -2,11 +2,13 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 
 const SettingsScreen = ({ setTheme }) => {
-  console.log("setTheme function: ", setTheme); // Debugging log
   const themes = useMemo(() => ['Black', 'Pink', 'Blue', 'Red', 'Yellow', 'Green'], []);
   const [selectedThemeIndex, setSelectedThemeIndex] = useState(0);
   const themeListRef = useRef(null);
   const selectedThemeRef = useRef(null);
+
+  // Log setTheme to ensure it is received correctly
+  console.log("setTheme in SettingsScreen component:", setTheme);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
