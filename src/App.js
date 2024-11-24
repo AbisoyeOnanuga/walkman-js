@@ -64,7 +64,7 @@ const App = () => {
       case 'radio':
         return <RadioScreen />;
       case 'settings':
-        return <SettingsScreen setTheme={setTheme} />;
+        return <SettingsScreen setTheme={setTheme} />; // Ensure setTheme is passed correctly
       case 'playlists':
         return <PlaylistsScreen />;
       case 'playback':
