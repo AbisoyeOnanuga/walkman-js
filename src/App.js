@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+// App.js
+import React, { useState } from 'react';
 import Walkman from './components/Walkman';
 import HomeScreen from './components/HomeScreen';
 import MusicScreen from './components/MusicScreen';
@@ -7,23 +8,27 @@ import RadioScreen from './components/RadioScreen';
 import SettingsScreen from './components/SettingsScreen';
 import PlaylistsScreen from './components/PlaylistsScreen';
 import PlaybackScreen from './components/PlaybackScreen';
-import GlobalAudioPlayer from './components/GlobalAudioPlayer'; // Import the new component
-import { applyTheme } from './themes/themeManager'; // Import applyTheme function
+import GlobalAudioPlayer from './components/GlobalAudioPlayer';
+import { ThemeProvider, useTheme } from './context/ThemeContext';
 import './App.css';
 
 const App = () => {
-  const [screenContent, setScreenContent] = useState('Welcome to Walkman-js');
+  return (
+    <ThemeProvider>
+      <AppContent />
+    </ThemeProvider>
+  );
+};
+
+const AppContent = () => {
+  const [screenContent, setScreenContent] = useState('Welcome to Walkman-js'); // Correctly defining useState
   const [selectedIcon, setSelectedIcon] = useState(1);
   const [currentScreen, setCurrentScreen] = useState('home');
-  const [theme, setTheme] = useState('Black');
-  const [currentAudio, setCurrentAudio] = useState(null); // State to manage current playing audio
-  
-  const icons = ['Photos', 'Music', 'FM Radio', 'Settings', 'Playlists', 'Playback'];
+  const [currentAudio, setCurrentAudio] = useState(null); 
 
-  useEffect(() => {
-     console.log('Current theme:', theme);
-     applyTheme(theme); // Apply the theme using the theme manager 
-  }, [theme]);
+  const { theme } = useTheme();
+
+  const icons = ['Photos', 'Music', 'FM Radio', 'Settings', 'Playlists', 'Playback'];
 
   const handleButtonPress = (button) => {
     let newIndex = selectedIcon;
@@ -56,7 +61,7 @@ const App = () => {
   };
 
   const renderCurrentScreen = () => {
-  switch (currentScreen) {
+    switch (currentScreen) {
       case 'photos':
         return <PhotosScreen />;
       case 'music':
@@ -64,7 +69,7 @@ const App = () => {
       case 'radio':
         return <RadioScreen />;
       case 'settings':
-        return <SettingsScreen setTheme={setTheme} />; // Ensure setTheme is passed correctly
+        return <SettingsScreen />; // No need to pass setTheme, it's managed by context
       case 'playlists':
         return <PlaylistsScreen />;
       case 'playback':
@@ -75,7 +80,7 @@ const App = () => {
   };
 
   return (
-    <div className="app">
+    <div className="app" style={{ background: theme.body.background }}>
       <Walkman
         screenContent={renderCurrentScreen}
         onButtonPress={handleButtonPress}
