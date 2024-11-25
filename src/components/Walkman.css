@@ -29,8 +29,8 @@
 }
 
 .screen {
-  width: 120px;
-  height: 234px;
+  width: 150px;
+  height: 194px;
   border-radius: 3px;
   border: 1px solid #0c0c0c;
   background-color: #494949;
@@ -152,6 +152,7 @@
   transition: background-color 0.3s, box-shadow 0.3s;
 }
 
+/* Active states */
 .button-back:active {
   background: linear-gradient(15deg, #1a1a1a, #292929);
 }
