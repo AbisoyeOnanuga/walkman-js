@@ -1,5 +1,6 @@
+// components/Walkman.jsx
 import React, { useEffect, useState } from 'react';
-
+import { useTheme } from '../context/ThemeContext';
 import PlayIcon from '../assets/play-pause.svg';
 import UpIcon from '../assets/up.png';
 import DownIcon from '../assets/down.png';
@@ -13,15 +14,17 @@ import RadioScreen from './RadioScreen';
 import SettingsScreen from './SettingsScreen';
 import PlaylistsScreen from './PlaylistsScreen';
 import PlaybackScreen from './PlaybackScreen';
-
 import './Walkman.css';
 
 const Walkman = ({ onButtonPress, selectedIcon, currentScreen }) => {
+  const { theme } = useTheme();
   const [pressTimer, setPressTimer] = useState(null);
   const [playing, setPlaying] = useState(false);
+  const [activeButton, setActiveButton] = useState(null); // Track active button
 
   useEffect(() => {
     const handleKeyDown = (event) => {
+      setActiveButton(event.key.toLowerCase()); // Set active button
       switch (event.key) {
         case 'ArrowUp':
           onButtonPress('up');
@@ -51,11 +54,20 @@ const Walkman = ({ onButtonPress, selectedIcon, currentScreen }) => {
       }
     };
 
+    const handleKeyUp = () => {
+      setActiveButton(null); // Reset active button
+    };
+
     window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    window.addEventListener('keyup', handleKeyUp);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keyup', handleKeyUp);
+    };
   }, [onButtonPress]);
 
   const handleMouseDown = (button) => {
+    setActiveButton(button); // Set active button
     const timer = setTimeout(() => {
       if (button === 'back') {
         onButtonPress('home');
@@ -69,6 +81,7 @@ const Walkman = ({ onButtonPress, selectedIcon, currentScreen }) => {
   const handleMouseUp = () => {
     clearTimeout(pressTimer);
     setPressTimer(null);
+    setActiveButton(null); // Reset active button
   };
 
   const renderCurrentScreen = () => {
@@ -94,14 +107,17 @@ const Walkman = ({ onButtonPress, selectedIcon, currentScreen }) => {
     <div className="walkman">
       <div className="bezel">
         <div className="sony-logo">SONY</div>
-        {renderCurrentScreen()}
+        <div className="screen" style={{ background: theme.body.background }}>
+          {renderCurrentScreen()}
+        </div>
       </div>
-      <div className="volume-buttons"></div>
-      <div className="key-volume-button"></div>
-      <div className="power-button"></div>
+      <div className="volume-buttons" style={{ background: theme.volumeButtons.background }}></div>
+      <div className="key-volume-button" style={{ background: theme.keyButton.background }}></div>
+      <div className="power-button" style={{ background: theme.powerButton.background }}></div>
       <div className="buttons">
         <div
           className="button-back"
+          style={{ background: theme.buttonBack.background }}
           onMouseDown={() => handleMouseDown('back')}
           onMouseUp={handleMouseUp}
           onClick={() => onButtonPress('back')}
@@ -111,6 +127,7 @@ const Walkman = ({ onButtonPress, selectedIcon, currentScreen }) => {
         </div>
         <div
           className="button-option"
+          style={{ background: theme.buttonOption.background }}
           onMouseDown={() => handleMouseDown('option')}
           onMouseUp={handleMouseUp}
           onClick={() => onButtonPress('option')}
@@ -120,10 +137,9 @@ const Walkman = ({ onButtonPress, selectedIcon, currentScreen }) => {
         </div>
         <div className="button-home">HOME</div>
         <div className="button-power">POWER</div>
-        <div className="navigation">
-          <button className="button-center" onClick={() => onButtonPress('enter')}>
+        <div className="navigation" style={{ background: theme.navigation.background }}>
+          <button className="button-center" style={{ background: theme.buttonCenter.background }} onClick={() => onButtonPress('enter')}>
             <img src={PlayIcon} alt="Play/Pause" />
-            <div className="key-button"></div>
           </button>
           <button className="button-up" onClick={() => onButtonPress('up')}><img src={UpIcon} alt="Up" /></button>
           <button className="button-down" onClick={() => onButtonPress('down')}><img src={DownIcon} alt="Down" /></button>
