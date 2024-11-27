@@ -8,7 +8,7 @@ import SettingsScreen from './components/SettingsScreen';
 import PlaylistsScreen from './components/PlaylistsScreen';
 import PlaybackScreen from './components/PlaybackScreen';
 import GlobalAudioPlayer from './components/GlobalAudioPlayer'; // Import the new component
-import { applyTheme } from './utils/themeManager'; // Import applyTheme function
+import { applyTheme } from './themes/themeManager'; // Import applyTheme function
 import './App.css';
 
 const App = () => {
