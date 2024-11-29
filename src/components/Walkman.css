@@ -4,11 +4,13 @@
   height: 460px;
   border-radius: 8px;
   border: 1px solid #000;
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 10px;
+  background: var(--walkman-background, linear-gradient(15deg, #1a1a1a, #4d4d4d)); /* Default fallback */
+  border: var(--walkman-border, 1px solid #000); /* Default fallback */
+  background-color: var(--walkman-background-color, #494949); /* Default fallback */
 }
 
 .bezel {
@@ -90,10 +92,6 @@
   background-color: #eee; 
   cursor: pointer; 
   transition: background-color 0.3s ease; 
-} 
-.button:active, 
-.button.active { 
-  background-color: #ccc; /* Change color when active */
 }
 
 .button-center {
