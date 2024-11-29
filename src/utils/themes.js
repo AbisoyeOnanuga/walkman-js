@@ -6,6 +6,9 @@ export const Black = {
     border: "1px solid #000",
     backgroundColor: "#494949",
   },
+  walkman: { 
+    backgroundColor: "#494949", // Add this line
+  },
   buttonCenter: {
     background: "linear-gradient(15deg, #1a1a1a, #363636)",
   },
@@ -28,6 +31,12 @@ export const Black = {
     background: "linear-gradient(15deg, #292929, #585858)",
   },
   active: {
+    buttonBack: {
+      background: "#292929",
+    },
+    buttonOption: {
+      background: "#292929",
+    },
     buttonCenter: {
       backgroundColor: "rgba(0, 0, 0, 0.5)"
     },
@@ -55,8 +64,8 @@ export const Black = {
 };
   
 export const Blue = {
-  body: {
-    background: "linear-gradient(15deg, #4682b4, #1e90ff)",
+  walkman: { 
+    backgroundColor: "linear-gradient(15deg, #4682b4, #1e90ff)", // Add this line
   },
   buttonCenter: {
     background: "linear-gradient(15deg, #4682b4, #1e90ff)",
@@ -79,6 +88,31 @@ export const Blue = {
   keyButton: {
     background: "linear-gradient(15deg, #4682b4, #1e90ff)",
   },
+  active: {
+    buttonCenter: {
+      backgroundColor: "rgba(0, 0, 0, 0.5)"
+    },
+    buttonUp: {
+      background: "linear-gradient(0deg, #2e2e2e, #1a1a1a)",
+      width: "120px"
+    },
+    buttonDown: {
+      background: "linear-gradient(180deg, #2020208b, #090909)",
+      width: "120px"
+    },
+    buttonLeft: {
+      background: "linear-gradient(270deg, #26262644, #1a1a1a)",
+      height: "120px",
+      top: "15px",
+      width: "30px"
+    },
+    buttonRight: {
+      background: "linear-gradient(90deg, #26262644, #1a1a1a)",
+      height: "120px",
+      top: "15px",
+      width: "30px"
+    }
+  }
 };
   
 export const Pink = {
