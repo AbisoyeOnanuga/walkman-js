@@ -30,14 +30,13 @@ const HomeScreen = ({ selectedIcon, onButtonPress }) => {
         </div>
         <div className="battery-icon"><img src={icon10} alt="Battery Status" /></div>
       </div>
-      <div className="screen-content" style={{ background: theme.body.background }}>
+      <div className="screen-content">
         <div className="grid">
           {icons.map((icon, index) => (
             <div
               key={index}
               className={`icon ${icon.label.toLowerCase().replace(/\s+/g, '-')} ${selectedIcon === index ? 'glow' : ''}`}
               onClick={() => onButtonPress(icon.src, index)}
-              style={{ background: selectedIcon === index ? theme.buttonCenter.background : 'transparent' }}
             >
               <img className="icon" src={icon.src} alt={icon.label} />
             </div>

@@ -104,10 +104,10 @@ const Walkman = ({ onButtonPress, selectedIcon, currentScreen }) => {
   };
 
   return (
-    <div className="walkman">
+    <div className="walkman" style={{ background: theme.walkman.background }}>
       <div className="bezel">
         <div className="sony-logo">SONY</div>
-        <div className="screen" style={{ background: theme.body.background }}>
+        <div className="screen">
           {renderCurrentScreen()}
         </div>
       </div>
