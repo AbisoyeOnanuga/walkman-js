@@ -80,12 +80,13 @@ const AppContent = () => {
   };
 
   return (
-    <div className="app" style={{ background: theme.body.background }}>
+    <div className="app">
       <Walkman
         screenContent={renderCurrentScreen}
         onButtonPress={handleButtonPress}
         selectedIcon={selectedIcon}
         currentScreen={currentScreen}
+        theme={theme}
       />
       <GlobalAudioPlayer currentAudio={currentAudio} setCurrentAudio={setCurrentAudio} />
     </div>
