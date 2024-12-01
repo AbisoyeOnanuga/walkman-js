@@ -149,6 +149,16 @@
 }
 
 /* Active states */
+.button-back.active,
+.button-option.active,
+.button-center.active,
+.button-up.active,
+.button-down.active,
+.button-left.active,
+.button-right.active {
+  background: var(--active-background, rgba(0, 0, 0, 0.7)); /* Default fallback */
+}
+
 .button-back:active {
   background: var(--buttonBack-active-background, linear-gradient(15deg, #1a1a1a, #292929));
 }
