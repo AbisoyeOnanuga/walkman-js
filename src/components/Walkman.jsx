@@ -22,50 +22,6 @@ const Walkman = ({ onButtonPress, selectedIcon, currentScreen }) => {
   const [playing, setPlaying] = useState(false);
   const [activeButton, setActiveButton] = useState(null); // Track active button
 
-  useEffect(() => {
-    const handleKeyDown = (event) => {
-      setActiveButton(event.key.toLowerCase()); // Set active button
-      switch (event.key) {
-        case 'ArrowUp':
-          onButtonPress('up');
-          break;
-        case 'ArrowDown':
-          onButtonPress('down');
-          break;
-        case 'ArrowLeft':
-          onButtonPress('left');
-          break;
-        case 'ArrowRight':
-          onButtonPress('right');
-          break;
-        case 'Enter':
-        case ' ':
-          onButtonPress('enter');
-          break;
-        case 'Backspace':
-        case 'Escape':
-          onButtonPress('back');
-          break;
-        case 'Shift':
-          onButtonPress('option');
-          break;
-        default:
-          break;
-      }
-    };
-
-    const handleKeyUp = () => {
-      setActiveButton(null); // Reset active button
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    window.addEventListener('keyup', handleKeyUp);
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-      window.removeEventListener('keyup', handleKeyUp);
-    };
-  }, [onButtonPress]);
-
   const handleMouseDown = (button) => {
     setActiveButton(button); // Set active button
     const timer = setTimeout(() => {
@@ -82,6 +38,66 @@ const Walkman = ({ onButtonPress, selectedIcon, currentScreen }) => {
     clearTimeout(pressTimer);
     setPressTimer(null);
     setActiveButton(null); // Reset active button
+  };
+  
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      let buttonName;
+      setActiveButton(event.key.toLowerCase()); // Set active button
+      switch (event.key) {
+        case 'ArrowUp':
+          buttonName = 'buttonUp';
+          onButtonPress('up');
+          break;
+        case 'ArrowDown':
+          buttonName = 'buttonDown';
+          onButtonPress('down');
+          break;
+        case 'ArrowLeft':
+          buttonName = 'buttonLeft';
+          onButtonPress('left');
+          break;
+        case 'ArrowRight':
+          buttonName = 'buttonRight';
+          onButtonPress('right');
+          break;
+        case 'Enter':
+        case ' ':
+          buttonName = 'buttonCenter';
+          onButtonPress('enter');
+          break;
+        case 'Backspace':
+        case 'Escape':
+          buttonName = 'buttonBack';
+          onButtonPress('back');
+          break;
+        case 'Shift':
+          buttonName = 'buttonOption';
+          onButtonPress('option');
+          break;
+        default:
+          return;
+      }
+      setActiveButton(buttonName);
+    };
+
+    const handleKeyUp = () => {
+      setActiveButton(null); // Reset active button
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('keyup', handleKeyUp);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keyup', handleKeyUp);
+    };
+  }, [onButtonPress]);
+
+  const getButtonStyle = (buttonName) => {
+    if (activeButton === buttonName) {
+      return { background: theme.active[buttonName].background };
+    }
+    return { background: theme[buttonName].background };
   };
 
   const renderCurrentScreen = () => {
@@ -117,7 +133,7 @@ const Walkman = ({ onButtonPress, selectedIcon, currentScreen }) => {
       <div className="buttons">
         <div
           className="button-back"
-          style={{ background: theme.buttonBack.background }}
+          style={getButtonStyle('buttonBack')}
           onMouseDown={() => handleMouseDown('back')}
           onMouseUp={handleMouseUp}
           onClick={() => onButtonPress('back')}
@@ -127,7 +143,7 @@ const Walkman = ({ onButtonPress, selectedIcon, currentScreen }) => {
         </div>
         <div
           className="button-option"
-          style={{ background: theme.buttonOption.background }}
+          style={getButtonStyle('buttonOption')}
           onMouseDown={() => handleMouseDown('option')}
           onMouseUp={handleMouseUp}
           onClick={() => onButtonPress('option')}
@@ -138,7 +154,7 @@ const Walkman = ({ onButtonPress, selectedIcon, currentScreen }) => {
         <div className="button-home">HOME</div>
         <div className="button-power">POWER</div>
         <div className="navigation" style={{ background: theme.navigation.background }}>
-          <button className="button-center" style={{ background: theme.buttonCenter.background }} onClick={() => onButtonPress('enter')}>
+          <button className="button-center" style={getButtonStyle('buttonCenter')} onClick={() => onButtonPress('enter')}>
             <div className="key-center-button" style={{ background: theme.keyButton.background }}></div>
             <img src={PlayIcon} alt="Play/Pause" />
           </button>

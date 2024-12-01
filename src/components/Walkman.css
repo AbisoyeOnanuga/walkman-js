@@ -150,33 +150,33 @@
 
 /* Active states */
 .button-back:active {
-  background: linear-gradient(15deg, #1a1a1a, #292929);
+  background: var(--buttonBack-active-background, linear-gradient(15deg, #1a1a1a, #292929));
 }
 
 .button-option:active {
-  background: linear-gradient(15deg, #1a1a1a, #292929);
+  background: var(--buttonOption-active-background, linear-gradient(15deg, #1a1a1a, #292929));
 }
 
 .button-center:active {
- background: linear-gradient(15deg, #1a1a1a, #292929);
+ background: var(--buttonCenter-active-background, linear-gradient(15deg, #1a1a1a, #292929));
  }
 
 .button-up:active {
-  background: linear-gradient(0deg, #2e2e2e, #1a1a1a); 
+  background: var(--buttonUp-active-background, linear-gradient(0deg, #2e2e2e, #1a1a1a)); 
   width: 120px;
 }
 .button-down:active {
-  background: linear-gradient(180deg, #2020208b, #090909);
+  background: var(--buttonDown-active-background, linear-gradient(180deg, #2020208b, #090909));
     width: 120px;
 }
 .button-left:active {
-  background: linear-gradient(270deg, #26262644, #1a1a1a);
+  background: var(--buttonLeft-active-background, linear-gradient(270deg, #26262644, #1a1a1a));
   height: 120px;
   top: 15px;
   width: 30px;
 }
 .button-right:active {
-  background: linear-gradient(90deg, #26262644, #1a1a1a);
+  background: var(--buttonRight-active-background, linear-gradient(90deg, #26262644, #1a1a1a));
   height: 120px;
   top: 15px;
   width: 30px;
@@ -206,7 +206,6 @@
   border-radius: 50%;
   background-color: #363636;
   border: 1px solid #000;
-  background: linear-gradient(15deg, #1a1a1a, #363636);
   box-shadow: inset 1px -2px 1px 0px #00000094, inset -2px 2px 2px -2px #ffffffad, 0 0 0 0; /* Updated box shadow */
   top: 10px;
   display: flex;
@@ -227,6 +226,7 @@
   right: -50px;
   background: linear-gradient(15deg, #1a1a1a, #363636);
   box-shadow: inset 1px -2px 1px -1px #00000094, inset 0px 1px 2px -1px #ffffffad, 0 0 0 0; /* Updated box shadow */
+  transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 .walkman-logo {

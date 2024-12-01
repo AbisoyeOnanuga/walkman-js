@@ -1,5 +1,4 @@
 // utils/themes.js
-
 export const Black = {
   walkman: { 
     background: "linear-gradient(15deg, #1a1a1a, #363636)", // Add this line
@@ -30,13 +29,13 @@ export const Black = {
   },
   active: {
     buttonBack: {
-      background: "#292929",
+      background: "linear-gradient(15deg, #1a1a1a, #292929)", 
     },
     buttonOption: {
-      background: "#292929",
+      background: "linear-gradient(15deg, #1a1a1a, #292929)",
     },
     buttonCenter: {
-      backgroundColor: "rgba(0, 0, 0, 0.5)"
+      backgroundColor: "linear-gradient(15deg, #1a1a1a, #292929)"
     },
     buttonUp: {
       background: "linear-gradient(0deg, #2e2e2e, #1a1a1a)",
