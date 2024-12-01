@@ -23,10 +23,10 @@ export const Black = {
     background: "linear-gradient(15deg, #1a1a1a, #363636)",
   },
   keyButton: {
-    background: "linear-gradient(180deg, #526791, #425078)",
+    background: "linear-gradient(180deg, #494949, #1a1a1a)",
   },
   keyVolume: {
-    background: "linear-gradient(270deg, #526791, #425078)",
+    background: "linear-gradient(180deg, #494949, #1a1a1a)",
   },
   active: {
     buttonBack: {
@@ -141,6 +141,9 @@ export const Pink = {
   keyButton: {
     background: "linear-gradient(15deg, #ff1493, #ff69b4)",
   },
+  keyVolume: {
+    background: "linear-gradient(15deg, #ff1493, #ff69b4)",
+  },
 };
 
 export const Red = {
@@ -168,23 +171,26 @@ export const Red = {
   keyButton: {
     background: "linear-gradient(15deg, #961717, #fc6d6d)",
   },
+  keyVolume: {
+    background: "linear-gradient(15deg, #961717, #fc6d6d)",
+  },
 };
 
 export const Yellow = {
   walkman: {
-    background: "linear-gradient(15deg, #ff8c00 , #ffd700)",
+    background: "linear-gradient(15deg, #ff9b00, #eed864)",
   },
   buttonCenter: {
-    background: "linear-gradient(15deg, #ff8c00 , #ffd700)",
+    background: "linear-gradient(15deg, #ff9b00, #eed864)",
   },
   navigation: {
-    background: "linear-gradient(15deg, #ff8c00 , #ffd700)",
+    background: "linear-gradient(15deg, #ff9b00, #eed864)",
   },
   buttonBack: {
-    background: "linear-gradient(15deg, #ff8c00 , #ffd700)",
+    background: "linear-gradient(15deg, #ff9b00, #eed864)",
   },
   buttonOption: {
-    background: "linear-gradient(15deg, #ff8c00 , #ffd700)",
+    background: "linear-gradient(15deg, #ff9b00, #eed864)",
   },
   volumeButtons: {
     background: "linear-gradient(15deg, #ff8c00 , #ffd700)",
@@ -193,6 +199,9 @@ export const Yellow = {
     background: "linear-gradient(15deg, #ff8c00 , #ffd700)",
   },
   keyButton: {
+    background: "linear-gradient(15deg, #ff8c00 , #ffd700)",
+  },
+  keyVolume: {
     background: "linear-gradient(15deg, #ff8c00 , #ffd700)",
   },
 };
@@ -220,6 +229,9 @@ export const Green = {
     background: "linear-gradient(15deg, #228b22, #32cd32)",
   },
   keyButton: {
+    background: "linear-gradient(15deg, #228b22, #32cd32)",
+  },
+  keyVolume: {
     background: "linear-gradient(15deg, #228b22, #32cd32)",
   },
 };
