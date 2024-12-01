@@ -42,7 +42,6 @@ const Walkman = ({ onButtonPress, selectedIcon, currentScreen }) => {
   
   useEffect(() => {
     const handleKeyDown = (event) => {
-      let buttonName;
       setActiveButton(event.key.toLowerCase()); // Set active button
       switch (event.key) {
         case 'ArrowUp':
@@ -78,7 +77,6 @@ const Walkman = ({ onButtonPress, selectedIcon, currentScreen }) => {
         default:
           return;
       }
-      setActiveButton(buttonName);
     };
 
     const handleKeyUp = () => {
@@ -92,13 +90,6 @@ const Walkman = ({ onButtonPress, selectedIcon, currentScreen }) => {
       window.removeEventListener('keyup', handleKeyUp);
     };
   }, [onButtonPress]);
-
-  const getButtonStyle = (buttonName) => {
-    if (activeButton === buttonName) {
-      return { background: theme.active[buttonName].background };
-    }
-    return { background: theme[buttonName].background };
-  };
 
   const renderCurrentScreen = () => {
     switch (currentScreen) {
