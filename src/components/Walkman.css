@@ -316,10 +316,9 @@
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  border: 1px solid linear-gradient(60deg, #494949, #1a1a1a); 
-  background: linear-gradient(60deg, #494949, #1a1a1a);
-  top: 65px;
-  right: -6px;
+  background: linear-gradient(180deg, #494949, #1a1a1a);
+  top: 42px;
+  right: 30px;
 }
 
 .home-screen {
