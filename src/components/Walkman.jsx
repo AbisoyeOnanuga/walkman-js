@@ -112,7 +112,7 @@ const Walkman = ({ onButtonPress, selectedIcon, currentScreen }) => {
         </div>
       </div>
       <div className="volume-buttons" style={{ background: theme.volumeButtons.background }}></div>
-      <div className="key-volume-button" style={{ background: theme.keyButton.background }}></div>
+      <div className="key-volume-button" style={{ background: theme.keyVolume.background }}></div>
       <div className="power-button" style={{ background: theme.powerButton.background }}></div>
       <div className="buttons">
         <div
@@ -139,6 +139,7 @@ const Walkman = ({ onButtonPress, selectedIcon, currentScreen }) => {
         <div className="button-power">POWER</div>
         <div className="navigation" style={{ background: theme.navigation.background }}>
           <button className="button-center" style={{ background: theme.buttonCenter.background }} onClick={() => onButtonPress('enter')}>
+            <div className="key-center-button" style={{ background: theme.keyButton.background }}></div>
             <img src={PlayIcon} alt="Play/Pause" />
           </button>
           <button className="button-up" onClick={() => onButtonPress('up')}><img src={UpIcon} alt="Up" /></button>
