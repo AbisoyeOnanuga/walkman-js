@@ -89,8 +89,14 @@ export const Blue = {
     background: "linear-gradient(270deg, #526791, #425078)",
   },
   active: {
+    buttonBack: {
+      background: "linear-gradient(15deg, #394b72, #43557d)", 
+    },
+    buttonOption: {
+      background: "linear-gradient(15deg, #1a1a1a, #292929)",
+    },
     buttonCenter: {
-      backgroundColor: "rgba(15deg, rgb(0 78 131), rgb(30, 144, 255))"
+      backgroundColor: "rgba(15deg, #4a6091, #5c72a3)"
     },
     buttonUp: {
       background: "linear-gradient(0deg, #48acff00, #004a7d)",
