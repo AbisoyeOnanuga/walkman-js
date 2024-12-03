@@ -1,8 +1,7 @@
-// components/SettingsScreen.jsx
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { useTheme } from '../context/ThemeContext';
 
-const SettingsScreen = () => {
+const SettingsScreen = ({ onButtonPress }) => {
   const themesList = useMemo(() => ['Black', 'Blue', 'Pink', 'Red', 'Yellow', 'Green'], []);
   const [selectedThemeIndex, setSelectedThemeIndex] = useState(0);
   const { changeTheme } = useTheme();
@@ -11,20 +10,24 @@ const SettingsScreen = () => {
 
   useEffect(() => {
     const handleKeyDown = (event) => {
-      let newIndex = selectedThemeIndex;
-      if (event.key === 'ArrowUp') {
-        newIndex = (selectedThemeIndex - 1 + themesList.length) % themesList.length;
-      } else if (event.key === 'ArrowDown') {
-        newIndex = (selectedThemeIndex + 1) % themesList.length;
-      } else if (event.key === 'Enter' || event.key === ' ') {
-        changeTheme(themesList[selectedThemeIndex]);  // Change theme
-      }
-      setSelectedThemeIndex(newIndex);
+      handleNavigation(event.key);
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [selectedThemeIndex, themesList, changeTheme]);
+  }, [selectedThemeIndex, themesList]);
+
+  const handleNavigation = (key) => {
+    let newIndex = selectedThemeIndex;
+    if (key === 'ArrowUp' || key === 'up') {
+      newIndex = (selectedThemeIndex - 1 + themesList.length) % themesList.length;
+    } else if (key === 'ArrowDown' || key === 'down') {
+      newIndex = (selectedThemeIndex + 1) % themesList.length;
+    } else if (key === 'Enter' || key === ' ' || key === 'enter') {
+      changeTheme(themesList[selectedThemeIndex]);
+    }
+    setSelectedThemeIndex(newIndex);
+  };
 
   useEffect(() => {
     if (selectedThemeRef.current) {
@@ -38,6 +41,11 @@ const SettingsScreen = () => {
     }
   }, []);
 
+  const handleMouseClick = (index) => {
+    setSelectedThemeIndex(index);
+    changeTheme(themesList[index]);
+  };
+
   return (
     <div className="settings-screen">
       <h2>Settings</h2>
@@ -47,7 +55,7 @@ const SettingsScreen = () => {
             key={theme}
             ref={index === selectedThemeIndex ? selectedThemeRef : null}
             className={index === selectedThemeIndex ? 'selected' : ''}
-            onClick={() => changeTheme(theme)}
+            onClick={() => handleMouseClick(index)}
           >
             {theme.charAt(0).toUpperCase() + theme.slice(1)}
           </li>
