@@ -1,4 +1,5 @@
 import React from 'react';
+import Header from './Header';
 import { useTheme } from '../context/ThemeContext';
 import icon1 from '../assets/photos.png';
 import icon2 from '../assets/music.png';
@@ -10,7 +11,7 @@ import icon7 from '../assets/play-status.svg';
 import icon9 from '../assets/song-status.svg';
 import icon10 from '../assets/battery.svg';
 
-const HomeScreen = ({ selectedIcon, onButtonPress }) => {
+const HomeScreen = ({ selectedIcon, onButtonPress, playing }) => {
   const { theme } = useTheme();
   const icons = [
     { src: icon1, label: 'Photos' },
@@ -23,13 +24,7 @@ const HomeScreen = ({ selectedIcon, onButtonPress }) => {
 
   return (
     <div className="home-screen">
-      <div className="header">
-        <div className="status-icon">
-          <div className="song-status"><img src={icon7} alt="Play Status" /></div>
-          <div className="song-status"><img src={icon9} alt="Song Status" /></div>
-        </div>
-        <div className="battery-icon"><img src={icon10} alt="Battery Status" /></div>
-      </div>
+      <Header playing={playing} />
       <div className="screen-content">
         <div className="grid">
           {icons.map((icon, index) => (
