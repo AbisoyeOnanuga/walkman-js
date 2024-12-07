@@ -6,7 +6,49 @@ const PET_STATES = {
   IDLE: 'idle',
   HAPPY: 'happy',
   HUNGRY: 'hungry',
-  SLEEPING: 'sleeping'
+  SLEEPING: 'sleeping',
+  EATING: 'eating',
+  PLAYING: 'playing',
+  EXCITED: 'excited'
+};
+
+// Pixel art representations
+const PET_PIXELS = {
+  idle: [
+    "  ●─●  ",
+    " ╰─┴─╯ ",
+    "  │ │  "
+  ],
+  happy: [
+    "  ◠─◠  ",
+    " ╰─┴─╯ ",
+    " ╰┴┴╯  "
+  ],
+  hungry: [
+    "  ●︵●  ",
+    " ╰─┴─╯ ",
+    "  │ │  "
+  ],
+  sleeping: [
+    "  -─-  ",
+    " ╰─┴─╯ ",
+    " zzZ   "
+  ],
+  eating: [
+    "  ◠─◠  ",
+    " ╰─┴─╯ ",
+    " nom!  "
+  ],
+  playing: [
+    "  ◠─◠  ",
+    " ╰─┴─╯ ",
+    " \\○/   "
+  ],
+  excited: [
+    "  ★─★  ",
+    " ╰─┴─╯ ",
+    " \\○/   "
+  ]
 };
 
 const PetScreen = ({ playing }) => {
@@ -16,6 +58,7 @@ const PetScreen = ({ playing }) => {
   const [petState, setPetState] = useState(PET_STATES.IDLE);
   const [lastFed, setLastFed] = useState(Date.now());
   const [lastPlayed, setLastPlayed] = useState(Date.now());
+  const [animation, setAnimation] = useState(null);
 
   // Update pet stats over time
   useEffect(() => {
@@ -40,14 +83,32 @@ const PetScreen = ({ playing }) => {
   }, []);
 
   const feedPet = () => {
-    if (Date.now() - lastFed > 5000) { // 5 second cooldown
+    if (Date.now() - lastFed > 5000) {
+      setAnimation('eating');
+      setTimeout(() => {
+        setAnimation(null);
+        if (hunger > 70) {
+          setPetState(PET_STATES.EXCITED);
+          setTimeout(() => setPetState(PET_STATES.HAPPY), 2000);
+        }
+      }, 2000);
+      
       setHunger(prev => Math.min(100, prev + 30));
       setLastFed(Date.now());
     }
   };
 
   const playWithPet = () => {
-    if (Date.now() - lastPlayed > 3000) { // 3 second cooldown
+    if (Date.now() - lastPlayed > 3000) {
+      setAnimation('playing');
+      setTimeout(() => {
+        setAnimation(null);
+        if (happiness > 70) {
+          setPetState(PET_STATES.EXCITED);
+          setTimeout(() => setPetState(PET_STATES.HAPPY), 2000);
+        }
+      }, 2000);
+      
       setHappiness(prev => Math.min(100, prev + 20));
       setEnergy(prev => Math.max(0, prev - 10));
       setLastPlayed(Date.now());
@@ -60,17 +121,16 @@ const PetScreen = ({ playing }) => {
   };
 
   const renderPet = () => {
-    // Simple ASCII art pet for now - we can replace with pixel art later
-    switch (petState) {
-      case PET_STATES.HAPPY:
-        return '(^‿^)';
-      case PET_STATES.HUNGRY:
-        return '(╥﹏╥)';
-      case PET_STATES.SLEEPING:
-        return '(－‸－)';
-      default:
-        return '(・_・)';
-    }
+    const currentState = animation || petState;
+    const pixelArt = PET_PIXELS[currentState];
+    
+    return (
+      <pre className="pet-pixel-art">
+        {pixelArt.map((line, index) => (
+          <div key={index} className="pixel-line">{line}</div>
+        ))}
+      </pre>
+    );
   };
 
   return (
