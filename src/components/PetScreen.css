@@ -63,4 +63,72 @@
 
 .pet-controls button:hover {
   background: rgba(255, 255, 255, 0.2);
+}
+
+.pet-pixel-art {
+  font-family: monospace;
+  white-space: pre;
+  line-height: 1.2;
+  margin: 0;
+  color: #fff;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+.pixel-line {
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.pet-pixel-art.happy, .pet-pixel-art.excited {
+  color: #4CAF50;
+}
+
+.pet-pixel-art.hungry {
+  color: #FF9800;
+}
+
+.pet-pixel-art.sleeping {
+  color: #90CAF9;
+}
+
+.pet-pixel-art.eating {
+  color: #FF4081;
+}
+
+.pet-pixel-art.playing {
+  color: #9C27B0;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.pet-pixel-art.eating, .pet-pixel-art.playing {
+  animation: bounce 0.5s ease infinite;
+}
+
+.pet-controls button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pet-controls button.cooldown {
+  position: relative;
+  overflow: hidden;
+}
+
+.pet-controls button.cooldown::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background: #4CAF50;
+  animation: cooldown 5s linear;
+}
+
+@keyframes cooldown {
+  from { width: 100%; }
+  to { width: 0%; }
 } 
