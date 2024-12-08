@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { useTheme } from '../context/ThemeContext';
+import Header from './Header';
 
-const SettingsScreen = ({ onButtonPress }) => {
+const SettingsScreen = ({ onButtonPress, playing }) => {
   const [currentView, setCurrentView] = useState('main-menu');
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [pressTimer, setPressTimer] = useState(null);
@@ -31,29 +32,34 @@ const SettingsScreen = ({ onButtonPress }) => {
       setPressTimer(null);
     }
 
-    // Start a new timer for long press detection
+    // Start a new timer for long press detection (3 seconds)
     const timer = setTimeout(() => {
-      // Long press (3 seconds) - go to home screen
+      // Long press - go to home screen
       onButtonPress('back');
+      setPressTimer(null);
     }, 3000);
 
     setPressTimer(timer);
   };
 
   const handleBackRelease = () => {
+    // Only handle short press if timer exists and hasn't fired
     if (pressTimer) {
       clearTimeout(pressTimer);
       setPressTimer(null);
 
-      // Short press - go back to previous screen
+      // Short press - navigate back one level
       switch (currentView) {
         case 'about':
         case 'themes':
+          // Go back to main settings menu
           setCurrentView('main-menu');
           setSelectedIndex(0);
           break;
-        default:
+        case 'main-menu':
+          // Exit settings to previous screen
           onButtonPress('back');
+          break;
       }
     }
   };
@@ -176,55 +182,64 @@ const SettingsScreen = ({ onButtonPress }) => {
 
   const renderMainMenu = () => (
     <div className="settings-screen">
-      <h2>Settings</h2>
-      <ul className="theme-list" ref={mainMenuRef} tabIndex={0}>
-        {mainMenuOptions.map((option, index) => (
-          <li
-            key={option}
-            ref={index === selectedIndex ? selectedMainMenuRef : null}
-            className={index === selectedIndex ? 'selected' : ''}
-            onClick={() => handleMainMenuMouseClick(index)}
-          >
-            {option}
-          </li>
-        ))}
-      </ul>
+      <Header playing={playing} />
+      <div className="screen-content">
+        <h2>Settings</h2>
+        <ul className="theme-list" ref={mainMenuRef} tabIndex={0}>
+          {mainMenuOptions.map((option, index) => (
+            <li
+              key={option}
+              ref={index === selectedIndex ? selectedMainMenuRef : null}
+              className={index === selectedIndex ? 'selected' : ''}
+              onClick={() => handleMainMenuMouseClick(index)}
+            >
+              {option}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 
   const renderAboutLinks = () => (
     <div className="settings-screen">
-      <h2>About</h2>
-      <ul className="theme-list" ref={aboutLinksRef} tabIndex={0}>
-        {aboutLinks.map((link, index) => (
-          <li
-            key={link.name}
-            ref={index === selectedIndex ? selectedAboutLinkRef : null}
-            className={index === selectedIndex ? 'selected' : ''}
-            onClick={() => handleAboutLinkMouseClick(index)}
-          >
-            {link.name}
-          </li>
-        ))}
-      </ul>
+      <Header playing={playing} />
+      <div className="screen-content">
+        <h2>About</h2>
+        <ul className="theme-list" ref={aboutLinksRef} tabIndex={0}>
+          {aboutLinks.map((link, index) => (
+            <li
+              key={link.name}
+              ref={index === selectedIndex ? selectedAboutLinkRef : null}
+              className={index === selectedIndex ? 'selected' : ''}
+              onClick={() => handleAboutLinkMouseClick(index)}
+            >
+              {link.name}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 
   const renderThemesList = () => (
     <div className="settings-screen">
-      <h2>Themes</h2>
-      <ul className="theme-list" ref={themesListRef} tabIndex={0}>
-        {themesList.map((theme, index) => (
-          <li
-            key={theme}
-            ref={index === selectedIndex ? selectedThemeRef : null}
-            className={index === selectedIndex ? 'selected' : ''}
-            onClick={() => handleThemeMouseClick(index)}
-          >
-            {theme.charAt(0).toUpperCase() + theme.slice(1)}
-          </li>
-        ))}
-      </ul>
+      <Header playing={playing} />
+      <div className="screen-content">
+        <h2>Themes</h2>
+        <ul className="theme-list" ref={themesListRef} tabIndex={0}>
+          {themesList.map((theme, index) => (
+            <li
+              key={theme}
+              ref={index === selectedIndex ? selectedThemeRef : null}
+              className={index === selectedIndex ? 'selected' : ''}
+              onClick={() => handleThemeMouseClick(index)}
+            >
+              {theme.charAt(0).toUpperCase() + theme.slice(1)}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 
