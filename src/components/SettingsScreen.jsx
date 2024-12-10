@@ -8,9 +8,9 @@ const SettingsScreen = ({ onButtonPress }) => {
 
   const mainMenuOptions = useMemo(() => ['About', 'Theme'], []);
   const aboutLinks = useMemo(() => [
-    { name: 'GitHub', url: 'https://github.com/yourusername' },
-    { name: 'Website', url: 'https://yourwebsite.com' },
-    { name: 'LinkedIn', url: 'https://linkedin.com/in/yourusername' },
+    { name: 'GitHub', url: 'https://github.com/AbisoyeOnanuga' },
+    { name: 'Website', url: 'https://abisoyeonanuga.github.io/website' },
+    { name: 'LinkedIn', url: 'https://www.linkedin.com/in/abisoye-onanuga-b0aaa5133/' },
     { name: 'Inspiration: ipod.js', url: 'https://github.com/tannerv/ipod.js' }
   ], []);
   const themesList = useMemo(() => ['Black', 'Blue', 'Pink', 'Red', 'Yellow', 'Green'], []);
