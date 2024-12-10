@@ -6,7 +6,7 @@ const SettingsAboutScreen = ({ onButtonPress, onNavigate }) => {
     { name: 'GitHub', url: 'https://github.com/AbisoyeOnanuga/walkman-js' },
     { name: 'Website', url: 'https://abisoyeonanuga.github.io/website/' },
     { name: 'LinkedIn', url: 'https://www.linkedin.com/in/abisoye-onanuga-b0aaa5133/' },
-    { name: 'Inspiration: ipod.js by Tanner V', url: 'https://github.com/tvillarete' }
+    { name: 'Inspiration: ipod.js by Tanner V', url: 'https://github.com/tvillarete/ipod.js' }
   ];
 
   const handleNavigation = (key) => {
