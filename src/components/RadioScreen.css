@@ -1,0 +1,95 @@
+.radio-screen {
+  width: 150px;
+  height: 194px;
+  display: flex;
+  flex-direction: column;
+  background-color: #0d0d0d;
+  position: relative;
+  overflow: hidden;
+}
+
+.screen-content {
+  flex: 1;
+  position: relative;
+  padding-top: 16px;
+  width: 100%;
+  height: calc(100% - 16px);
+}
+
+.stations-list {
+  position: absolute;
+  top: 16px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 8px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) rgba(255, 255, 255, 0.1);
+}
+
+.stations-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.stations-list::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.stations-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+}
+
+.station {
+  display: flex;
+  align-items: center;
+  padding: 6px;
+  margin-bottom: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.station:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.station.active {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.station-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 6px;
+}
+
+.station-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 2px;
+}
+
+.station-info {
+  flex: 1;
+}
+
+.station-name {
+  font-size: 0.8rem;
+  color: #fff;
+  margin-bottom: 1px;
+}
+
+.station-tags {
+  font-size: 0.6rem;
+  color: #888;
+}
+
+.station-status {
+  width: 20px;
+  color: #4CAF50;
+  text-align: center;
+} 
