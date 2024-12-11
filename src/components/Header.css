@@ -1,0 +1,43 @@
+.header {
+  width: 150px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(90deg, #050505, #494949);
+  position: fixed;
+  z-index: 1000;
+}
+
+.status-icon {
+  position: relative;
+  top: -2px;
+  display: flex;
+  background-color: transparent;
+}
+
+.song-status {
+  display: flex;
+  align-items: center;
+}
+
+.song-status img {
+  margin-left: 4px;
+}
+
+.song-status img.active {
+  filter: brightness(0) saturate(100%) invert(71%) sepia(93%) 
+          saturate(389%) hue-rotate(84deg) brightness(89%) contrast(87%);
+}
+
+.status-text {
+  font-size: 0.7rem;
+  color: #fff;
+  margin-left: 4px;
+}
+
+.battery-icon {
+  position: relative;
+  top: -2px;
+  background-color: transparent;
+  margin-right: 3px;
+} 

@@ -1,48 +1,47 @@
 // components/Walkman.jsx
 import React, { useEffect, useState } from 'react';
-import { useTheme } from '../context/ThemeContext';
 import PlayIcon from '../assets/play-pause.svg';
 import UpIcon from '../assets/up.png';
 import DownIcon from '../assets/down.png';
 import LeftIcon from '../assets/left.png';
 import RightIcon from '../assets/right.png';
 import WalkmanIcon from '../assets/walkman-logo.svg';
-import HomeScreen from './HomeScreen';
-import MusicScreen from './MusicScreen';
-import PhotosScreen from './PhotosScreen';
-import RadioScreen from './RadioScreen';
-import SettingsScreen from './SettingsScreen';
-import PlaylistsScreen from './PlaylistsScreen';
-import PlaybackScreen from './PlaybackScreen';
 import './Walkman.css';
 
-const Walkman = ({ onButtonPress, selectedIcon, currentScreen }) => {
-  const { theme } = useTheme();
+const Walkman = ({ 
+  screenContent, 
+  onButtonPress, 
+  selectedIcon, 
+  currentScreen,
+  theme,
+  playing,
+  currentStation,
+  onStationPlay
+}) => {
   const [pressTimer, setPressTimer] = useState(null);
-  const [playing, setPlaying] = useState(false);
-  const [activeButton, setActiveButton] = useState(null); // Track active button
+  const [activeButton, setActiveButton] = useState(null);
 
   const handleMouseDown = (button) => {
-    setActiveButton(button); // Set active button
+    setActiveButton(button);
     const timer = setTimeout(() => {
       if (button === 'back') {
         onButtonPress('home');
       } else if (button === 'option') {
         onButtonPress('power');
       }
-    }, 3000); // 3 seconds
+    }, 3000);
     setPressTimer(timer);
   };
 
   const handleMouseUp = () => {
     clearTimeout(pressTimer);
     setPressTimer(null);
-    setActiveButton(null); // Reset active button
+    setActiveButton(null);
   };
   
   useEffect(() => {
     const handleKeyDown = (event) => {
-      setActiveButton(event.key.toLowerCase()); // Set active button
+      setActiveButton(event.key.toLowerCase());
       switch (event.key) {
         case 'ArrowUp':
           onButtonPress('up');
@@ -73,7 +72,7 @@ const Walkman = ({ onButtonPress, selectedIcon, currentScreen }) => {
     };
 
     const handleKeyUp = () => {
-      setActiveButton(null); // Reset active button
+      setActiveButton(null);
     };
 
     window.addEventListener('keydown', handleKeyDown);
@@ -84,31 +83,21 @@ const Walkman = ({ onButtonPress, selectedIcon, currentScreen }) => {
     };
   }, [onButtonPress]);
 
-  const renderCurrentScreen = () => {
-    switch (currentScreen) {
-      case 'photos':
-        return <PhotosScreen onButtonPress={onButtonPress} />;
-      case 'music':
-        return <MusicScreen onButtonPress={onButtonPress} />;
-      case 'radio':
-        return <RadioScreen setPlaying={setPlaying} playing={playing} onButtonPress={onButtonPress} />;
-      case 'settings':
-        return <SettingsScreen onButtonPress={onButtonPress} />;
-      case 'playlists':
-        return <PlaylistsScreen setPlaying={setPlaying} playing={playing} />;
-      case 'playback':
-        return <PlaybackScreen />;
-      default:
-        return <HomeScreen selectedIcon={selectedIcon} onButtonPress={onButtonPress} />;
-    }
-  };
-
   return (
     <div className="walkman" style={{ background: theme.walkman.background }}>
       <div className="bezel">
         <div className="sony-logo">SONY</div>
         <div className="screen">
-          {renderCurrentScreen()}
+          {typeof screenContent === 'function' ? 
+            screenContent({
+              selectedIcon,
+              onButtonPress,
+              playing,
+              currentStation,
+              onStationPlay
+            }) : 
+            screenContent
+          }
         </div>
       </div>
       <div className="volume-buttons" style={{ background: theme.volumeButtons.background }}></div>
