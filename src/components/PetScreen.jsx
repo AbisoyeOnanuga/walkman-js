@@ -51,6 +51,24 @@ const PET_PIXELS = {
   ]
 };
 
+// Add more animations
+const ANIMATIONS = {
+  dance: [
+    ["  ●─●  ", " ╰─┴─╯ ", " └┘└┘ "],
+    ["  ●─●  ", " ╰─┴─╯ ", " ┌┐┌┐ "],
+  ],
+  jump: [
+    ["  ●─●  ", " ╰─┴─╯ ", "  │ │  "],
+    ["  ●─●  ", " ╰─┴─╯ ", "   ^   "],
+  ],
+  spin: [
+    ["  ●─●  ", " ╰─┴─╯ ", "  │ │  "],
+    ["  ●═●  ", " ╰═╯   ", "  │ │  "],
+    ["  ●─●  ", "   ─╯  ", "  │ │  "],
+    ["  ●═●  ", "   ═╯  ", "  │ │  "],
+  ]
+};
+
 const PetScreen = ({ playing }) => {
   const [hunger, setHunger] = useState(100);
   const [happiness, setHappiness] = useState(100);
@@ -59,6 +77,8 @@ const PetScreen = ({ playing }) => {
   const [lastFed, setLastFed] = useState(Date.now());
   const [lastPlayed, setLastPlayed] = useState(Date.now());
   const [animation, setAnimation] = useState(null);
+  const [currentAnimation, setCurrentAnimation] = useState(null);
+  const [animationFrame, setAnimationFrame] = useState(0);
 
   // Update pet stats over time
   useEffect(() => {
@@ -82,6 +102,18 @@ const PetScreen = ({ playing }) => {
     return () => clearInterval(timer);
   }, []);
 
+  // Animation handler
+  useEffect(() => {
+    if (currentAnimation) {
+      const frames = ANIMATIONS[currentAnimation];
+      const interval = setInterval(() => {
+        setAnimationFrame(prev => (prev + 1) % frames.length);
+      }, 200);
+
+      return () => clearInterval(interval);
+    }
+  }, [currentAnimation]);
+
   const feedPet = () => {
     if (Date.now() - lastFed > 5000) {
       setAnimation('eating');
@@ -89,7 +121,11 @@ const PetScreen = ({ playing }) => {
         setAnimation(null);
         if (hunger > 70) {
           setPetState(PET_STATES.EXCITED);
-          setTimeout(() => setPetState(PET_STATES.HAPPY), 2000);
+          setCurrentAnimation('dance');
+          setTimeout(() => {
+            setPetState(PET_STATES.HAPPY);
+            setCurrentAnimation(null);
+          }, 2000);
         }
       }, 2000);
       
@@ -101,11 +137,16 @@ const PetScreen = ({ playing }) => {
   const playWithPet = () => {
     if (Date.now() - lastPlayed > 3000) {
       setAnimation('playing');
+      setCurrentAnimation('jump');
       setTimeout(() => {
         setAnimation(null);
         if (happiness > 70) {
           setPetState(PET_STATES.EXCITED);
-          setTimeout(() => setPetState(PET_STATES.HAPPY), 2000);
+          setCurrentAnimation('spin');
+          setTimeout(() => {
+            setPetState(PET_STATES.HAPPY);
+            setCurrentAnimation(null);
+          }, 2000);
         }
       }, 2000);
       
@@ -122,11 +163,17 @@ const PetScreen = ({ playing }) => {
 
   const renderPet = () => {
     const currentState = animation || petState;
-    const pixelArt = PET_PIXELS[currentState];
+    let displayArt;
+
+    if (currentAnimation) {
+      displayArt = ANIMATIONS[currentAnimation][animationFrame];
+    } else {
+      displayArt = PET_PIXELS[currentState];
+    }
     
     return (
-      <pre className="pet-pixel-art">
-        {pixelArt.map((line, index) => (
+      <pre className={`pet-pixel-art ${currentState}`}>
+        {displayArt.map((line, index) => (
           <div key={index} className="pixel-line">{line}</div>
         ))}
       </pre>
