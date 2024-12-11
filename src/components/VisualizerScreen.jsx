@@ -32,7 +32,7 @@ const VisualizerScreen = ({ playing, audioPlayer }) => {
         size: Math.random() * 3 + 1,
         baseSpeed: Math.random() * 1 + 0.5,
         angle: Math.random() * Math.PI * 2,
-        hueOffset: Math.random() * 360 // Add random hue offset for each particle
+        hueOffset: Math.random() * 360
       }));
     };
 
@@ -41,13 +41,18 @@ const VisualizerScreen = ({ playing, audioPlayer }) => {
       try {
         audioContextRef.current = new (window.AudioContext || window.webkitAudioContext)();
         analyserRef.current = audioContextRef.current.createAnalyser();
-        const source = audioContextRef.current.createMediaElementSource(audioPlayer);
         
+        // Set analyzer properties before creating the data array
         analyserRef.current.fftSize = 256;
-        source.connect(analyserRef.current);
-        analyserRef.current.connect(audioContextRef.current.destination);
-        
         dataArrayRef.current = new Uint8Array(analyserRef.current.frequencyBinCount);
+
+        // Only create new audio source if not already connected
+        if (!audioPlayer.visualizerConnected) {
+          const source = audioContextRef.current.createMediaElementSource(audioPlayer);
+          source.connect(analyserRef.current);
+          analyserRef.current.connect(audioContextRef.current.destination);
+          audioPlayer.visualizerConnected = true;
+        }
       } catch (error) {
         console.error('Error setting up audio analysis:', error);
       }
