@@ -7,7 +7,7 @@ import PetScreen from './components/PetScreen';
 import RadioScreen from './components/RadioScreen';
 import SettingsScreen from './components/SettingsScreen';
 import PlaylistsScreen from './components/PlaylistsScreen';
-import PlaybackScreen from './components/PlaybackScreen';
+import WeatherScreen from './components/WeatherScreen';
 import PersistentPlayer from './components/PersistentPlayer';
 import Header from './components/Header';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
@@ -28,14 +28,18 @@ const AppContent = () => {
   const [currentAudio, setCurrentAudio] = useState(null); 
   const [playing, setPlaying] = useState(null);
   const [activePlayer, setActivePlayer] = useState(null);
-  const [audioPlayer] = useState(new Audio());
+  const [audioPlayer] = useState(() => {
+    const audio = new Audio();
+    audio.crossOrigin = "anonymous";
+    return audio;
+  });
   const [currentStation, setCurrentStation] = useState(null);
   const [youtubePlayer, setYoutubePlayer] = useState(null);
   const [currentPlaylist, setCurrentPlaylist] = useState(null);
 
   const { theme } = useTheme();
 
-  const icons = ['Pet', 'Visualizer', 'FM Radio', 'Settings', 'Playlists', 'Playback'];
+  const icons = ['Pet', 'Visualizer', 'FM Radio', 'Settings', 'Playlists', 'Weather'];
 
   useEffect(() => {
     audioPlayer.addEventListener('playing', () => {
@@ -73,7 +77,7 @@ const AppContent = () => {
           newIndex = (selectedIcon + 1) % 6;
           break;
         case 'enter':
-          const screens = ['pet', 'visualizer', 'radio', 'settings', 'playlists', 'playback'];
+          const screens = ['pet', 'visualizer', 'radio', 'settings', 'playlists', 'weather'];
           setCurrentScreen(screens[selectedIcon]);
           return;
         default:
@@ -147,6 +151,8 @@ const AppContent = () => {
         return <SettingsScreen onButtonPress={handleButtonPress} playing={playing} />;
       case 'visualizer':
         return <VisualizerScreen playing={playing} audioPlayer={audioPlayer} />;
+      case 'weather':
+        return <WeatherScreen playing={playing} />;
       default:
         return <HomeScreen 
           selectedIcon={selectedIcon} 
