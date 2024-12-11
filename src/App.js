@@ -2,8 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import Walkman from './components/Walkman';
 import HomeScreen from './components/HomeScreen';
-import MusicScreen from './components/MusicScreen';
-import PhotosScreen from './components/PhotosScreen';
+import VisualizerScreen from './components/VisualizerScreen';
+import PetScreen from './components/PetScreen';
 import RadioScreen from './components/RadioScreen';
 import SettingsScreen from './components/SettingsScreen';
 import PlaylistsScreen from './components/PlaylistsScreen';
@@ -12,8 +12,6 @@ import PersistentPlayer from './components/PersistentPlayer';
 import Header from './components/Header';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
 import './App.css';
-import VisualizerScreen from './components/VisualizerScreen';
-import PetScreen from './components/PetScreen';
 
 const App = () => {
   return (
