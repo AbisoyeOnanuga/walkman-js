@@ -8,10 +8,15 @@ const DEFAULT_CITY = 'sydney'; // Fallback city
 const DEFAULT_COUNTRY = 'AU';  // Fallback country
 
 const WeatherScreen = ({ playing }) => {
+  // Initialize city from localStorage or use default
+  const [city, setCity] = useState(() => {
+    const savedCity = localStorage.getItem('weatherCity');
+    return savedCity || DEFAULT_CITY;
+  });
+  
   const [weather, setWeather] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [city, setCity] = useState('sydney');
   const [inputCity, setInputCity] = useState('');
   const [showInput, setShowInput] = useState(false);
 
@@ -75,7 +80,10 @@ const WeatherScreen = ({ playing }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (inputCity.trim()) {
-      setCity(inputCity.trim().toLowerCase());
+      const newCity = inputCity.trim().toLowerCase();
+      setCity(newCity);
+      // Save to localStorage
+      localStorage.setItem('weatherCity', newCity);
       setInputCity('');
     }
   };
