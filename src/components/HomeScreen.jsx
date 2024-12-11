@@ -14,8 +14,8 @@ import icon10 from '../assets/battery.svg';
 const HomeScreen = ({ selectedIcon, onButtonPress, playing }) => {
   const { theme } = useTheme();
   const icons = [
-    { src: icon1, label: 'Photos' },
-    { src: icon2, label: 'Music' }, 
+    { src: icon1, label: 'Pet' },
+    { src: icon2, label: 'Visualizer' }, 
     { src: icon3, label: 'Radio' }, 
     { src: icon4, label: 'Settings' }, 
     { src: icon5, label: 'Playlists' },
