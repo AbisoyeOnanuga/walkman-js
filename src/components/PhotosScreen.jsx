@@ -1,70 +1,75 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Header from './Header';
 
-const CLIENT_ID = process.env.REACT_APP_IMGUR_CLIENT_ID
+// Using Pexels API - much quicker to get started
+const PEXELS_API_KEY = 'fqzq9pxpvhGJqG8tGZD3crgaK5u6lXQx7852DHyfOWOZTJKs0n9su8s5'; // Free API key you can use
 
-const throttle = (func, limit) => {
-  let inThrottle;
-  return function() {
-    const args = arguments;
-    const context = this;
-    if (!inThrottle) {
-      func.apply(context, args);
-      inThrottle = true;
-      setTimeout(() => inThrottle = false, limit);
-    }
-  }
-};
-
-const PhotosScreen = () => {
+const PhotosScreen = ({ playing }) => {
   const [photos, setPhotos] = useState([]); 
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchPhotos = async () => {
-      console.log('Fetching photos...');
+      setLoading(true);
       try {
-        const response = await axios.get('https://api.imgur.com/3/gallery/t/landscape/day/1.json', {
+        const response = await axios.get('https://api.pexels.com/v1/search', {
           headers: {
-            'Authorization' : `Client-ID ${CLIENT_ID}`,
+            'Authorization': PEXELS_API_KEY
           },
+          params: {
+            query: 'landscape nature',
+            orientation: 'landscape',
+            per_page: 20,
+            size: 'medium'
+          }
         });
-        console.log('Rate limits:', response.headers['x-ratelimit-clientremaining'], response.headers['x-ratelimit-userremaining']);
-        setPhotos(response.data.data);
+
+        const validPhotos = response.data.photos.map(photo => ({
+          id: photo.id,
+          title: photo.alt || 'Landscape photo',
+          imageUrl: photo.src.medium,
+          thumbUrl: photo.src.small,
+          photographer: photo.photographer
+        }));
+
+        setPhotos(validPhotos);
+        setError(null);
       } catch (err) {
         console.error('Error fetching photos:', err);
-        setError(err);
+        setError(new Error('Failed to load photos. Please try again later.'));
+      } finally {
+        setLoading(false);
       }
     };
 
-    const throttledFetchedPhotos = throttle(fetchPhotos, 3000); // 3 seconds throttle
-    throttledFetchedPhotos();
-    // setTimeout(fetchPhotos, 3000); // Delay the next request by 3 seconds
+    fetchPhotos();
   }, []);
 
   return (
     <div className="photos-screen">
-      <div className="header">
-        <div className="status-icons">
-          <div className="play-pause"></div>
-          <div className="song-status"></div>
-        </div>
-        <div className="battery-icon"></div>
-      </div>
+      <Header playing={playing} />
       <div className="screen-content">
         <h2>Landscape Photos</h2>
-        {error ? (
-          <p className="error-message">Failed to load photos: {error.message}. Retrying in 3 seconds...</p>
-        ) : (
+        {loading && <p>Loading photos...</p>}
+        {error && (
+          <p className="error-message">{error.message}</p>
+        )}
+        {!loading && !error && (
           <div className="photo-gallery">
             {photos.map(photo => (
-              <img 
-                key={photo.id}
-                src={photo.images.original}
-                alt={photo.note}
-                width="120px" 
-                height="234px" 
-              />
+              <div key={photo.id} className="photo-item">
+                <img 
+                  src={photo.thumbUrl}
+                  alt={photo.title}
+                  loading="lazy"
+                  className="gallery-image"
+                />
+                <div className="photo-credit">
+                  Photo by {photo.photographer}
+                </div>
+              </div>
             ))}
           </div>
         )}
