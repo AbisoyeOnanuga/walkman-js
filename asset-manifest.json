@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/walkman-js/static/css/main.3e2945fa.css",
-    "main.js": "/walkman-js/static/js/main.8effadc9.js",
+    "main.js": "/walkman-js/static/js/main.c0f96a99.js",
     "static/js/453.bf5f5756.chunk.js": "/walkman-js/static/js/453.bf5f5756.chunk.js",
     "static/media/sony-walkman-nw-e394-background-1.jpg": "/walkman-js/static/media/sony-walkman-nw-e394-background-1.cb6fb42136749b5db12e.jpg",
     "static/media/radio.png": "/walkman-js/static/media/radio.8321c0008204d633b009.png",
@@ -17,11 +17,11 @@
     "static/media/battery.svg": "/walkman-js/static/media/battery.134a4e060466e9d45b3275b8b84c9a69.svg",
     "static/media/play-status.svg": "/walkman-js/static/media/play-status.7dec21d7b37ca9b4b6fb701dc95f433d.svg",
     "main.3e2945fa.css.map": "/walkman-js/static/css/main.3e2945fa.css.map",
-    "main.8effadc9.js.map": "/walkman-js/static/js/main.8effadc9.js.map",
+    "main.c0f96a99.js.map": "/walkman-js/static/js/main.c0f96a99.js.map",
     "453.bf5f5756.chunk.js.map": "/walkman-js/static/js/453.bf5f5756.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.3e2945fa.css",
-    "static/js/main.8effadc9.js"
+    "static/js/main.c0f96a99.js"
   ]
 }
