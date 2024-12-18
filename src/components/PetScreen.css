@@ -26,7 +26,7 @@
 }
 
 .stat {
-  font-size: 0.7rem;
+  font-size: 0.5rem; /* Smaller font size */
   color: #fff;
 }
 
@@ -45,7 +45,7 @@
 }
 
 .pet-pixel-art {
-  width: 33%; /* Adjusting size to be 1/3rd */
+  width: 40%; /* Slightly larger size */
   height: auto; /* Maintain aspect ratio */
   font-family: monospace;
   white-space: pre;
@@ -57,7 +57,15 @@
 
 .pixel-line {
   text-align: center;
-  font-size: 0.4rem; /* Adjusting size for smaller images */
+  font-size: 0.3rem; /* Smaller text size */
+}
+
+.pet-caption {
+  font-size: 0.8rem; /* Smaller caption text size */
+  color: #4CAF50;
+  text-align: center;
+  margin-top: 4px;
+  text-shadow: 0 0 5px #4CAF50; /* Adding outer glow */
 }
 
 .pet-pixel-art.happy, .pet-pixel-art.excited {
