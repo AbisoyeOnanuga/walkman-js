@@ -1,17 +1,15 @@
 import React from 'react';
 import Header from './Header';
 import { useTheme } from '../context/ThemeContext';
+import Miniplayer from './Miniplayer';
 import icon1 from '../assets/pet.png';
 import icon2 from '../assets/visualizer.png';
 import icon3 from '../assets/radio.png';
 import icon4 from '../assets/settings.png';
 import icon5 from '../assets/playlists.png';
 import icon6 from '../assets/weather.png';
-import icon7 from '../assets/play-status.svg';
-import icon9 from '../assets/song-status.svg';
-import icon10 from '../assets/battery.svg';
 
-const HomeScreen = ({ selectedIcon, onButtonPress, playing }) => {
+const HomeScreen = ({ selectedIcon, onButtonPress, playing, setPlaying, youtubePlayer }) => {
   const { theme } = useTheme();
   const icons = [
     { src: icon1, label: 'Pet' },
@@ -37,6 +35,7 @@ const HomeScreen = ({ selectedIcon, onButtonPress, playing }) => {
             </div>
           ))}
         </div>
+        <Miniplayer playing={playing} setPlaying={setPlaying} youtubePlayer={youtubePlayer} />
         <div className="highlighted-text">{icons[selectedIcon] && icons[selectedIcon].label}</div>
       </div>
     </div>
