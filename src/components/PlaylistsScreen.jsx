@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from './Header';
+import Miniplayer from './Miniplayer';
 import './PlaylistsScreen.css';
 
 const PLAYLISTS = [
@@ -43,13 +44,9 @@ const PLAYLISTS = [
   }
 ];
 
-const PlaylistsScreen = ({ 
-  playing, 
-  setPlaying, 
-  currentPlaylist, 
-  onPlaylistPlay, 
-  setYoutubePlayer 
-}) => {
+const PlaylistsScreen = ({ playing, setPlaying, currentPlaylist, onPlaylistPlay, setYoutubePlayer, youtubePlayer }) => {
+  const [isMiniplayer, setIsMiniplayer] = useState(false);
+
   useEffect(() => {
     if (!window.YT) {
       const tag = document.createElement('script');
@@ -59,32 +56,34 @@ const PlaylistsScreen = ({
     }
 
     const initPlayer = () => {
-      const player = new window.YT.Player('youtube-player', {
-        height: '100%',
-        width: '100%',
-        videoId: PLAYLISTS[0].videoId,
-        playerVars: {
-          autoplay: 0,
-          controls: 1,
-          modestbranding: 1,
-          rel: 0,
-          playsinline: 1,
-          list: PLAYLISTS[0].listId
-        },
-        events: {
-          onReady: (event) => {
-            setYoutubePlayer(event.target);
+      if (PLAYLISTS.length > 0) {
+        const player = new window.YT.Player('youtube-player', {
+          height: '100%',
+          width: '100%',
+          videoId: PLAYLISTS[0].videoId,
+          playerVars: {
+            autoplay: 0,
+            controls: 1,
+            modestbranding: 1,
+            rel: 0,
+            playsinline: 1,
+            list: PLAYLISTS[0].listId
           },
-          onStateChange: (event) => {
-            if (event.data === window.YT.PlayerState.PLAYING) {
-              setPlaying('playlists');
-            } else if (event.data === window.YT.PlayerState.PAUSED || 
-                     event.data === window.YT.PlayerState.ENDED) {
-              setPlaying(null);
+          events: {
+            onReady: (event) => {
+              setYoutubePlayer(event.target);
+            },
+            onStateChange: (event) => {
+              if (event.data === window.YT.PlayerState.PLAYING) {
+                setPlaying('playlists');
+              } else if (event.data === window.YT.PlayerState.PAUSED || 
+                       event.data === window.YT.PlayerState.ENDED) {
+                setPlaying(null);
+              }
             }
           }
-        }
-      });
+        });
+      }
     };
 
     if (window.YT && window.YT.Player) {
@@ -96,13 +95,18 @@ const PlaylistsScreen = ({
     return () => {};
   }, [setYoutubePlayer, setPlaying]);
 
+  const toggleMiniplayer = () => {
+    setIsMiniplayer(!isMiniplayer);
+  };
+
   return (
     <div className="playlists-screen">
       <Header playing={playing} />
       <div className="screen-content">
-        <div className="player-container" style={{ visibility: 'visible' }}>
+        <div className={`player-container ${isMiniplayer ? 'hidden' : ''}`}>
           <div id="youtube-player"></div>
         </div>
+        <Miniplayer playing={playing} setPlaying={setPlaying} youtubePlayer={youtubePlayer} />
         <div className="playlists-list">
           {PLAYLISTS.map(playlist => (
             <div 
@@ -123,6 +127,9 @@ const PlaylistsScreen = ({
           ))}
         </div>
       </div>
+      <button onClick={toggleMiniplayer}>
+        {isMiniplayer ? 'Expand' : 'Minimize'}
+      </button>
     </div>
   );
 };
