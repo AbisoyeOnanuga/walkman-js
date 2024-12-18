@@ -20,7 +20,7 @@ const PET_STATES = {
 };
 
 const PET_PIXELS = {
-  idle: idleBird,
+  idle: [idleBird, happyBird, hungryBird], // Multiple idle states
   happy: happyBird,
   hungry: hungryBird,
   sleeping: sleepingBird,
@@ -29,22 +29,20 @@ const PET_PIXELS = {
   excited: excitedBird
 };
 
-// Keeping existing ASCII animations for now
+const CAPTIONS = {
+  eating: 'nom! nom!',
+  sleeping: 'zzz...',
+  playing: 'tweet tweet!',
+  happy: 'chirp! chirp!',
+  hungry: 'feed me!',
+  excited: 'woo hoo!'
+};
+
+// Updated ANIMATIONS with placeholders
 const ANIMATIONS = {
-  dance: [
-    ["  ●─●  ", " ╰─┴─╯ ", " └┘└┘ "],
-    ["  ●─●  ", " ╰─┴─╯ ", " ┌┐┌┐ "],
-  ],
-  jump: [
-    ["  ●─●  ", " ╰─┴─╯ ", "  │ │  "],
-    ["  ●─●  ", " ╰─┴─╯ ", "   ^   "],
-  ],
-  spin: [
-    ["  ●─●  ", " ╰─┴─╯ ", "  │ │  "],
-    ["  ●═●  ", " ╰═╯   ", "  │ │  "],
-    ["  ●─●  ", "   ─╯  ", "  │ │  "],
-    ["  ●═●  ", "   ═╯  ", "  │ │  "],
-  ]
+  dance: [playingBird, playingBird],
+  jump: [happyBird, happyBird],
+  spin: [excitedBird, excitedBird, excitedBird, excitedBird]
 };
 
 const PetScreen = ({ playing }) => {
@@ -57,6 +55,7 @@ const PetScreen = ({ playing }) => {
   const [animation, setAnimation] = useState(null);
   const [currentAnimation, setCurrentAnimation] = useState(null);
   const [animationFrame, setAnimationFrame] = useState(0);
+  const [idleFrame, setIdleFrame] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -88,6 +87,16 @@ const PetScreen = ({ playing }) => {
       return () => clearInterval(interval);
     }
   }, [currentAnimation]);
+
+  useEffect(() => {
+    if (!animation && petState === PET_STATES.IDLE && PET_PIXELS.idle.length > 1) {
+      const interval = setInterval(() => {
+        setIdleFrame(prev => (prev + 1) % PET_PIXELS.idle.length);
+      }, 1000);
+
+      return () => clearInterval(interval);
+    }
+  }, [animation, petState]);
 
   const feedPet = () => {
     if (Date.now() - lastFed > 5000) {
@@ -142,11 +151,20 @@ const PetScreen = ({ playing }) => {
 
     if (currentAnimation && ANIMATIONS[currentAnimation]) {
       displayArt = ANIMATIONS[currentAnimation][animationFrame % ANIMATIONS[currentAnimation].length];
+    } else if (currentState === PET_STATES.IDLE && PET_PIXELS.idle.length > 1) {
+      displayArt = PET_PIXELS.idle[idleFrame];
     } else {
       displayArt = PET_PIXELS[currentState];
     }
 
-    return <img src={displayArt} alt={currentState} className={`pet-pixel-art ${currentState}`} />;
+    return (
+      <>
+        <img src={displayArt} alt={currentState} className={`pet-pixel-art ${currentState}`} />
+        {CAPTIONS[currentState] && (
+          <div className="pet-caption">{CAPTIONS[currentState]}</div>
+        )}
+      </>
+    );
   };
 
   return (
