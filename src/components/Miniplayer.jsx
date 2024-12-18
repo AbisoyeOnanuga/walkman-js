@@ -4,23 +4,37 @@ import './Miniplayer.css';
 
 const Miniplayer = ({ playing, setPlaying, youtubePlayer }) => {
   const [isMinimized, setIsMinimized] = useState(false);
-  const [position, setPosition] = useState({ top: 0, left: 0 });
   const miniplayerRef = useRef(null);
-
-  const handleDrag = (e) => {
-    setPosition({ top: e.clientY - 50, left: e.clientX - 50 });
-  };
 
   const handleResize = () => {
     setIsMinimized(!isMinimized);
   };
 
+  const snapToPosition = () => {
+    const miniplayer = miniplayerRef.current;
+    const { top, left } = miniplayer.getBoundingClientRect();
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
+
+    if (isMinimized) {
+      // Snap to corners when minimized
+      const newTop = top < screenHeight / 2 ? 0 : screenHeight - 100;
+      const newLeft = left < screenWidth / 2 ? 0 : screenWidth - 100;
+      miniplayer.style.top = `${newTop}px`;
+      miniplayer.style.left = `${newLeft}px`;
+    } else {
+      // Snap to bottom or top when in full-width mode
+      const newTop = top < screenHeight / 2 ? 0 : screenHeight - 100;
+      miniplayer.style.top = `${newTop}px`;
+      miniplayer.style.left = '0';
+    }
+  };
+
   return (
     <div
       className={`miniplayer ${playing ? 'active' : ''} ${isMinimized ? 'minimized' : ''}`}
-      style={{ top: position.top, left: position.left }}
       ref={miniplayerRef}
-      onMouseDown={handleDrag}
+      onMouseUp={snapToPosition}
     >
       <div id="youtube-player-miniplayer"></div>
       <button className="resize-button" onClick={handleResize}>
