@@ -9,7 +9,7 @@ import icon4 from '../assets/settings.png';
 import icon5 from '../assets/playlists.png';
 import icon6 from '../assets/weather.png';
 
-const HomeScreen = ({ selectedIcon, onButtonPress, playing, setPlaying, youtubePlayer }) => {
+const HomeScreen = ({ selectedIcon, onButtonPress, playing, setPlaying, youtubePlayer, isMiniplayer }) => {
   const { theme } = useTheme();
   const icons = [
     { src: icon1, label: 'Pet' },
@@ -35,8 +35,10 @@ const HomeScreen = ({ selectedIcon, onButtonPress, playing, setPlaying, youtubeP
             </div>
           ))}
         </div>
-        <Miniplayer playing={playing} setPlaying={setPlaying} youtubePlayer={youtubePlayer} />
-        <div className="highlighted-text">{icons[selectedIcon] && icons[selectedIcon].label}</div>
+        <Miniplayer playing={playing} setPlaying={setPlaying} youtubePlayer={youtubePlayer} isMiniplayer={isMiniplayer} />
+        <div className="highlighted-text">
+          {icons[selectedIcon] && icons[selectedIcon].label}
+        </div>
       </div>
     </div>
   );
