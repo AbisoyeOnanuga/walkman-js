@@ -99,17 +99,6 @@ const PlaylistsScreen = ({ playing, setPlaying, currentPlaylist, onPlaylistPlay,
 
   const toggleMiniplayer = () => {
     setIsMiniplayer(!isMiniplayer);
-    if (!isMiniplayer) {
-      // Move the YouTube player to the miniplayer div
-      document.getElementById('youtube-player').style.display = 'none';
-      document.getElementById('youtube-player-miniplayer').appendChild(document.getElementById('youtube-player'));
-      document.getElementById('youtube-player-miniplayer').style.display = 'block';
-    } else {
-      // Move the YouTube player back to the original div
-      document.getElementById('youtube-player-miniplayer').style.display = 'none';
-      document.querySelector('.player-container').appendChild(document.getElementById('youtube-player'));
-      document.getElementById('youtube-player').style.display = 'block';
-    }
   };
 
   return (
