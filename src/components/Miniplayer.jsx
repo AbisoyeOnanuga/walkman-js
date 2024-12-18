@@ -1,11 +1,21 @@
 // Miniplayer.jsx
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './Miniplayer.css';
 
 const Miniplayer = ({ playing, setPlaying, youtubePlayer, isMiniplayer }) => {
   const [isMinimized, setIsMinimized] = useState(false);
   const [position, setPosition] = useState({ bottom: 0, left: 0 });
   const miniplayerRef = useRef(null);
+
+  useEffect(() => {
+    if (isMiniplayer && youtubePlayer) {
+      document.getElementById('youtube-player-miniplayer').appendChild(youtubePlayer.getIframe());
+      youtubePlayer.playVideo();
+    } else if (youtubePlayer) {
+      document.querySelector('.player-container').appendChild(youtubePlayer.getIframe());
+      youtubePlayer.playVideo();
+    }
+  }, [isMiniplayer, youtubePlayer]);
 
   const handleDrag = (e) => {
     e.preventDefault();
