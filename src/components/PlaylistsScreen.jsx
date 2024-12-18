@@ -42,7 +42,7 @@ const PLAYLISTS = [
     videoId: '77ZozI0rw7w',
     thumbnail: 'https://i.ytimg.com/vi/77ZozI0rw7w/default.jpg'
   }
-];
+]; 
 
 const PlaylistsScreen = ({ playing, setPlaying, currentPlaylist, onPlaylistPlay, setYoutubePlayer, youtubePlayer }) => {
   const [isMiniplayer, setIsMiniplayer] = useState(false);
@@ -99,6 +99,17 @@ const PlaylistsScreen = ({ playing, setPlaying, currentPlaylist, onPlaylistPlay,
 
   const toggleMiniplayer = () => {
     setIsMiniplayer(!isMiniplayer);
+    if (!isMiniplayer) {
+      // Move the YouTube player to the miniplayer div
+      document.getElementById('youtube-player').style.display = 'none';
+      document.getElementById('youtube-player-miniplayer').appendChild(document.getElementById('youtube-player'));
+      document.getElementById('youtube-player-miniplayer').style.display = 'block';
+    } else {
+      // Move the YouTube player back to the original div
+      document.getElementById('youtube-player-miniplayer').style.display = 'none';
+      document.querySelector('.player-container').appendChild(document.getElementById('youtube-player'));
+      document.getElementById('youtube-player').style.display = 'block';
+    }
   };
 
   return (
