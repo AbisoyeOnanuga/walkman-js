@@ -46,6 +46,7 @@ const PLAYLISTS = [
 
 const PlaylistsScreen = ({ playing, setPlaying, currentPlaylist, onPlaylistPlay, setYoutubePlayer, youtubePlayer }) => {
   const [isMiniplayer, setIsMiniplayer] = useState(false);
+  const [isPlayerInitialized, setIsPlayerInitialized] = useState(false);
 
   useEffect(() => {
     if (!window.YT) {
@@ -72,6 +73,7 @@ const PlaylistsScreen = ({ playing, setPlaying, currentPlaylist, onPlaylistPlay,
           events: {
             onReady: (event) => {
               setYoutubePlayer(event.target);
+              setIsPlayerInitialized(true);
             },
             onStateChange: (event) => {
               if (event.data === window.YT.PlayerState.PLAYING) {
@@ -105,8 +107,13 @@ const PlaylistsScreen = ({ playing, setPlaying, currentPlaylist, onPlaylistPlay,
       <div className="screen-content">
         <div className={`player-container ${isMiniplayer ? 'hidden' : ''}`}>
           <div id="youtube-player"></div>
+          {isPlayerInitialized && (
+            <button className="minimize-button" onClick={toggleMiniplayer}>
+              Minimize
+            </button>
+          )}
         </div>
-        <Miniplayer playing={playing} setPlaying={setPlaying} youtubePlayer={youtubePlayer} />
+        <Miniplayer playing={playing} setPlaying={setPlaying} youtubePlayer={youtubePlayer} isMiniplayer={isMiniplayer} />
         <div className="playlists-list">
           {PLAYLISTS.map(playlist => (
             <div 
@@ -127,9 +134,6 @@ const PlaylistsScreen = ({ playing, setPlaying, currentPlaylist, onPlaylistPlay,
           ))}
         </div>
       </div>
-      <button onClick={toggleMiniplayer}>
-        {isMiniplayer ? 'Expand' : 'Minimize'}
-      </button>
     </div>
   );
 };
