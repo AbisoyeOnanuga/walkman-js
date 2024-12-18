@@ -44,28 +44,9 @@
   text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
 }
 
-.pet-controls {
-  display: flex;
-  justify-content: space-around;
-  padding: 8px 4px;
-}
-
-.pet-controls button {
-  background: rgba(255, 255, 255, 0.1);
-  border: none;
-  border-radius: 4px;
-  padding: 4px 8px;
-  color: #fff;
-  font-size: 0.7rem;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.pet-controls button:hover {
-  background: rgba(255, 255, 255, 0.2);
-}
-
 .pet-pixel-art {
+  width: 33%; /* Adjusting size to be 1/3rd */
+  height: auto; /* Maintain aspect ratio */
   font-family: monospace;
   white-space: pre;
   line-height: 1.2;
@@ -76,7 +57,7 @@
 
 .pixel-line {
   text-align: center;
-  font-size: 1.2rem;
+  font-size: 0.4rem; /* Adjusting size for smaller images */
 }
 
 .pet-pixel-art.happy, .pet-pixel-art.excited {
@@ -106,6 +87,27 @@
 
 .pet-pixel-art.eating, .pet-pixel-art.playing {
   animation: bounce 0.5s ease infinite;
+}
+
+.pet-controls {
+  display: flex;
+  justify-content: space-around;
+  padding: 8px 4px;
+}
+
+.pet-controls button {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 4px;
+  padding: 4px 8px;
+  color: #fff;
+  font-size: 0.7rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.pet-controls button:hover {
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .pet-controls button:disabled {
@@ -160,4 +162,4 @@
 
 .pet-pixel-art.dancing {
   animation: dance 0.3s ease infinite;
-} 
+}
