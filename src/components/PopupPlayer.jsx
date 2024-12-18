@@ -13,51 +13,19 @@ const PLAYLISTS = [
   // Add other playlists here
 ];
 
-const PopupPlayer = ({ playing, setPlaying, youtubePlayer, setYoutubePlayer }) => {
+const PopupPlayer = ({ playing, setPlaying, youtubePlayer, setYoutubePlayer, isPopupPlayer, closePopup }) => {
   const [isMinimized, setIsMinimized] = useState(false);
   const [position, setPosition] = useState({ bottom: 0, right: 0 });
   const playerRef = useRef(null);
 
   useEffect(() => {
-    const initPlayer = () => {
-      if (PLAYLISTS.length > 0) {
-        const player = new window.YT.Player('popup-player', {
-          height: '100%',
-          width: '100%',
-          videoId: PLAYLISTS[0].videoId,
-          playerVars: {
-            autoplay: 0,
-            controls: 1,
-            modestbranding: 1,
-            rel: 0,
-            playsinline: 1,
-            list: PLAYLISTS[0].listId
-          },
-          events: {
-            onReady: (event) => {
-              setYoutubePlayer(event.target);
-            },
-            onStateChange: (event) => {
-              if (event.data === window.YT.PlayerState.PLAYING) {
-                setPlaying('popupPlayer');
-              } else if (event.data === window.YT.PlayerState.PAUSED || 
-                        event.data === window.YT.PlayerState.ENDED) {
-                setPlaying(null);
-              }
-            }
-          }
-        });
-      }
-    };
-
-    if (window.YT && window.YT.Player) {
-      initPlayer();
-    } else {
-      window.onYouTubeIframeAPIReady = initPlayer;
+    if (isPopupPlayer && youtubePlayer) {
+      document.getElementById('popup-player').appendChild(youtubePlayer.getIframe());
+      youtubePlayer.playVideo();
+    } else if (youtubePlayer && playerRef.current) {
+      document.querySelector('.player-container').appendChild(youtubePlayer.getIframe());
     }
-
-    return () => {};
-  }, [setYoutubePlayer, setPlaying]);
+  }, [isPopupPlayer, youtubePlayer]);
 
   const handleDrag = (e) => {
     e.preventDefault();
@@ -90,7 +58,7 @@ const PopupPlayer = ({ playing, setPlaying, youtubePlayer, setYoutubePlayer }) =
 
   return (
     <div
-      className={`popup-player ${playing === 'popupPlayer' ? 'active' : ''} ${isMinimized ? 'minimized' : ''}`}
+      className={`popup-player ${playing === 'popupPlayer' && isPopupPlayer ? 'active' : ''} ${isMinimized ? 'minimized' : ''}`}
       style={position}
       ref={playerRef}
       onMouseDown={handleMouseDown}
@@ -98,6 +66,9 @@ const PopupPlayer = ({ playing, setPlaying, youtubePlayer, setYoutubePlayer }) =
       <div id="popup-player"></div>
       <button className="resize-button" onClick={handleResize}>
         {isMinimized ? 'Expand' : 'Minimize'}
+      </button>
+      <button className="close-button" onClick={closePopup}>
+        &times;
       </button>
     </div>
   );
