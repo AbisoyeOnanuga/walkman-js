@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Header from './Header';
-import Miniplayer from './Miniplayer';
 import './PlaylistsScreen.css';
 
 const PLAYLISTS = [
@@ -42,12 +41,15 @@ const PLAYLISTS = [
     videoId: '77ZozI0rw7w',
     thumbnail: 'https://i.ytimg.com/vi/77ZozI0rw7w/default.jpg'
   }
-]; 
+];
 
-const PlaylistsScreen = ({ playing, setPlaying, currentPlaylist, onPlaylistPlay, setYoutubePlayer, youtubePlayer }) => {
-  const [isMiniplayer, setIsMiniplayer] = useState(false);
-  const [isPlayerInitialized, setIsPlayerInitialized] = useState(false);
-
+const PlaylistsScreen = ({ 
+  playing, 
+  setPlaying, 
+  currentPlaylist, 
+  onPlaylistPlay, 
+  setYoutubePlayer 
+}) => {
   useEffect(() => {
     if (!window.YT) {
       const tag = document.createElement('script');
@@ -57,35 +59,32 @@ const PlaylistsScreen = ({ playing, setPlaying, currentPlaylist, onPlaylistPlay,
     }
 
     const initPlayer = () => {
-      if (PLAYLISTS.length > 0) {
-        const player = new window.YT.Player('youtube-player', {
-          height: '100%',
-          width: '100%',
-          videoId: PLAYLISTS[0].videoId,
-          playerVars: {
-            autoplay: 0,
-            controls: 1,
-            modestbranding: 1,
-            rel: 0,
-            playsinline: 1,
-            list: PLAYLISTS[0].listId
+      const player = new window.YT.Player('youtube-player', {
+        height: '100%',
+        width: '100%',
+        videoId: PLAYLISTS[0].videoId,
+        playerVars: {
+          autoplay: 0,
+          controls: 1,
+          modestbranding: 1,
+          rel: 0,
+          playsinline: 1,
+          list: PLAYLISTS[0].listId
+        },
+        events: {
+          onReady: (event) => {
+            setYoutubePlayer(event.target);
           },
-          events: {
-            onReady: (event) => {
-              setYoutubePlayer(event.target);
-              setIsPlayerInitialized(true);
-            },
-            onStateChange: (event) => {
-              if (event.data === window.YT.PlayerState.PLAYING) {
-                setPlaying('playlists');
-              } else if (event.data === window.YT.PlayerState.PAUSED || 
-                       event.data === window.YT.PlayerState.ENDED) {
-                setPlaying(null);
-              }
+          onStateChange: (event) => {
+            if (event.data === window.YT.PlayerState.PLAYING) {
+              setPlaying('playlists');
+            } else if (event.data === window.YT.PlayerState.PAUSED || 
+                     event.data === window.YT.PlayerState.ENDED) {
+              setPlaying(null);
             }
           }
-        });
-      }
+        }
+      });
     };
 
     if (window.YT && window.YT.Player) {
@@ -97,23 +96,13 @@ const PlaylistsScreen = ({ playing, setPlaying, currentPlaylist, onPlaylistPlay,
     return () => {};
   }, [setYoutubePlayer, setPlaying]);
 
-  const toggleMiniplayer = () => {
-    setIsMiniplayer(!isMiniplayer);
-  };
-
   return (
     <div className="playlists-screen">
       <Header playing={playing} />
       <div className="screen-content">
-        <div className={`player-container ${isMiniplayer ? 'hidden' : ''}`}>
+        <div className="player-container" style={{ visibility: 'visible' }}>
           <div id="youtube-player"></div>
-          {isPlayerInitialized && (
-            <button className="minimize-button" onClick={toggleMiniplayer}>
-              Minimize
-            </button>
-          )}
         </div>
-        <Miniplayer playing={playing} setPlaying={setPlaying} youtubePlayer={youtubePlayer} isMiniplayer={isMiniplayer} />
         <div className="playlists-list">
           {PLAYLISTS.map(playlist => (
             <div 
