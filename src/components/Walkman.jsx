@@ -11,6 +11,7 @@ import WalkmanIconPink from '../assets/walkman-logo-pink.svg';
 import WalkmanIconRed from '../assets/walkman-logo-red.svg';
 import WalkmanIconYellow from '../assets/walkman-logo-yellow.svg';
 import WalkmanIconGreen from '../assets/walkman-logo-green.svg';
+import SonyLogo from '../assets/sony-logo.svg';
 import './Walkman.css';
 
 const Walkman = ({ 
@@ -151,7 +152,7 @@ const Walkman = ({
   return (
     <div className="walkman" style={{ background: theme.walkman.background }}>
       <div className="bezel">
-        <div className="sony-logo">SONY</div>
+        <div className="sony-logo"><img src={SonyLogo} alt="Sony" /></div>
         <div className="screen">
           {typeof screenContent === 'function' ? 
             screenContent({

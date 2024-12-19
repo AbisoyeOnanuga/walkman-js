@@ -28,6 +28,14 @@
   margin-bottom: 20px;
 }
 
+.sony-logo img{
+  position: relative;
+  width: 65px;
+  height: auto;
+  align-items: center;
+  justify-content: center;
+}
+
 .screen {
   width: 150px;
   height: 194px;
