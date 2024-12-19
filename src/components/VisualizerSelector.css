@@ -1,0 +1,48 @@
+.visualizer-selector {
+    position: absolute;
+    bottom: 8px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 4px;
+    color: #fff;
+    font-size: 0.8rem;
+    display: flex;
+    justify-content: center;
+}
+  
+.visualizer-selector span {
+    padding: 4px 8px;
+    border: 1px solid #444;
+    background: #222;
+    border-radius: 4px;
+}
+  
+  
+  
+.visualizer-selector button {
+    background: #444;
+    color: #fff;
+    border: none;
+    padding: 4px 8px;
+    margin: 0 4px;
+    cursor: pointer;
+}
+  
+.visualizer-selector button:focus {
+    outline: none;
+}
+  
+.visualizer-selector button:hover {
+    background: #666;
+}
+  
+.visualizer-selector button:active {
+    background: #888;
+}
+  
+.visualizer-selector button:focus {
+    outline: 2px solid #fff;
+}
+  
