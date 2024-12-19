@@ -12,7 +12,6 @@ import SettingsAboutScreen from './components/SettingsAboutScreen';
 import SettingsThemeScreen from './components/SettingsThemeScreen';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
 import { RADIO_STATIONS } from './data/radioStations';
-import Miniplayer from './components/Miniplayer';
 import './App.css';
 
 const App = () => {
@@ -110,7 +109,7 @@ const AppContent = () => {
 
   const handleButtonPress = (button) => {
     let newIndex = selectedIcon;
-  
+    
     // Handle back button first
     if (button === 'back' || button === 'Escape' || button === 'Backspace') {
       if (currentScreen === 'settings') {
@@ -124,7 +123,7 @@ const AppContent = () => {
       }
       return;
     }
-  
+
     switch (currentScreen) {
       case 'home':
         switch (button) {
@@ -156,7 +155,7 @@ const AppContent = () => {
       case 'radio':
         const currentStationIndex = RADIO_STATIONS.findIndex(station => station.name === currentStation?.name);
         let newStationIndex = currentStationIndex === -1 ? 0 : currentStationIndex;
-  
+
         switch (button) {
           case 'up':
             newStationIndex = (newStationIndex - 1 + RADIO_STATIONS.length) % RADIO_STATIONS.length;
@@ -190,11 +189,11 @@ const AppContent = () => {
         }
         return;
     }
-  
+    
     setSelectedIcon(newIndex);
     setScreenContent(`Selected: ${icons[newIndex]}`);
   };
-  
+
   const renderCurrentScreen = () => {
     switch (currentScreen) {
       case 'pet':
@@ -208,7 +207,6 @@ const AppContent = () => {
           currentPlaylist={currentPlaylist}
           onPlaylistPlay={handlePlaylistPlay}
           setYoutubePlayer={setYoutubePlayer}
-          youtubePlayer={youtubePlayer}
         />;
       case 'radio':
         return <RadioScreen 
@@ -253,12 +251,10 @@ const AppContent = () => {
           selectedIcon={selectedIcon} 
           onButtonPress={handleButtonPress}
           playing={playing}
-          setPlaying={setPlaying}
-          youtubePlayer={youtubePlayer}
         />;
     }
-  };  
-  
+  };
+
   return (
     <div className="app">
       <Walkman
@@ -273,7 +269,6 @@ const AppContent = () => {
       />
     </div>
   );
-  };
-  
-  export default App;
-  
+};
+
+export default App;
