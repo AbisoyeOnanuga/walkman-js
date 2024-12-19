@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
+import React, { useState, useEffect, useRef, useMemo, forwardRef, useImperativeHandle } from 'react';
 import { useTheme } from '../context/ThemeContext';
 import Header from './Header';
 
-const SettingsScreen = ({ onButtonPress, playing }) => {
+const SettingsScreen = forwardRef(({ onButtonPress, playing }, ref) => {
   const [currentView, setCurrentView] = useState('main-menu');
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [pressTimer, setPressTimer] = useState(null);
@@ -12,7 +12,8 @@ const SettingsScreen = ({ onButtonPress, playing }) => {
     { name: 'GitHub', url: 'https://github.com/AbisoyeOnanuga' },
     { name: 'Website', url: 'https://abisoyeonanuga.github.io/website' },
     { name: 'LinkedIn', url: 'https://www.linkedin.com/in/abisoye-onanuga-b0aaa5133/' },
-    { name: 'Inspiration: ipod.js by Tanner V', url: 'https://github.com/tannerv/ipod.js' }
+    { name: 'Inspiration: ipod.js by Tanner V', url: 'https://github.com/tvillarete/ipod-classic.js' },
+    { name: 'walkman.js by Abisoye', url: 'https://github.com/AbisoyeOnanuga/walkman-js' }
   ], []);
   const themesList = useMemo(() => ['Black', 'Blue', 'Pink', 'Red', 'Yellow', 'Green'], []);
 
@@ -256,7 +257,24 @@ const SettingsScreen = ({ onButtonPress, playing }) => {
     }
   };
 
+  // Expose navigation method through ref
+  useImperativeHandle(ref, () => ({
+    handleNavigation: (button) => {
+      switch (currentView) {
+        case 'main-menu':
+          handleMainMenuNavigation(button);
+          break;
+        case 'about':
+          handleAboutLinksNavigation(button);
+          break;
+        case 'themes':
+          handleThemesNavigation(button);
+          break;
+      }
+    }
+  }));
+
   return renderCurrentView();
-};
+});
 
 export default SettingsScreen;
