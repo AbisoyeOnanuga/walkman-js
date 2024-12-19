@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/walkman-js/static/css/main.6596980b.css",
-    "main.js": "/walkman-js/static/js/main.c4f28286.js",
+    "main.css": "/walkman-js/static/css/main.4c371662.css",
+    "main.js": "/walkman-js/static/js/main.08cc2789.js",
     "static/js/453.bf5f5756.chunk.js": "/walkman-js/static/js/453.bf5f5756.chunk.js",
     "static/media/playingBird.svg": "/walkman-js/static/media/playingBird.7cc7fce6b704761000dde35aca433f8a.svg",
     "static/media/excitedBird.svg": "/walkman-js/static/media/excitedBird.4b4a8dfdc006eb27d792d0e3023bd27f.svg",
@@ -13,6 +13,7 @@
     "static/media/sony-walkman-nw-e394-background-1.jpg": "/walkman-js/static/media/sony-walkman-nw-e394-background-1.cb6fb42136749b5db12e.jpg",
     "static/media/radio.png": "/walkman-js/static/media/radio.8321c0008204d633b009.png",
     "static/media/walkman-logo.svg": "/walkman-js/static/media/walkman-logo.96de1622057aed233d730d75ba5d23a9.svg",
+    "static/media/sony-logo.svg": "/walkman-js/static/media/sony-logo.4bf84e43940d5d32c791273f69657376.svg",
     "static/media/walkman-logo-green.svg": "/walkman-js/static/media/walkman-logo-green.5af120ee23609683e3fb4a2a6e2f9fec.svg",
     "static/media/walkman-logo-pink.svg": "/walkman-js/static/media/walkman-logo-pink.150d0919ca1c4959ff9151728ef0fd3b.svg",
     "static/media/walkman-logo-yellow.svg": "/walkman-js/static/media/walkman-logo-yellow.7e44b3bd0ab7ac76bdb625f784f1fea5.svg",
@@ -23,12 +24,12 @@
     "index.html": "/walkman-js/index.html",
     "static/media/battery.svg": "/walkman-js/static/media/battery.134a4e060466e9d45b3275b8b84c9a69.svg",
     "static/media/play-status.svg": "/walkman-js/static/media/play-status.7dec21d7b37ca9b4b6fb701dc95f433d.svg",
-    "main.6596980b.css.map": "/walkman-js/static/css/main.6596980b.css.map",
-    "main.c4f28286.js.map": "/walkman-js/static/js/main.c4f28286.js.map",
+    "main.4c371662.css.map": "/walkman-js/static/css/main.4c371662.css.map",
+    "main.08cc2789.js.map": "/walkman-js/static/js/main.08cc2789.js.map",
     "453.bf5f5756.chunk.js.map": "/walkman-js/static/js/453.bf5f5756.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.6596980b.css",
-    "static/js/main.c4f28286.js"
+    "static/css/main.4c371662.css",
+    "static/js/main.08cc2789.js"
   ]
 }
