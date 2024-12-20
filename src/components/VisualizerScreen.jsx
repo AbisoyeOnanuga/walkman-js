@@ -132,7 +132,7 @@ const VisualizerScreen = ({ playing, audioPlayer }) => {
     for (let i = 0; i < 50; i++) {
       const value = (dataArray && dataArray.length && playing) ? dataArray[i % dataArray.length] : 128;
       const randomHeight = Math.random() * (playing ? canvas.height * 0.2 : canvas.height * 0.05);
-      const barHeight = (value / 255) * canvas.height * barHeightMultiplier + randomHeight;
+      const barHeight = playing ? (value / 255) * canvas.height * barHeightMultiplier + randomHeight : canvas.height * 0.05;
       const x = barWidth * i;
       ctx.fillStyle = playing ? `hsl(${(i / 50) * 360}, 100%, 50%)` : getGreyColor();
       ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
