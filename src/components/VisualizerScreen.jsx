@@ -126,22 +126,18 @@ const VisualizerScreen = ({ playing, audioPlayer }) => {
     ctx.fillStyle = 'rgba(13, 13, 13, 0.2)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    const barCount = 50;
-    const barWidth = canvas.width / barCount;
-    let audioLevel = 0;
+    const barWidth = canvas.width / 50;
+    const barHeightMultiplier = playing ? 3 : 1;
 
-    if (dataArray && dataArray.length && playing) {
-      audioLevel = dataArray.reduce((acc, val) => acc + val, 0) / dataArray.length / 255;
-    }
-
-    for (let i = 0; i < barCount; i++) {
-      const value = playing ? dataArray[i % dataArray.length] / 255 : 0.2;
-      const barHeight = value * canvas.height * 3;
+    for (let i = 0; i < 50; i++) {
+      const value = (dataArray && dataArray.length && playing) ? dataArray[i % dataArray.length] : 128;
+      const randomHeight = Math.random() * (playing ? canvas.height * 0.5 : canvas.height * 0.1);
+      const barHeight = playing ? (value / 255) * canvas.height * barHeightMultiplier + randomHeight : canvas.height * 0.05;
       const x = barWidth * i;
-      ctx.fillStyle = playing ? `hsl(${(i / barCount) * 360}, 100%, 50%)` : getGreyColor();
-      ctx.fillRect(x, canvas.height - barHeight, barWidth - 2, barHeight);  // The -2 ensures a gap between bars
+      ctx.fillStyle = playing ? `hsl(${(i / 50) * 360}, 100%, 50%)` : getGreyColor();
+      ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
 
-      ctx.shadowBlur = 20;
+      ctx.shadowBlur = 10;
       ctx.shadowColor = ctx.fillStyle;
     }
   };
@@ -152,24 +148,20 @@ const VisualizerScreen = ({ playing, audioPlayer }) => {
 
     const centerX = canvas.width / 2;
     const centerY = canvas.height / 2;
-    const baseRadius = Math.min(canvas.width, canvas.height) / 4;
-    let audioLevel = 0;
+    const radius = Math.min(canvas.width, canvas.height) / 4;
+    const sliceWidth = (Math.PI * 2) / 50;
+    const audioLevel = (dataArray && dataArray.length && playing) ? dataArray.reduce((acc, val) => acc + val, 0) / dataArray.length / 255 : 0.5;
 
-    if (dataArray && dataArray.length && playing) {
-      audioLevel = dataArray.reduce((acc, val) => acc + val, 0) / dataArray.length / 255;
-    }
-
-    const radius = baseRadius * (1 + audioLevel);
-    const sliceWidth = (Math.PI * 2) / dataArray.length;
     ctx.lineWidth = 2;
     ctx.strokeStyle = playing ? 'rgba(0, 255, 0, 1)' : getGreyColor();
     ctx.beginPath();
 
-    for (let i = 0; i < dataArray.length; i++) {
-      const value = playing ? dataArray[i] / 255 : 0.5;
+    for (let i = 0; i < 50; i++) {
+      const value = (dataArray && dataArray.length && playing) ? dataArray[i % dataArray.length] / 255 : 0.5;
+      const randomRadius = Math.random() * (playing ? radius * 0.2 : radius * 0.05);
       const angle = i * sliceWidth;
-      const x = centerX + radius * Math.cos(angle);
-      const y = centerY + radius * Math.sin(angle);
+      const x = centerX + (radius + value * radius * audioLevel + randomRadius) * Math.cos(angle);
+      const y = centerY + (radius + value * radius * audioLevel + randomRadius) * Math.sin(angle);
 
       if (i === 0) {
         ctx.moveTo(x, y);
