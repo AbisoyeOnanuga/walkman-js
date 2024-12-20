@@ -10,9 +10,7 @@ const getHSLColor = (x, y, width, height, audioLevel) => {
   return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
 };
 
-const getGreyColor = () => {
-  return 'rgba(102, 102, 102, 0.3)';
-};
+const getGreyColor = () => 'rgba(102, 102, 102, 0.3)';
 
 const VisualizerScreen = ({ playing, audioPlayer }) => {
   const [visualizerType, setVisualizerType] = useState('particles');
@@ -32,7 +30,7 @@ const VisualizerScreen = ({ playing, audioPlayer }) => {
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
         size: Math.random() * 3 + 1,
-        baseSpeed: Math.random() * 0.5 + 0.1,
+        baseSpeed: Math.random() * 0.05 + 0.01,  // Much slower base speed
         angle: Math.random() * Math.PI * 2,
         hueOffset: Math.random() * 360
       }));
@@ -119,7 +117,7 @@ const VisualizerScreen = ({ playing, audioPlayer }) => {
       ctx.fillStyle = playing ? getHSLColor(particle.x, particle.y, canvas.width, canvas.height, audioLevel) : getGreyColor();
       ctx.fill();
 
-      ctx.shadowBlur = playing ? 20 : 0;
+      ctx.shadowBlur = 20;
       ctx.shadowColor = ctx.fillStyle;
     });
   };
@@ -128,86 +126,58 @@ const VisualizerScreen = ({ playing, audioPlayer }) => {
     ctx.fillStyle = 'rgba(13, 13, 13, 0.2)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    if (particlesRef.current.length === 0) {
-      particlesRef.current = Array.from({ length: 50 }, () => ({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        size: Math.random() * 3 + 1,
-        baseSpeed: Math.random() * 0.5 + 0.1,
-        angle: Math.random() * Math.PI * 2,
-        hueOffset: Math.random() * 360
-      }));
-    }
+    if (!dataArray || !dataArray.length) return; // Check if dataArray is null or empty
 
-    let audioLevel = 0;
-    if (dataArray && dataArray.length && playing) {
-      audioLevel = dataArray.reduce((acc, val) => acc + val, 0) / dataArray.length / 255;
-    }
+    const barWidth = canvas.width / 50;
+    const barHeightMultiplier = playing ? 3 : 1;
 
-    particlesRef.current.forEach(particle => {
-      const speed = playing ? particle.baseSpeed * (1 + (audioLevel * 3)) : particle.baseSpeed;
-      particle.x += Math.cos(particle.angle) * speed;
-      particle.y += Math.sin(particle.angle) * speed;
-
-      if (particle.x < 0 || particle.x > canvas.width) {
-        particle.angle = Math.PI - particle.angle;
-      }
-      if (particle.y < 0 || particle.y > canvas.height) {
-        particle.angle = -particle.angle;
-      }
-
-      const size = particle.size * (1 + (audioLevel * 2));
-      ctx.beginPath();
-      ctx.arc(particle.x, particle.y, size, 0, Math.PI * 2);
-      ctx.fillStyle = playing ? getHSLColor(particle.x, particle.y, canvas.width, canvas.height, audioLevel) : getGreyColor();
-      ctx.fill();
+    for (let i = 0; i < 50; i++) {
+      const value = playing ? dataArray[i % dataArray.length] : 1;
+      const barHeight = (value / 255) * canvas.height * barHeightMultiplier;
+      const x = barWidth * i;
+      ctx.fillStyle = playing ? `hsl(${(i / 50) * 360}, 100%, 50%)` : getGreyColor();
+      ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
 
       ctx.shadowBlur = playing ? 20 : 0;
       ctx.shadowColor = ctx.fillStyle;
-    });
+    }
   };
 
   const animateWaveform = (ctx, dataArray, canvas, playing) => {
     ctx.fillStyle = 'rgba(13, 13, 13, 0.2)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    if (particlesRef.current.length === 0) {
-      particlesRef.current = Array.from({ length: 50 }, () => ({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        size: Math.random() * 3 + 1,
-        baseSpeed: Math.random() * 0.5 + 0.1,
-        angle: Math.random() * Math.PI * 2,
-        hueOffset: Math.random() * 360
-      }));
-    }
+    if (!dataArray || !dataArray.length) return; // Check if dataArray is null or empty
 
     let audioLevel = 0;
     if (dataArray && dataArray.length && playing) {
       audioLevel = dataArray.reduce((acc, val) => acc + val, 0) / dataArray.length / 255;
     }
 
-    particlesRef.current.forEach(particle => {
-      const speed = playing ? particle.baseSpeed * (1 + (audioLevel * 3)) : particle.baseSpeed;
-      particle.x += Math.cos(particle.angle) * speed;
-      particle.y += Math.sin(particle.angle) * speed;
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+    const radius = (Math.min(canvas.width, canvas.height) / 4) * (1 + audioLevel);
+    const sliceWidth = (Math.PI * 2) / dataArray.length;
 
-      if (particle.x < 0 || particle.x > canvas.width) {
-        particle.angle = Math.PI - particle.angle;
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = playing ? 'rgba(0, 255, 0, 1)' : getGreyColor();
+    ctx.beginPath();
+
+    for (let i = 0; i < dataArray.length; i++) {
+      const angle = i * sliceWidth;
+      const x = centerX + radius * Math.cos(angle);
+      const y = centerY + radius * Math.sin(angle);
+      if (i === 0) {
+        ctx.moveTo(x, y);
+      } else {
+        ctx.lineTo(x, y);
       }
-      if (particle.y < 0 || particle.y > canvas.height) {
-        particle.angle = -particle.angle;
-      }
+    }
 
-      const size = particle.size * (1 + (audioLevel * 2));
-      ctx.beginPath();
-      ctx.arc(particle.x, particle.y, size, 0, Math.PI * 2);
-      ctx.fillStyle = playing ? getHSLColor(particle.x, particle.y, canvas.width, canvas.height, audioLevel) : getGreyColor();
-      ctx.fill();
-
-      ctx.shadowBlur = playing ? 20 : 0;
-      ctx.shadowColor = ctx.fillStyle;
-    });
+    ctx.closePath();
+    ctx.stroke();
+    ctx.shadowBlur = playing ? 20 : 0;
+    ctx.shadowColor = ctx.strokeStyle;
   };
 
   return (
@@ -225,3 +195,4 @@ const VisualizerScreen = ({ playing, audioPlayer }) => {
 };
 
 export default VisualizerScreen;
+  
