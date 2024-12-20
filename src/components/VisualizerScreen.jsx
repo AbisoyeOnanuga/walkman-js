@@ -30,7 +30,7 @@ const VisualizerScreen = ({ playing, audioPlayer }) => {
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
         size: Math.random() * 3 + 1,
-        baseSpeed: Math.random() * 0.05 + 0.01,  // Much slower base speed
+        baseSpeed: Math.random() * 0.05 + 0.01,
         angle: Math.random() * Math.PI * 2,
         hueOffset: Math.random() * 360
       }));
@@ -126,19 +126,22 @@ const VisualizerScreen = ({ playing, audioPlayer }) => {
     ctx.fillStyle = 'rgba(13, 13, 13, 0.2)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    if (!dataArray || !dataArray.length) return; // Check if dataArray is null or empty
+    const barCount = 50;
+    const barWidth = canvas.width / barCount;
+    let audioLevel = 0;
 
-    const barWidth = canvas.width / 50;
-    const barHeightMultiplier = playing ? 3 : 1;
+    if (dataArray && dataArray.length && playing) {
+      audioLevel = dataArray.reduce((acc, val) => acc + val, 0) / dataArray.length / 255;
+    }
 
-    for (let i = 0; i < 50; i++) {
-      const value = playing ? dataArray[i % dataArray.length] : 1;
-      const barHeight = (value / 255) * canvas.height * barHeightMultiplier;
+    for (let i = 0; i < barCount; i++) {
+      const value = playing ? dataArray[i % dataArray.length] / 255 : 0.2;
+      const barHeight = value * canvas.height * 3;
       const x = barWidth * i;
-      ctx.fillStyle = playing ? `hsl(${(i / 50) * 360}, 100%, 50%)` : getGreyColor();
-      ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
+      ctx.fillStyle = playing ? `hsl(${(i / barCount) * 360}, 100%, 50%)` : getGreyColor();
+      ctx.fillRect(x, canvas.height - barHeight, barWidth - 2, barHeight);  // The -2 ensures a gap between bars
 
-      ctx.shadowBlur = playing ? 20 : 0;
+      ctx.shadowBlur = 20;
       ctx.shadowColor = ctx.fillStyle;
     }
   };
@@ -147,26 +150,27 @@ const VisualizerScreen = ({ playing, audioPlayer }) => {
     ctx.fillStyle = 'rgba(13, 13, 13, 0.2)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    if (!dataArray || !dataArray.length) return; // Check if dataArray is null or empty
-
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+    const baseRadius = Math.min(canvas.width, canvas.height) / 4;
     let audioLevel = 0;
+
     if (dataArray && dataArray.length && playing) {
       audioLevel = dataArray.reduce((acc, val) => acc + val, 0) / dataArray.length / 255;
     }
 
-    const centerX = canvas.width / 2;
-    const centerY = canvas.height / 2;
-    const radius = (Math.min(canvas.width, canvas.height) / 4) * (1 + audioLevel);
+    const radius = baseRadius * (1 + audioLevel);
     const sliceWidth = (Math.PI * 2) / dataArray.length;
-
     ctx.lineWidth = 2;
     ctx.strokeStyle = playing ? 'rgba(0, 255, 0, 1)' : getGreyColor();
     ctx.beginPath();
 
     for (let i = 0; i < dataArray.length; i++) {
+      const value = playing ? dataArray[i] / 255 : 0.5;
       const angle = i * sliceWidth;
       const x = centerX + radius * Math.cos(angle);
       const y = centerY + radius * Math.sin(angle);
+
       if (i === 0) {
         ctx.moveTo(x, y);
       } else {
@@ -176,7 +180,7 @@ const VisualizerScreen = ({ playing, audioPlayer }) => {
 
     ctx.closePath();
     ctx.stroke();
-    ctx.shadowBlur = playing ? 20 : 0;
+    ctx.shadowBlur = 20;
     ctx.shadowColor = ctx.strokeStyle;
   };
 
@@ -195,4 +199,3 @@ const VisualizerScreen = ({ playing, audioPlayer }) => {
 };
 
 export default VisualizerScreen;
-  
