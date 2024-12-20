@@ -131,8 +131,8 @@ const VisualizerScreen = ({ playing, audioPlayer }) => {
 
     for (let i = 0; i < 50; i++) {
       const value = (dataArray && dataArray.length && playing) ? dataArray[i % dataArray.length] : 128;
-      const randomHeight = Math.random() * (playing ? canvas.height * 0.5 : canvas.height * 0.1);
-      const barHeight = playing ? (value / 255) * canvas.height * barHeightMultiplier + randomHeight : canvas.height * 0.05;
+      const randomHeight = Math.random() * (playing ? canvas.height * 0.2 : canvas.height * 0.05);
+      const barHeight = (value / 255) * canvas.height * barHeightMultiplier + randomHeight;
       const x = barWidth * i;
       ctx.fillStyle = playing ? `hsl(${(i / 50) * 360}, 100%, 50%)` : getGreyColor();
       ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
@@ -150,7 +150,7 @@ const VisualizerScreen = ({ playing, audioPlayer }) => {
     const centerY = canvas.height / 2;
     const radius = Math.min(canvas.width, canvas.height) / 4;
     const sliceWidth = (Math.PI * 2) / 50;
-    const audioLevel = (dataArray && dataArray.length && playing) ? dataArray.reduce((acc, val) => acc + val, 0) / dataArray.length / 255 : 0.5;
+    const audioLevel = (dataArray && dataArray.length && playing) ? dataArray.reduce((acc, val) => acc + val, 0) / dataArray.length / 255 : 0.2;
 
     ctx.lineWidth = 2;
     ctx.strokeStyle = playing ? 'rgba(0, 255, 0, 1)' : getGreyColor();
@@ -158,7 +158,7 @@ const VisualizerScreen = ({ playing, audioPlayer }) => {
 
     for (let i = 0; i < 50; i++) {
       const value = (dataArray && dataArray.length && playing) ? dataArray[i % dataArray.length] / 255 : 0.5;
-      const randomRadius = Math.random() * (playing ? radius * 0.2 : radius * 0.05);
+      const randomRadius = Math.random() * (playing ? radius * 0.1 : radius * 0.02);
       const angle = i * sliceWidth;
       const x = centerX + (radius + value * radius * audioLevel + randomRadius) * Math.cos(angle);
       const y = centerY + (radius + value * radius * audioLevel + randomRadius) * Math.sin(angle);
