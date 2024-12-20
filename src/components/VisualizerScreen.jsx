@@ -127,19 +127,24 @@ const VisualizerScreen = ({ playing, audioPlayer }) => {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     const barWidth = canvas.width / 50;
-    const barHeightMultiplier = playing ? 3 : 1;
+    const barHeightMultiplier = playing ? 0.75 : 0.1; // Further reduced multiplier for more subtle height
 
     for (let i = 0; i < 50; i++) {
-      const value = (dataArray && dataArray.length && playing) ? dataArray[i % dataArray.length] : 128;
-      const randomHeight = Math.random() * (playing ? canvas.height * 0.2 : canvas.height * 0.05);
-      const barHeight = playing ? (value / 255) * canvas.height * barHeightMultiplier + randomHeight : canvas.height * 0.05;
+      let value = (dataArray && dataArray.length && playing) ? dataArray[i % dataArray.length] : 128;
+      
+      // Add minimal randomness to simulate natural audio movement without overwhelming the effect
+      value += Math.random() * 10 * (Math.random() < 0.5 ? -1 : 1);
+      
+      const normalizedValue = Math.max((value / 255) * canvas.height * barHeightMultiplier, 0);
+      const barHeight = playing ? normalizedValue : canvas.height * 0.1; // Reduced bar height when no audio
+
       const x = barWidth * i;
       ctx.fillStyle = playing ? `hsl(${(i / 50) * 360}, 100%, 50%)` : getGreyColor();
       ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
 
       ctx.shadowBlur = 10;
       ctx.shadowColor = ctx.fillStyle;
-    }
+  }
   };
 
   const animateWaveform = (ctx, dataArray, canvas, playing) => {
