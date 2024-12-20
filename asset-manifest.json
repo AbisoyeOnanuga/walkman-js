@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/walkman-js/static/css/main.4c371662.css",
-    "main.js": "/walkman-js/static/js/main.08cc2789.js",
+    "main.css": "/walkman-js/static/css/main.e15eb549.css",
+    "main.js": "/walkman-js/static/js/main.be03e1e2.js",
     "static/js/453.bf5f5756.chunk.js": "/walkman-js/static/js/453.bf5f5756.chunk.js",
     "static/media/playingBird.svg": "/walkman-js/static/media/playingBird.7cc7fce6b704761000dde35aca433f8a.svg",
     "static/media/excitedBird.svg": "/walkman-js/static/media/excitedBird.4b4a8dfdc006eb27d792d0e3023bd27f.svg",
@@ -24,12 +24,12 @@
     "index.html": "/walkman-js/index.html",
     "static/media/battery.svg": "/walkman-js/static/media/battery.134a4e060466e9d45b3275b8b84c9a69.svg",
     "static/media/play-status.svg": "/walkman-js/static/media/play-status.7dec21d7b37ca9b4b6fb701dc95f433d.svg",
-    "main.4c371662.css.map": "/walkman-js/static/css/main.4c371662.css.map",
-    "main.08cc2789.js.map": "/walkman-js/static/js/main.08cc2789.js.map",
+    "main.e15eb549.css.map": "/walkman-js/static/css/main.e15eb549.css.map",
+    "main.be03e1e2.js.map": "/walkman-js/static/js/main.be03e1e2.js.map",
     "453.bf5f5756.chunk.js.map": "/walkman-js/static/js/453.bf5f5756.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.4c371662.css",
-    "static/js/main.08cc2789.js"
+    "static/css/main.e15eb549.css",
+    "static/js/main.be03e1e2.js"
   ]
 }
