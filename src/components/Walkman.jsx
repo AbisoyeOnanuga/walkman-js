@@ -150,147 +150,160 @@ const Walkman = ({
   };
 
   return (
-    <div className="walkman" style={{ background: theme.walkman.background }}>
-      <div className="bezel">
-        <div className="sony-logo"><img src={SonyLogo} alt="Sony" /></div>
-        <div className="screen">
-          {typeof screenContent === 'function' ? 
-            screenContent({
-              selectedIcon,
-              onButtonPress,
-              playing,
-              currentStation,
-              onStationPlay
-            }) : 
-            screenContent
-          }
+    <div className="walkman-container">
+      <div className="walkman" style={{ background: theme.walkman.background }}>
+        <div className="bezel">
+          <div className="sony-logo"><img src={SonyLogo} alt="Sony" /></div>
+          <div className="screen">
+            {typeof screenContent === 'function' ? 
+              screenContent({
+                selectedIcon,
+                onButtonPress,
+                playing,
+                currentStation,
+                onStationPlay
+              }) : 
+              screenContent
+            }
+          </div>
+        </div>
+        <div className="volume-buttons" style={{ background: theme.volumeButtons.background }}></div>
+        <div className="key-volume-button" style={{ background: theme.keyVolume.background }}></div>
+        <div className="power-button" style={{ background: theme.powerButton.background }}></div>
+        <div className="buttons">
+          <div
+            className={`button-back ${activeButton === 'back' ? 'active' : ''}`}
+            style={{ 
+              ...buttonStyle,
+              background: activeButton === 'back' && theme.active ? 
+                theme.active.buttonBack.background : 
+                theme.buttonBack.background 
+            }}
+            onMouseDown={() => handleMouseDown('back')}
+            onMouseUp={() => {
+              handleMouseUp();
+              onButtonPress('back');
+            }}
+            onMouseLeave={handleMouseUp}
+            tabIndex="0"
+          >
+            BACK
+          </div>
+          <div
+            className={`button-option ${activeButton === 'option' ? 'active' : ''}`}
+            style={{ 
+              ...buttonStyle,
+              background: activeButton === 'option' && theme.active ? 
+                theme.active.buttonOption.background : 
+                theme.buttonOption.background 
+            }}
+            onMouseDown={() => handleMouseDown('option')}
+            onMouseUp={() => {
+              handleMouseUp();
+              onButtonPress('option');
+            }}
+            onMouseLeave={handleMouseUp}
+            tabIndex="0"
+          >
+            OPTION
+          </div>
+          <div className="button-home">HOME</div>
+          <div className="button-power">POWER</div>
+          <div className="navigation" style={{ background: theme.navigation.background }}>
+            <button 
+              className={`button-center ${activeButton === 'enter' ? 'active' : ''}`}
+              style={{ 
+                ...buttonStyle,
+                background: activeButton === 'enter' && theme.active ? 
+                  theme.active.buttonCenter.background : 
+                  theme.buttonCenter.background 
+              }}
+              onMouseDown={() => handleMouseDown('enter')}
+              onMouseUp={() => {
+                handleMouseUp();
+                handleNavigation('enter');
+              }}
+              onMouseLeave={handleMouseUp}
+            >
+              <div className="key-center-button" style={{ background: theme.keyButton.background }}></div>
+              <img src={PlayIcon} alt="Play/Pause" />
+            </button>
+            <button 
+              className={`button-up ${activeButton === 'up' ? 'active' : ''}`}
+              style={{ 
+                ...buttonStyle,
+                ...(activeButton === 'up' && theme.active ? theme.active.buttonUp : {})
+              }}
+              onMouseDown={() => handleMouseDown('up')}
+              onMouseUp={() => {
+                handleMouseUp();
+                handleNavigation('up');
+              }}
+              onMouseLeave={handleMouseUp}
+            >
+              <img src={UpIcon} alt="Up" />
+            </button>
+            <button 
+              className={`button-down ${activeButton === 'down' ? 'active' : ''}`}
+              style={{ 
+                ...buttonStyle,
+                ...(activeButton === 'down' && theme.active ? theme.active.buttonDown : {})
+              }}
+              onMouseDown={() => handleMouseDown('down')}
+              onMouseUp={() => {
+                handleMouseUp();
+                handleNavigation('down');
+              }}
+              onMouseLeave={handleMouseUp}
+            >
+              <img src={DownIcon} alt="Down" />
+            </button>
+            <button 
+              className={`button-left ${activeButton === 'left' ? 'active' : ''}`}
+              style={{ 
+                ...buttonStyle,
+                ...(activeButton === 'left' && theme.active ? theme.active.buttonLeft : {})
+              }}
+              onMouseDown={() => handleMouseDown('left')}
+              onMouseUp={() => {
+                handleMouseUp();
+                handleNavigation('left');
+              }}
+              onMouseLeave={handleMouseUp}
+            >
+              <img src={LeftIcon} alt="Left" />
+            </button>
+            <button 
+              className={`button-right ${activeButton === 'right' ? 'active' : ''}`}
+              style={{ 
+                ...buttonStyle,
+                ...(activeButton === 'right' && theme.active ? theme.active.buttonRight : {})
+              }}
+              onMouseDown={() => handleMouseDown('right')}
+              onMouseUp={() => {
+                handleMouseUp();
+                handleNavigation('right');
+              }}
+              onMouseLeave={handleMouseUp}
+            >
+              <img src={RightIcon} alt="Right" />
+            </button>
+          </div>
+        </div>
+        <div className="walkman-logo">
+          <img src={getThemeLogo()} alt="Walkman" />
         </div>
       </div>
-      <div className="volume-buttons" style={{ background: theme.volumeButtons.background }}></div>
-      <div className="key-volume-button" style={{ background: theme.keyVolume.background }}></div>
-      <div className="power-button" style={{ background: theme.powerButton.background }}></div>
-      <div className="buttons">
-        <div
-          className={`button-back ${activeButton === 'back' ? 'active' : ''}`}
-          style={{ 
-            ...buttonStyle,
-            background: activeButton === 'back' && theme.active ? 
-              theme.active.buttonBack.background : 
-              theme.buttonBack.background 
-          }}
-          onMouseDown={() => handleMouseDown('back')}
-          onMouseUp={() => {
-            handleMouseUp();
-            onButtonPress('back');
-          }}
-          onMouseLeave={handleMouseUp}
-          tabIndex="0"
-        >
-          BACK
-        </div>
-        <div
-          className={`button-option ${activeButton === 'option' ? 'active' : ''}`}
-          style={{ 
-            ...buttonStyle,
-            background: activeButton === 'option' && theme.active ? 
-              theme.active.buttonOption.background : 
-              theme.buttonOption.background 
-          }}
-          onMouseDown={() => handleMouseDown('option')}
-          onMouseUp={() => {
-            handleMouseUp();
-            onButtonPress('option');
-          }}
-          onMouseLeave={handleMouseUp}
-          tabIndex="0"
-        >
-          OPTION
-        </div>
-        <div className="button-home">HOME</div>
-        <div className="button-power">POWER</div>
-        <div className="navigation" style={{ background: theme.navigation.background }}>
-          <button 
-            className={`button-center ${activeButton === 'enter' ? 'active' : ''}`}
-            style={{ 
-              ...buttonStyle,
-              background: activeButton === 'enter' && theme.active ? 
-                theme.active.buttonCenter.background : 
-                theme.buttonCenter.background 
-            }}
-            onMouseDown={() => handleMouseDown('enter')}
-            onMouseUp={() => {
-              handleMouseUp();
-              handleNavigation('enter');
-            }}
-            onMouseLeave={handleMouseUp}
-          >
-            <div className="key-center-button" style={{ background: theme.keyButton.background }}></div>
-            <img src={PlayIcon} alt="Play/Pause" />
-          </button>
-          <button 
-            className={`button-up ${activeButton === 'up' ? 'active' : ''}`}
-            style={{ 
-              ...buttonStyle,
-              ...(activeButton === 'up' && theme.active ? theme.active.buttonUp : {})
-            }}
-            onMouseDown={() => handleMouseDown('up')}
-            onMouseUp={() => {
-              handleMouseUp();
-              handleNavigation('up');
-            }}
-            onMouseLeave={handleMouseUp}
-          >
-            <img src={UpIcon} alt="Up" />
-          </button>
-          <button 
-            className={`button-down ${activeButton === 'down' ? 'active' : ''}`}
-            style={{ 
-              ...buttonStyle,
-              ...(activeButton === 'down' && theme.active ? theme.active.buttonDown : {})
-            }}
-            onMouseDown={() => handleMouseDown('down')}
-            onMouseUp={() => {
-              handleMouseUp();
-              handleNavigation('down');
-            }}
-            onMouseLeave={handleMouseUp}
-          >
-            <img src={DownIcon} alt="Down" />
-          </button>
-          <button 
-            className={`button-left ${activeButton === 'left' ? 'active' : ''}`}
-            style={{ 
-              ...buttonStyle,
-              ...(activeButton === 'left' && theme.active ? theme.active.buttonLeft : {})
-            }}
-            onMouseDown={() => handleMouseDown('left')}
-            onMouseUp={() => {
-              handleMouseUp();
-              handleNavigation('left');
-            }}
-            onMouseLeave={handleMouseUp}
-          >
-            <img src={LeftIcon} alt="Left" />
-          </button>
-          <button 
-            className={`button-right ${activeButton === 'right' ? 'active' : ''}`}
-            style={{ 
-              ...buttonStyle,
-              ...(activeButton === 'right' && theme.active ? theme.active.buttonRight : {})
-            }}
-            onMouseDown={() => handleMouseDown('right')}
-            onMouseUp={() => {
-              handleMouseUp();
-              handleNavigation('right');
-            }}
-            onMouseLeave={handleMouseUp}
-          >
-            <img src={RightIcon} alt="Right" />
-          </button>
-        </div>
-      </div>
-      <div className="walkman-logo">
-        <img src={getThemeLogo()} alt="Walkman" />
+      <div className="keyboard-instructions">
+        <h3>Keyboard Controls</h3>
+        <ul>
+          <li><strong>Arrow Keys:</strong> Navigate options</li>
+          <li><strong>Enter/Spacebar:</strong> Accept selection</li>
+          <li><strong>Backspace/Escape:</strong> Go back</li>
+          <li><strong>Shift:</strong> Option</li>
+        </ul>
+        <h4>Visualizer Note</h4>
+        <p>Use mouse scroll to move between visualizers.</p>
       </div>
     </div>
   );

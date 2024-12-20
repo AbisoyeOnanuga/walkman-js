@@ -496,3 +496,39 @@ img.icon {
   display: flex;
   align-items: center;
 }
+
+.walkman-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  position: relative; /* Ensure relative positioning to adjust control placement */
+}
+
+.walkman {
+  margin-right: 50px; /* Increased space between Walkman and instructions */
+}
+
+.keyboard-instructions {
+  position: absolute;
+  right: -250px; /* Positioning the instructions further to the right */
+  max-width: 200px;
+  padding: 10px;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  text-align: left;
+}
+
+.keyboard-instructions h3, .keyboard-instructions h4 {
+  margin-top: 0;
+}
+
+.keyboard-instructions ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.keyboard-instructions li {
+  margin-bottom: 10px;
+}
