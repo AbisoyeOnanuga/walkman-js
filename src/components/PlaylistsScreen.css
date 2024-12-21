@@ -41,6 +41,19 @@
   background-color: #0d0d0d;
 }
 
+.playlists-list::-webkit-scrollbar {
+  width: 3px;
+}
+
+.playlists-list::-webkit-scrollbar-track {
+  background: #333;
+}
+
+.playlists-list::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 2px;
+}
+
 .playlist {
   display: flex;
   align-items: center;
