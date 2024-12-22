@@ -24,20 +24,18 @@
   bottom: 0;
   padding: 8px;
   overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.3) rgba(255, 255, 255, 0.1);
 }
 
 .stations-list::-webkit-scrollbar {
-  width: 4px;
+  width: 3px; /* Chrome, Safari */
 }
 
 .stations-list::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.1);
+  background: #333;
 }
 
 .stations-list::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.3);
+  background: #ccc;
   border-radius: 2px;
 }
 
