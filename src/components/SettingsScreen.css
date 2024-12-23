@@ -1,0 +1,117 @@
+.settings-main-screen,
+.settings-about-screen,
+.settings-theme-screen {
+  width: 150px;
+  height: 194px;
+  background-color: #0d0d0d;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  font-size: 12px;
+  overflow: hidden;
+}
+
+.settings-main-screen h2,
+.settings-about-screen h2,
+.settings-theme-screen h2 {
+  font-size: 0.9rem;
+  margin: 0;
+  padding: 24px 8px 4px 8px;
+  text-align: left;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.settings-main-screen ul,
+.settings-about-screen ul,
+.settings-theme-screen ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* Custom scrollbar */
+.settings-main-screen ul::-webkit-scrollbar,
+.settings-about-screen ul::-webkit-scrollbar,
+.settings-theme-screen ul::-webkit-scrollbar {
+  width: 3px;
+}
+
+.settings-main-screen ul::-webkit-scrollbar-track,
+.settings-about-screen ul::-webkit-scrollbar-track,
+.settings-theme-screen ul::-webkit-scrollbar-track {
+  background: #333;
+}
+
+.settings-main-screen ul::-webkit-scrollbar-thumb,
+.settings-about-screen ul::-webkit-scrollbar-thumb,
+.settings-theme-screen ul::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 2px;
+}
+
+.settings-main-screen li,
+.settings-about-screen li,
+.settings-theme-screen li {
+  padding: 10px;
+  cursor: pointer;
+  width: auto;
+  position: relative;
+  font-size: 0.7rem;
+}
+
+.settings-main-screen li::before,
+.settings-about-screen li::before,
+.settings-theme-screen li::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: radial-gradient(circle, transparent, #333);
+}
+
+.settings-main-screen li:hover,
+.settings-about-screen li:hover,
+.settings-theme-screen li:hover {
+  background: linear-gradient(to top, transparent, rgba(255, 255, 255, 0.1) 50%, transparent);
+}
+
+.settings-main-screen li.selected,
+.settings-about-screen li.selected,
+.settings-theme-screen li.selected {
+  background: linear-gradient(to top, transparent, rgba(255, 255, 255, 0.3) 50%, transparent);
+}
+
+/* Theme-specific styles */
+.settings-theme-screen li {
+  display: flex;
+  align-items: center;
+  padding-left: 24px;
+  position: relative;
+}
+
+.settings-theme-screen li::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.settings-theme-screen li[data-theme='Black']::before { background-color: #000; }
+.settings-theme-screen li[data-theme='Blue']::before { background-color: #1e88e5; }
+.settings-theme-screen li[data-theme='Pink']::before { background-color: #e91e63; }
+.settings-theme-screen li[data-theme='Red']::before { background-color: #f44336; }
+.settings-theme-screen li[data-theme='Yellow']::before { background-color: #fdd835; }
+.settings-theme-screen li[data-theme='Green']::before { background-color: #43a047; } 
